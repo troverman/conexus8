@@ -33,10 +33,122 @@
   <link rel="stylesheet" href="/conexus/static/css/bootstrap.min.css" type="text/css" />
   <link rel="stylesheet" href="/conexus/static/css/bootstrap-responsive.min.css" type="text/css" />
   <link rel="stylesheet" href="/conexus/static/css/web2py_bootstrap.css" type="text/css" />
+  <link rel="stylesheet" href="/conexus/static/css/font-awesome.css">
+  <link rel="stylesheet" href="/conexus/static/css/icomoon.css">
   <!--/stylesheets -->
+
   <!-- inline-styles ================================================== -->
   <style type="text/css">
-    .container{width:100%;}
+    html, body {
+      height: 100%;
+    }
+    .centered-width{
+      margin-left:6%;
+      margin-right:6%;
+    }
+    .container{
+      width:100%;
+      min-height: 100%;
+      height: auto !important;
+      height: 100%;
+      margin: 0 auto -56px;
+    }
+    .footer{
+      height:28px;
+      padding-left:5%;
+      padding-right:5%;
+      padding-bottom:10px;   
+    }
+    .modal.fade {
+      top: 7%;
+      -webkit-transition: opacity 0.3s linear;
+      -moz-transition: opacity 0.3s linear;
+      -o-transition: opacity 0.3s linear;
+      transition: opacity 0.3s linear;
+    }
+    .modal.fade.in {top: 7%;}       
+    .navbar .btn-navbar {display:none;}
+    a{color:rgb(71,122,173);}
+    a:hover{text-decoration: none;color:rgb(51,102,153);}
+    img.opacity-img{opacity:0.8;}
+    img.opacity-img:hover{opacity:1;}
+    #angle-down-icon{color:rgb(211,221,241);margin-left:5px;}
+    #angle-down-icon:hover{color:rgb(255,255,255);}
+    #academies-icon{color:rgb(211,221,241);}
+    #academies-icon:hover{color:rgb(255,255,255);}
+    #courses-icon{color:rgb(211,221,241);}
+    #courses-icon:hover{color:rgb(255,255,255);}
+    #discover-icon{color:rgb(211,221,241);}
+    #discover-icon:hover{color:rgb(255,255,255);}
+    #facebook-login:hover{opacity:.9;}
+    #feed-icon{color:rgb(211,221,241);}
+    #feed-icon:hover{color:rgb(255,255,255);}
+    #footer-links{font-family:ubuntu;color:rgb(201,211,231);margin-top:-15px;}
+    #google-login:hover{opacity:.9;}
+    #inbox-icon{color:rgb(211,221,241);}
+    #inbox-icon:hover{color:rgb(255,255,255);}
+    #login-area{
+      font-size:14px;
+      font-family:ubuntu;
+      color:rgb(50,50,50);
+    }
+    #login-area:hover{color:rgb(150,150,150)}
+    #logo-conexus{
+      float:left;
+      height:50px;
+      padding-top:10px;
+      padding-right:10px;
+      padding-bottom:13px;
+    }
+    #logo-conexus:hover{background-color:rgb(255,255,255);}
+    #main-content{border-top:3px solid rgb(255,138,0);}
+    #member-icon-area{
+      float:right;
+      padding-top:23px;
+      padding-bottom:23px;
+      padding-left:10px;"
+    }
+    #member-icon-area a{padding:1px;}
+    #member-name-area{
+      padding-left:10px;
+      padding-right:10px;
+      padding-top:17px;
+    }
+    #notification-icon{color:rgb(211,221,241);}
+    #notification-icon:hover{color:rgb(255,255,255);}
+    #site-header{
+      width:auto;
+      min-width:1000px;
+      margin-left:5%;
+      margin-right:5%;
+    }
+    #site-header-container{
+      background-image:-webkit-gradient(linear, 0 100%, 0 0, from(rgb(255,255,255)), to(rgb(235,235,235)));
+      background-image:-webkit-linear-gradient(rgb(255,255,255), rgb(235,235,235));
+      background-image:-moz-linear-gradient(rgb(255,255,255), rgb(235,235,235));
+      background-image:-ms-linear-gradient(rgb(255,255,255), rgb(235,235,235));
+      background-image:-o-linear-gradient(rgb(255,255,255), rgb(235,235,235));
+      background-image:linear-gradient(rgb(255,255,255), rgb(235,235,235));
+      border-bottom:1px solid rgb(51,72,83);
+      height:67px;
+    }
+    #site-footer-container{
+      background-image:-webkit-gradient(linear, 0 100%, 0 0, from(rgb(24,95,192)), to(rgb(34,105,202)));
+      background-image:-webkit-linear-gradient(rgb(24,95,192), rgb(34,105,202));
+      background-image:-moz-linear-gradient(rgb(24,95,192), rgb(34,105,202));
+      background-image:-ms-linear-gradient(rgb(24,95,192), rgb(34,105,202));
+      background-image:-o-linear-gradient(rgb(24,95,192), rgb(34,105,202));
+      background-image:linear-gradient(rgb(24,95,192), rgb(34,105,202));
+      border-top:3px solid rgb(201,211,231);
+    }
+    #site-footer-container a{color:rgb(211,221,241);}
+    #site-footer-container a:hover{color:rgb(255,255,255);}
+    #twitter-login:hover{opacity:.9;}   
+    #username-area{color:rgb(211,221,241);}
+    #username-area:hover{color:rgb(255,255,255);}  
+    #username-text{font-family:ubuntu;font-weight:bold;}
+
+              
   </style>
   <!--/inline-styles -->
 
@@ -56,42 +168,220 @@
   <!-- containter ================================================== -->
   <div class="container">
     <!-- navbar ================================================== -->
-    <div class="navbar navbar-inverse">
+    <div class="navbar navbar-inverse navbar-fixed-top" style="position:relative;min-width:980px;">
       <div class="flash">{{=response.flash or ''}}</div>
-      <div class="navbar-inner">
-        {{if auth.is_logged_in():}}
-        {{else:}}
-        {{pass}}
-          <a class="brand" href="/">conex.us</a>
-          <ul id="navbar" class="nav pull-right">{{='auth' in globals() and auth.navbar(mode="dropdown") or ''}}</ul>
+      <div class="navbar-inner" id="site-header-container">
+        <div class="" id="site-header">
+          <div id="logo-container">
+            <a href="/">
+              <img id="logo-conexus" src="/conexus/static/images/conexus.png" />
+            </a>
+          </div>
+          <div id="header-icons" style="margin-top:30px;margin-left:3px;float:left;">
+            <a href="/discover/"><i id="discover-icon" class="fa fa-random"></i></a>
+            <a href="/groups/"><i id="courses-icon" class="fa fa-pencil"></i></a>
+            <a href="/projects/"><i id="academies-icon" class="fa fa-th"></i></a>
+            <a href="/feed/"><i id="feed-icon" class="fa fa-align-justify"></i></a>
+          </div>
+          <div id="header-search" style="float:left;margin-left:20px;margin-top:23px;">
+            <div class="input-append">
+              <input type="text">
+              <div class="btn-group" style="margin-top:0px;">
+                <button class="btn" tabindex="-1"><i class="icon-search"></i></button>
+                <button class="btn dropdown-toggle" data-toggle="dropdown" tabindex="-1">
+                <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu">
+                <li><a href="#">Action</a></li>
+                <li><a href="#">Another action</a></li>
+                <li><a href="#">Something else here</a></li>
+                <li class="divider"></li>
+                <li><a href="#">Separated link</a></li>
+                </ul>            
+              </div>
+            </div>
+          </div>
+          {{if auth.is_logged_in():}}
+            <ul id="member-name-area" class="nav pull-right nav_bar">
+              <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+                <p id="username-text" class="lead"><a id="username-area" href="/member/{{=session.auth.user.username}}">{{=session.auth.user.username}}<i class="fa fa-angle-down" id="angle-down-icon"></i></a></p>
+              </a> 
+              <ul class="dropdown-menu" style="margin-top:0px">              
+                <li>
+                    <a href="/account/">
+                      <i class="fa fa-user" style="float:left;margin-top:3px;"></i><p style="margin-left:25px;">account</p>
+                    </a>
+                </li>    
+                <li>
+                  <a href="/inbox/">
+                    <i class="fa fa-envelope" style="float:left;margin-top:3px;"></i><p style="margin-left:25px;">inbox</p>
+                  </a>              
+                </li>
+                <li>
+                  <a href="/notifications/">
+                    <i class="fa fa-globe" style="float:left;margin-top:3px;"></i><p style="margin-left:25px;">notifications</p>
+                  </a>
+                </li>
+                <li>
+                  <a href="/member/{{=session.auth.user.username}}">
+                    <i class="fa fa-smile-o" style="float:left;margin-top:3px;"></i><p style="margin-left:25px;">profile</p>
+                  </a>
+                </li>
+                <li class="divider"></li>
+                  <li>
+                  <a href="/account/logout/">
+                    <i class="fa fa-power-off" style="float:left;margin-top:3px;"></i><p style="margin-left:25px;">logout</p>
+                  </a>
+                </li>
+              </ul>
+            </ul>
+            <div id="member-icon-area">
+              <a href="/notifications"><i id="notification-icon" class="fa fa-globe"></i></a>
+              <a href="/inbox"><i id="inbox-icon" class="fa fa-envelope"></i></a>
+            </div>
+          {{else:}}
+            <ul id="navbar" class="nav pull-right" style="margin-top:24px;">
+              <a data-toggle="modal" href="#login-or-signup" id="login-area">login or signup</a>
+            </ul>
+          {{pass}}
+        </div>
       </div>
     </div>
     <!--/navbar -->
+
     <!-- main-content ================================================== -->
-    <div id="main-content">
+    <div id="main-content" style="min-width:980px;">
       {{block center}}
       {{include}}
       {{end}}
     </div>
-    <!--/main-content -->
-    <!-- footer ================================================== -->
-    <div id="footer">
-      <footer class="footer" id="footer">
-        <div class="footer-container">
-          <div class="pull-left">&#169; {{=request.now.year}} <a href="/">conex.us</a></div>
-          <div class="pull-right" id="footer-links" >
-            <a href="/about/">about</a>,
-            <a href="/events/">events</a>,
-            <a href="/groups/">groups</a>,
-            <a href="/projects/">projects</a>,
-            <a href="/transparency/">transparency</a>
+    <!-- /main-content -->
+
+    <!-- hidden-content ================================================== -->
+    <div id="hidden-content">
+      {{if auth.user_id is None:}}
+        <div class="modal fade" id="login-or-signup" style="display:none;">
+          <div class="modal-header" id="login-or-signup-header">
+            <a class="close" data-dismiss="modal">×</a>
+            <h3>Login or Signup</h3>
           </div>
-        </div>
-      </footer>
+          <br>
+          <div class="modal-body" style="">
+            <div id="external-login" style="display: table;margin: 0 auto;">
+              <a id="facebook-login"><img src="/conexus/static/images/facebook-login.png" style="width:64px"/></a>
+              <a id="twitter-login"><img src="/conexus/static/images/twitter-login.png" style="width:64px"/></a>
+              <a id="google-login"><img src="/conexus/static/images/google-login.png" style="width:64px"/></a> 
+            </div>
+            <br><br>
+            <ul style="float:left;margin-left:5%"class="nav nav-tabs" id="profile-tab" data-tabs="tabs">
+              <li class="active"><a href="#login" data-toggle="tab">Login</a></li>
+              <li><a href="#signup" data-toggle="tab">Signup</a></li>
+            </ul>
+            <br><br><br>
+            <div class="tab-content" style="margin-left:10%;">
+              <div class="tab-pane active" id="login">
+                {{=auth.login()}}
+              </div>
+              <div class="tab-pane" id="signup">
+                {{=auth.register()}}
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+          </div>
+        </div> 
+      {{pass}}  
     </div>
-    <!-- /footer -->
+    <!-- /hidden-content -->
   </div> 
   <!-- /container -->
+  <!-- footer ================================================== -->
+  <div id="site-footer-container" style="min-width:980px;">
+    <div class="footer" id="footer">
+      <br>
+      <div class="footer-container">
+        <div class="pull-left" id="footer-links">&#169; {{=request.now.year}} <a href="/">conex.us</a></div>
+        <div class="pull-right" id="footer-links">
+          <a href="/about/">about</a>,
+          <a href="/contact/">contact</a>,
+          <a href="/events/">events</a>,
+          <a href="/groups/">groups</a>,
+          <a href="/discover/">discover</a>,
+          <a href="/mission/">mission</a>,
+          <a href="/faq/">faq</a>,
+          <a href="/positions/">positions</a>,
+          <a href="/privacy/">privacy</a>,
+          <a href="/projects/">projects</a>,
+          <a href="/stats/">stats</a>,
+          <a href="/tasks/">tasks</a>,
+          <a href="/terms/">terms</a>,
+          <a href="/transparency/">transparency</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- /footer -->
+  <!-- inline-scripts ============================================= -->
+  <script>
+    $("#login-or-signup" ).draggable({handle:"#login-or-signup-header", cursor:"move"}); 
+    $("#logo-conexus").on({
+      "mouseover" : function() {
+        this.src = '/conexus/static/images/conexus.png';
+      },
+      "mouseout" : function() {
+        this.src='/conexus/static/images/conexus.png';
+      }
+    }); 
+
+    {{if request.function=='academies':}}
+      $("#academies-icon").css('color','rgb(255,255,255)');
+    {{pass}}
+    {{if request.function=='courses':}}
+      $("#courses-icon").css('color','rgb(255,255,255)');
+    {{pass}}
+    {{if request.function=='discover':}}
+      $("#discover-icon").css('color','rgb(255,255,255)');
+    {{pass}}
+    {{if request.function=='feed':}}
+      $("#feed-icon").css('color','rgb(255,255,255)');
+    {{pass}}
+
+    $("#member-icon-area").hover(
+      function() {
+        $("#angle-down-icon").css('color','rgb(255,255,255)');
+        $("#member-icon-area").css('background-color','rgb(56,107,158)');
+        $("#member-name-area").css('background-color','rgb(56,107,158)');
+        $("#username-area").css('color','rgb(255,255,255)');
+
+      }, 
+      function() {
+        $("#angle-down-icon").css('color','rgb(211,221,241)');
+        $("#member-icon-area").css('background-color','');
+        $("#member-name-area").css('background-color','');
+        $("#username-area").css('color','rgb(211,221,241)');
+
+      }
+    );
+    $("#member-name-area").hover(
+      function() {
+        $("#angle-down-icon").css('color','rgb(255,255,255)');
+        $("#member-icon-area").css('background-color','rgb(56,107,158)');
+        $("#member-name-area").css('background-color','rgb(56,107,158)');
+        $("#username-area").css('color','rgb(255,255,255)');
+
+      }, 
+      function() {
+        $("#angle-down-icon").css('color','rgb(211,221,241)');
+        $("#member-icon-area").css('background-color','');
+        $("#member-name-area").css('background-color','');
+        $("#username-area").css('color','rgb(211,221,241)');
+
+      }
+    );
+
+
+  </script>
+  <!-- /inline-scripts -->
 
   <!-- javascript ============================================= -->
   <script src="{{=URL('static','js/bootstrap.min.js')}}"></script>
@@ -109,4 +399,3 @@
 
 </html>
 <!-- /html -->
-

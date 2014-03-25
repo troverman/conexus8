@@ -1,0 +1,70 @@
+{{extend 'layout.html'}}
+<style>
+#index-header{
+    background-color:rgb(247,247,247);
+    border-bottom:1px solid rgb(225, 225, 225);
+    padding-top:15px;
+    padding-bottom:15px;
+}
+#index-header-container{
+    margin-left:5%;
+    margin-right:5%;
+}
+#share-footer{
+    background-color:rgb(247,247,247);
+    border-top:1px solid rgb(225, 225, 225);
+}
+#share-footer-container{margin-left:5%;margin-right:5%;}
+</style>
+<div id="index-header">
+    <div id="index-header-container">
+		<h3 style="float:left;">{{=member_from_url['username']}}</h3>
+		<p class="btn" style="float:right;">follow</p>
+		<p class="btn" style="float:right;">message</p>
+		<div style="clear:both;"></div>
+    </div>
+</div>
+
+<div class="centered-width">
+
+	<p>facebook</p>
+	<p>twitter</p>
+	<p>lealr</p>
+	<p>bankingfor</p>
+	<p>inlrn</p>
+	<p>voetr</p>
+	<p>live stream</p>
+	<iframe width="560" height="315" src="//www.youtube.com/embed/2qG-izMLGSk?list=UUNceSFBcgkYqv4QiD374VTQ" frameborder="0" allowfullscreen></iframe>
+	<p>time breakdown / hrly / daily / etc view</p>
+	<p>data feeds</p>
+	<p>heart rate</p>
+	<p>gps location</p>
+	<p>video feed</p>
+	<p>messaging</p>
+	<p>finance</p>
+	<h1>timeline</h1>
+	{{for x in range(12):}}
+		<h2>{{=x}} am/pm</h2>
+		<p>data</p>
+		<br>
+	{{pass}}
+</div>
+<br>
+<br>
+<br>
+<br>
+
+
+<script src="/conexus/static/js/gmaps.js"></script>
+<script>   
+	$(document).ready(function(){                                                         
+		new GMaps({
+		  div: '#map',
+		  lat: -12.043333,
+		  lng: -77.028333
+		}); 
+	}); 
+</script>
+<div id="map" ></div>   
+
+

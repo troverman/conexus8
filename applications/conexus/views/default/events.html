@@ -18,37 +18,36 @@
 </style>
 <div id="index-header">
     <div id="index-header-container">
-		<h1>projects</h1><br>
+		<h1>events</h1><br>
 		<p>this a filter</p>
     </div>
 </div>
 
 <div style="margin-left:5%;">
 
-	<p class="lead" style="text-align:center">trending projects</p>
+	<p class="lead" style="text-align:center">trending events</p>
 	<p class="lead" style="text-align:center">local</p>
-    <a data-toggle="modal" href="#new-project" class="lead" style="text-align:center">+ new project</a>
+    <a data-toggle="modal" href="#new-event" class="lead" style="text-align:center">+ new event</a>
 
-	{{for project in project_list:}}
-		<a href="/project/{{=project['url_title']}}/"><h3>{{=project['title']}}</h3></a>
-        <a>follow</a>
-        <a>members</a>
+
+	{{for event in event_list:}}
+		<h3><a href="/event/{{=event['url_title']}}/">{{=event['title']}}</a></h3>
 	{{pass}}
 
 </div>
 
+
 <br><br><br><br>
 
 
-<div class="modal fade" id="new-project" style="display:none;">
-    <div class="modal-header" id="new-project-header">
+<div class="modal fade" id="new-event" style="display:none;">
+    <div class="modal-header" id="new-event-header">
         <a class="close" data-dismiss="modal">×</a>
-        <h3>+ new project</h3>
+        <h3>+ new event</h3>
     </div>
     <br>
     <div class="modal-body" style="">
-        <p class="lead">description and such</p>
-        {{=create_project}}
+        <p class="lead">description and such
         <div id="external-login" style="display: table;margin: 0 auto;">
         <a id="facebook-login">table link 1</a>
         <a id="twitter-login">table link 2</a>
@@ -61,5 +60,5 @@
 </div> 
 
 <script>
-    $("#new-project" ).draggable({handle:"#new-project-header", cursor:"move"}); 
+    $("#new-event" ).draggable({handle:"#new-event-header", cursor:"move"}); 
 </script>

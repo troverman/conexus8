@@ -2,21 +2,14 @@
 
 <h1>transparency</h1>
 <p class="lead">paving the way for a transparent future</p>
-
-completly transparent companies
-<h3><a href="/transparency/bankingfor">bankingfor</a></h3>
-<h3><a href="/transparency/conexus">conex.us</a></h3>
-<h3><a href="/transparency/deliveryfor">deliveryfor</a></h3>
-<h3><a href="/transparency/epointme">epoint.me</a></h3>
-<h3><a href="/transparency/evolvedus">evolved us</a></h3>
-<h3><a href="/transparency/givingfor">givingfor</a></h3>
-<h3><a href="/transparency/hospitalityfor">hospitalityfor</a></h3>
-<h3><a href="/transparency/inlrn">inlrn</a></h3>
-<h3><a href="/transparency/insuringfor">insuringfor</a></h3>
-<h3><a href="/transparency/investingfor">investingfor</a></h3>
-<h3><a href="/transparency/lealr">lealr</a></h3>
-<h3><a href="/transparency/troverman">troverman</a></h3>
-<h3><a href="/transparency/voetr">voetr</a></h3>
-
-<p class="lead">transparent info -- wikileaks esks -- nsa stuff etc</p>
-<p class="lead">transparent members</p>
+<br><hr>
+{{member_list = db(db.auth_user).select()}}
+{{for member in member_list:}}
+	<a href="/member/{{=member['username']}}"><h3>{{=member['username']}}</h3></a>
+{{pass}}
+<br><hr>
+{{project_list = db(db.project).select()}}
+{{for project in project_list:}}
+	<a href="/project/{{=project['url_title']}}"><h3>{{=project['title']}}</h3></a>
+{{pass}}
+<br><br>

@@ -1,0 +1,120 @@
+{{extend 'layout.html'}}
+<style>
+#index-header{
+    background-color:rgb(247,247,247);
+    border-bottom:1px solid rgb(225, 225, 225);
+    padding-top:5px;
+    padding-bottom:5px;
+}
+#index-header-container{
+    margin-left:5%;
+    margin-right:5%;
+}
+#share-footer{
+    background-color:rgb(247,247,247);
+    border-top:1px solid rgb(225, 225, 225);
+}
+#share-footer-container{margin-left:5%;margin-right:5%;}
+
+#content { }
+#right { 
+	width: 255px;
+	float: right;
+	padding-left:5px;
+	padding-right:5px; 
+}
+#left {
+	width: 175px; 
+	float: left;
+	border-right:1px solid rgb(238,238,238);  
+	padding-left:15px;    
+}
+</style>
+<script language="javascript" type="text/javascript" src="{{=URL(request.application,'static','js/jquery.countdown.js')}}"></script>
+<!--<script type="text/javascript">
+$(function() {
+    $('.testing').countdown({
+        date: "June 7, 2087 15:03:26",
+        refresh:100
+    });
+});
+</script>-->
+
+<div id="index-header">
+    <div id="index-header-container">
+		<h3 style="float:left;">{{=event_from_url['title']}}</h3>
+		<p class="btn" style="float:right">join</p>
+		<div style="clear:both;"></div>
+    </div>
+</div>
+<div class="alert fade in">
+	<button type="button" class="close" data-dismiss="alert">×</button>
+	<strong>Holy guacamole!</strong> Best check yo self, you're looking great :D.
+</div>
+      
+<div id="left" class="well">
+	<h4>overview</h4>
+	<h4>announcements</h4>
+	<h4>projects</h4>
+	<h4>participants</h4>
+	<h4>stats</h4>
+</div>
+<div id="right">
+	right sidebar
+</div>
+<div class="centered-width">
+	<div class="testing"></div>
+	<div class="event-join" id="join-event-{{=event_from_url['id']}}" style="margin-right:10px;">
+		<form style="display:none"><input type="hidden" id="" name="join-{{=event_from_url['id']}}" value="{{=event_from_url['id']}}" /></form> 
+		<a onclick="alert('hi');ajax('ajax_join_event', ['join-{{=event_from_url['id']}}'], ':eval')">
+			<h5>join</h5>      
+		</a>
+	</div>
+
+	<h3>start date</h3>
+	<h3>end date</h3>
+	<div class="well well-small">
+		well...
+		<a onclick="alert('hello')">sup</a>
+	</div>
+
+	<table class="table table-hover">
+	<thead>
+		<tr>
+			<th>First Name</th>
+			<th>Last Name</th>
+			<th>Username</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td>Trevor</td>
+			<td>Overman</td>
+			<td>@troverman</td>
+		</tr>
+		<tr>
+			<td>Mikey</td>
+			<td>Thompson</td>
+			<td>@fat</td>
+		</tr>
+		<tr>
+			<td colspan="2">hahahah</td>
+			<td>@lol</td>
+		</tr>
+	</tbody>
+	</table>
+	          
+
+	<h3>{{=event_from_url['title']}} description</h3>
+	<h3>{{=event_from_url['title']}} participants</h3>
+	<h3>{{=event_from_url['title']}} projects</h3>
+	<h3>{{=event_from_url['title']}} sponsors</h3>
+	<h3>{{=event_from_url['title']}} prizes</h3>
+	<h3><a>{{=event_from_url['title']}} givingfor project</a></h3>
+	<h3><a>{{=event_from_url['title']}} voetr committee</a></h3>
+	<h3>notices</h3>
+	<h3>tasks</h3>
+	<h3>rules</h3>
+</div>
+
+<br><br><br><br>

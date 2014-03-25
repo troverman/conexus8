@@ -1,67 +1,305 @@
 {{extend 'layout.html'}}
+<style>
+#index-header{
+    background-color:rgb(247,247,247);
+    border-bottom:1px solid rgb(225, 225, 225);
+    padding-top:15px;
+    padding-bottom:15px;
+}
+#index-header-container{
+    margin-left:5%;
+    margin-right:5%;
+}
+#share-footer{
+    background-color:rgb(247,247,247);
+    border-top:1px solid rgb(225, 225, 225);
+}
+#share-footer-container{margin-left:5%;margin-right:5%;}
+#project-list-container{text-align:center;width:100%;}
+#project-list-item{border:2px solid rgb(180,180,180);display:inline-block;padding:10px;margin:7px;}
+#project-list-item:hover{border:2px solid rgb(110,110,110);display:inline-block;padding:11px;margin:7px;}
+
+</style>
+<script language="javascript" type="text/javascript" src="{{=URL(request.application,'static','js/jquery.flot.js')}}"></script>
+<script language="javascript" type="text/javascript" src="{{=URL(request.application,'static','js/jquery.flot.selection.js')}}"></script>
+<script language="javascript" type="text/javascript" src="{{=URL(request.application,'static','js/jquery.flot.time.js')}}"></script>
+<script language="javascript" type="text/javascript" src="{{=URL(request.application,'static','js/jquery.thumbnailScroller.js')}}"></script>
+
+<div id="index-header">
+    <div id="index-header-container">
+		<p class="lead">conexus is a team building repo</p>
+		<p class="lead">paving the way for a transparent future</p>
+    </div>
+</div>
+<div class="centered-width">
+	<br>
+	<p class="btn">this is a button</p>
+	<p class="btn">this is a button</p>
+	<p class="btn">this is a button</p>
+<br><br>
+<hr>
+
+	<table style="margin-left:auto;margin-right:auto">
+    	<tr>
+            <td><p class="lead" style="text-align:center;padding-left:25px;padding-right:25px;">how can we work together for a common goal?</p></td>
+            <td><p class="lead" style="text-align:center;padding-left:25px;padding-right:25px;">imagine a 24/7 global hackaton</p></td>
+            <td><p class="lead" style="text-align:center;padding-left:25px;padding-right:25px;">crowdsourced team building</p></td>
+            <td><p class="lead" style="text-align:center;padding-left:25px;padding-right:25px;">when a fire starts to burn, it starts to spread<span class="icon-fire"></span></p></td>
+        </tr>
+    </table>
+<br><br><br>
+    <table style="margin-left:auto;margin-right:auto">
+    	<tr>
+            <td><p class="lead" style="text-align:center;padding-left:25px;padding-right:25px;"><a href="/discover/">discover</a></p></td>
+            <td><p class="lead" style="text-align:center;padding-left:25px;padding-right:25px;"><a href="/events/">events</a></p></td>
+            <td><p class="lead" style="text-align:center;padding-left:25px;padding-right:25px;"><a href="/projects/">projects</a></p></td>
+            <td><p class="lead" style="text-align:center;padding-left:25px;padding-right:25px;"><a href="/tasks/">tasks</a></p></td>
+            <td><p class="lead" style="text-align:center;padding-left:25px;padding-right:25px;"><a href="/feed/">feed</a></p></td>
+            <td><p class="lead" style="text-align:center;padding-left:25px;padding-right:25px;"><a href="/transparency/">transparency</a></p></td>
+
+        </tr>
+        <tr>
+            <td><p class="lead">amazing stuff</p></td>
+            <td><p class="lead">are great!</p></td>
+            <td><p class="lead">are team building</p></td>
+            <td><p class="lead">are things to do</p></td>
+            <td><p class="lead">a list of the things</p></td>
+            <td><p class="lead">the future</p></td>
+        </tr>
+    </table>
+
+<hr>
+<br><br>
+
+	<table style="margin: auto;">
+		<tr>
+			<td style="max-width:33%"><p class="lead"><iframe src="//www.youtube.com/embed/8fpZ16cIVAQ?list=UUNceSFBcgkYqv4QiD374VTQ" frameborder="0" allowfullscreen></iframe></p></td>
+			<td style="max-width:33%"><p class="lead"><iframe src="//www.youtube.com/embed/xR4ibUq9iVw?list=UUNceSFBcgkYqv4QiD374VTQ" frameborder="0" allowfullscreen></iframe></p></td>
+			<td style="max-width:33%"><p class="lead"><iframe src="//www.youtube.com/embed/medBPRNlV0w?list=UUNceSFBcgkYqv4QiD374VTQ" frameborder="0" allowfullscreen></iframe></p></td>
+		</tr>
+	</table>
 
 
-<p class="lead">conexus is a transparency team building crowdowned repo</p>
-<p class="lead">paving the way for a transparent future</p>
+
+</div>
 
 <br><br>
-<p class="lead">cool infographics and stuff</p>
+<div style="background-color:rgb(24,95,192);">
+    <br><br><br>
+    <p style="text-align:center;color:rgb(200,200,200)">connecting us</p> 
+    <br><br><br>
+</div>
+<br><br><br>
+
+<div class="centered-width">
+
+
+	<p style="text-align:center" class="lead">collab or die</p>
+
+	<p style="text-align:center" class="lead">we need to work together</p>
+	<p style="text-align:center" class="lead">this is a graph</p><hr>
+	<script>
+	{{an_array=[]}}
+    {{import time}}
+    {{array = [1,2,3,4,5]}}
+    {{for counter, value in enumerate(array):}}
+        {{an_array.append([ value*1000, int(value) ])}}
+    {{pass}}
+
+    $(function() {
+        var data = '';
+        var show_graph_lines = true;
+        if (data == ''){data = {{=an_array}};}                  
+        var options = {
+            series: {
+                lines: {show: true},                            
+                points: {show: true}
+            },
+            grid: {
+                hoverable: true,
+                clickable: true
+            },
+            xaxis:{mode:"time",},
+            yaxis: {show: true,},
+            selection: {mode: "x"},
+        };
+        var placeholder = $.plot("#placeholder", [data], options);
+        $("#placeholder").bind("plotselected", function (event, ranges) {
+            placeholder = $.plot("#placeholder", [data], $.extend(true, {}, options, {
+            xaxis: {
+                min: ranges.xaxis.from,
+                max: ranges.xaxis.to
+            },
+            lines: { show: show_graph_lines },
+            points: { show: true }
+            }));
+        overview.setSelection(ranges, true);
+        }); 
+                                       
+        function showTooltip(x, y, contents) {
+            $("<div id='tooltip'>" + contents + "</div>").css({
+            position: "absolute",
+            display: "none",
+            top: y + 5,
+            left: x + 5,
+            border: "1px solid #fdd",
+            padding: "2px",
+            "background-color": "#fee",
+            opacity: 0.80
+            }).appendTo("body").fadeIn(200);
+        }           
+        var previousPoint = null;
+        $("#placeholder").bind("plothover", function (event, pos, item) {
+            var str = "(" + pos.x.toFixed(2) + ", " + pos.y.toFixed(2) + ")";
+            $("#hoverdata").text(str);
+            if (item) {
+                if (previousPoint != item.dataIndex) {         
+                    previousPoint = item.dataIndex;
+                    $("#tooltip").remove();
+                    var x = item.datapoint[0].toFixed(2),
+                    y = item.datapoint[1].toFixed(2);          
+                    showTooltip(item.pageX, item.pageY,
+                    item.series.label + " of " + x + " = " + y);
+                }
+            } else {
+                $("#tooltip").remove();
+                previousPoint = null;            
+            }           
+        });   
+        $("#placeholder").bind("plotclick", function (event, pos, item) {
+            if (item) {
+                $("#clickdata").text(" - click point " + item.dataIndex + " in " + item.series.label);
+                plot.highlight(item.series, item.datapoint);
+            }
+        });
+    });
+</script>
+    
+<div>
+    <div id="placeholder" style="width:75%;height:250px;display: table;margin: 0 auto;"></div>
+</div>
+    <p class="lead" style="text-align:center">work with people, together</p>
+    <p class="lead" style="text-align:center">donate toward promising projects</p>
+    <p class="lead" style="text-align:center">epoint.me connected, givingfor connected, voetr connected, inlrn connected</p>
+    <p class="lead" style="text-align:center">democratic</p>
+    <p class="lead" style="text-align:center">help change the business model. crowdowned</p>
+    <p class="lead" style="text-align:center">we're all cofounders</p>
+    <p class="lead" style="text-align:center">transparent</p>
+    <p class="lead" style="text-align:center">paving the way for a transparent future</p>
+
+
+
+</div>
+
+<br><br>
+<div style="background-color:rgb(100,150,50);">
+    <br><br><br>
+    <p style="text-align:center;"><a style="color:rgb(240,250,255)" href="/projects/">projects</a></p> 
+    <br><br><br>
+</div>
+<br><br><br>
+<div class="centered-width">
+    <div id="project-list-container">
+        {{for project in project_list:}}
+        <div id="project-list-item">
+            <a href="/project/{{=project['url_title']}}"><p style="text-align:center;">{{=project['title']}}</p></a>
+            <a href="/project/{{=project['url_title']}}"><img style="width:256px;" class="img-polaroid" src="/conexus/static/images/noimage-icon.png"/></a>
+        </div>
+        {{pass}}
+        <br><br>
+    </div>
+    <br><br><br>
+    <p class="lead" style="text-align:center">collaboration is good</p>
+    <p class="lead" style="text-align:center">i like to work together with people</p>
+    <p class="lead" style="text-align:center">group projects can be fun :D</p>
+    <p class="lead" style="text-align:center">let's do awesome things</p>
+</div>
 <br><br>
 
-<p class="lead">what are we even doing?</p>
+<div style="background-color:rgb(140,120,90);">
+    <br><br><br>
+    <p style="text-align:center;"><a style="color:rgb(240,250,255)" href="/events/">events</a></p> 
+    <br><br><br>
+</div>
+<br><br><br>
+<div class="centered-width">
+    <div id="project-list-container">
+        {{for event in event_list:}}
+        <div id="project-list-item">
+            <a href="/event/{{=event['url_title']}}"><p style="text-align:center;">{{=event['title']}}</p></a>
+            <a href="/event/{{=event['url_title']}}"><img style="width:256px;" class="img-polaroid" src="/conexus/static/images/noimage-icon.png"/></a>
+        </div>
+        {{pass}}
+        <br><br>
+    </div>
+    <br><br><br>
+    <p class="lead" style="text-align:center">24/7 global hackathon</p>
+    <p class="lead" style="text-align:center">win prizes</p>
+    <p class="lead" style="text-align:center">collaborative competition</p>
+    <p class="lead" style="text-align:center">let's make awesome things</p>
+    <p class="lead" style="text-align:center">we can do it</p>
 
-<p class="lead">what can we do to make this life a better ride for us all,</p>
-<p class="lead">to help move humanity forward as a species, and to continually foster an environent of convergant evolution?</p>
-<p class="lead">how can we build communities, and how can we work together for a common goal?</p>
-
-
-open info?
-transparent?
-
-profit is not monetary.
-
-<p class="lead">
-	<a href="/transparency/">transparent</a>, 
-    <a href="http://www.github.com/troverman/conexus">opensource</a>, 
-    <a href="http://www.github.com/troverman/conexus">crowd owned</a>, 
-    <a href="http://www.github.com/troverman/conexus">voetr enabled</a>.
-</p>
-
-
-we are all one, let's feel it
-
-
-infinity is everything and no thing, nothing. 0 inf = 0 = 1 = 2 = 3 = 4 = 5
-
+</div>
 <br><br>
 
-bankingfor
-givingfor
-voetr
-evolvedus
-conexus
+<div style="background-color:rgb(51,72,83);">
+    <br><br><br>
+    <p style="text-align:center;color:rgb(200,200,200)">evolution</p> 
+    <br><br><br>
+</div>
+<br><br><br>
+<div class="centered-width">
+    <p class="lead" style="text-align:center">once upon a time</p>
+    <p class="lead" style="text-align:center">the world decided to work together</p>
+    <p class="lead" style="text-align:center">toward a common goal</p>
+    <p class="lead" style="text-align:center">conex.us</p>
+</div>
 
 
-yacht vs life ???
-
-<br><br>
-
-some people have value.. where should value be placed?
-
-
-<br><br><br><br>
-working together for a common goal
-what is the goal?
-
-
-live stream + transparent + convo + soapbox + connecting people + team dynamic + faclilting group thought, not groupthink + feed + voetr leadership + crowdowned + scientific collab + needs / wants + groups + open information + live eeg of ppl + heart rate + AHH + location + feeling + evolved us + inlrn
-
-crowd funded + givingfor
-
-<br><br>
-<a href="/groups/">groups</a><br>
-<a href="/projects/">projects</a><br>
-<a href="/events/">events</a><br>
 <br>
 <br>
-crowdsourced team building
+<div id="share-footer">
+    <div id="share-footer-container">
+    	<div style="float:left;">
+    		<h1>share</h1>
+    		<p>facebook, twittter, reddit, 4chan, lealr</p>
+    	</div>
+		<div style="float:right;">
+		    <h1>get the app</h1>
+		    <a href=""><img class="opacity-img" style="height:48px;" src="/conexus/static/images/app_store_icon.png" /></a>
+		    <a href=""><img class="opacity-img" style="height:48px;" src="/conexus/static/images/android_marketplace_icon.png" /></a>
+		</div>
+		<div style="clear:both;"></div>
+	</div>
+</div>
+<br>
+<br>
+<br>
+	<!--
+	open info?
+	transparent?
+	profit is not monetary.
+
+	we are all one, let's feel it.
+	infinity is everything and no thing, nothing. 0 inf = 0 = 1 = 2 = 3 = 4 = 5
+
+	bankingfor
+	givingfor
+	voetr
+	evolvedus
+	conexus
+
+	yacht vs life ???
+	some people have value.. where should value be placed?
+	working together for a common goal
+	what is the goal?
+
+	live stream + transparent + convo + soapbox + connecting people + team dynamic + faclilting group thought, not groupthink + feed + voetr leadership + crowdowned + scientific collab + needs / wants + groups + open information + live eeg of ppl + heart rate + AHH + location + feeling + evolved us + inlrn
+
+	crowd funded + givingfor
+
+	<a href="/groups/">groups</a><br>
+	<a href="/projects/">projects</a><br>
+	<a href="/events/">events</a><br>
+
+-->
