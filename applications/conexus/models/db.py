@@ -83,7 +83,18 @@ db.define_table('project',
 db.define_table('project_member',
     Field('member_id','string'),
     Field('project_id','string'),
+    Field('project_membergroup_id_array','list:string'),
 )
+
+################################
+####project_membergroup#########
+################################
+db.define_table('project_membergroup',
+    Field('project_id','integer'),
+    Field('title','string'),
+    Field('description','string'),
+)
+
 
 ################################
 ####event#######################
@@ -99,7 +110,38 @@ db.define_table('event',
 db.define_table('event_member',
     Field('member_id','string'),
     Field('event_id','string'),
+    Field('event_membergroup_id_array','list:string'),
 )
+
+################################
+####event_membergroup###########
+################################
+db.define_table('event_membergroup',
+    Field('event_id','integer'),
+    Field('title','string'),
+    Field('description','string'),
+)
+
+################################
+####event_thread################
+################################
+db.define_table('event_thread',
+    Field('member_id','string'),
+    Field('event_id','string'),
+    Field('title','string'),
+    Field('thread_content','text'),
+)
+
+################################
+####event_page##################
+################################
+db.define_table('event_page',
+    Field('member_id','string'),
+    Field('event_id','string'),
+    Field('title','string'),
+    Field('page_content','text'),
+)
+
 
 
 

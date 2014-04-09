@@ -32,10 +32,42 @@ def discover():
 def event():
     try:
         event_from_url = db(db.event.url_title == request.args(0)).select()[0]
+        response.flash = 'hello world'
+        event_threads = db(db.event_thread.event_id == event_from_url['id']).select()
+        event_pages = db(db.event_page.event_id == event_from_url['id']).select()
+
+        form_create_thread = SQLFORM(db.event_thread)
+        if form_create_thread.process(formname='form_create_comment').accepted:
+            #db.collection_member.insert(collection_id = form_create_collection.vars.id, user_id = auth.user_id, collection_usergroup_id=0)
+            session.flash = 'thread created'
+            redirect(URL('/event/' + str(event_from_url['url_title'])))     
+        elif form_create_thread.errors:
+            session.flash = 'Error'   
+            redirect(URL(''))
+
+        form_create_page = SQLFORM(db.event_page)
+        if form_create_page.process(formname='form_create_page').accepted:
+            #db.collection_member.insert(collection_id = form_create_collection.vars.id, user_id = auth.user_id, collection_usergroup_id=0)
+            session.flash = 'page created'
+            redirect(URL('/event/' + str(event_from_url['url_title'])))     
+        elif form_create_page.errors:
+            session.flash = 'Error'   
+            redirect(URL(''))
+
+        event_member_list = db(db.event_member.event_id == event_from_url['id']).select()
+
     except IndexError:
         redirect(URL('events'))
 
-    return dict(event_from_url=event_from_url)
+    return dict(
+        event_threads=event_threads,
+        event_from_url=event_from_url,
+        form_create_thread=form_create_thread,
+        event_pages=event_pages,
+        form_create_page=form_create_page,
+        event_member_list=event_member_list,
+
+    )
 
 ################################
 ####event#######################
@@ -75,6 +107,12 @@ def help():
     return dict()
 
 ################################
+####inbox#######################
+################################
+def inbox():
+    return dict()
+
+################################
 ####index#######################
 ################################
 def index():
@@ -100,6 +138,12 @@ def member():
 ####mission#####################
 ################################
 def mission():
+    return dict()
+
+################################
+####notifications###############
+################################
+def notifications():
     return dict()
 
 ################################
@@ -131,14 +175,14 @@ def projects():
 def project():
     try:
         project_from_url = db(db.project.url_title == request.args(0)).select()[0]
-        project_member_array = db(db.project_member.project_id == project_from_url['id']).select()
+        project_member_list = db(db.project_member.project_id == project_from_url['id']).select()
 
     except IndexError:
         redirect(URL('projects'))
 
     return dict(
         project_from_url=project_from_url,
-        project_member_array=project_member_array,
+        project_member_list=project_member_list,
     )
 
 
@@ -228,16 +272,66 @@ def test():
 ################################                     
 def ajax_join_event():
     event_id = request.vars.itervalues()
-    for x in event_id:
-        event_id_trim = int(x)
+    #for x in event_id:
+        #event_id_trim = int(x)
         
     #LOGIC
-    #db.collection_member.insert(user_id = auth.user_id, collection_id = event_id_trim, event_usergroup_id=1)
-    #jquery = "jQuery('.flash').html('joined').slideDown().delay(1000).slideUp();"
-    #jquery += "$('#join-event-%s').fadeToggle(100);" % collection_id_trim
-    jquery = "jQuery('.flash').html('joined').slideDown().delay(1000).slideUp();alert('hello')"
-    return jquery   
+    #db.event_member.insert(member_id = auth.user_id, event_id = event_id_trim, event_membergroup_id_array=1)
+    jquery = "jQuery('.flash').html('%s').slideDown().delay(1000).slideUp();" % event_id
 
-def echo():
-    return request.vars.name
+    #jquery += "$('#join-collection-%s').fadeToggle(100);" % collection_id_trim
+    #jquery += "$('#leave-collection-%s').delay(100).fadeToggle(400);" % collection_id_trim   
+    return jquery      
+    
+################################
+####ajax_leave_event############
+################################     
+def ajax_leave_event():
+    event_id = request.vars.itervalues()
+    for x in event_id:
+        event_id_trim = int(x)
+
+    #LOGIC
+    db((db.event_member.member_id==auth.user_id) & (db.event_member.collection_id==event_id_trim)).delete()
+    jquery = "jQuery('.flash').html('left event').slideDown().delay(1000).slideUp();"
+
+    #jquery += "$('#leave-collection-%s').fadeToggle(100);" % collection_id_trim
+    #jquery += "$('#join-collection-%s').delay(100).fadeToggle(400);" % collection_id_trim   
+    return jquery
+       
+
+################################
+####ajax_join_project###########
+################################                     
+def ajax_join_project():
+    project_id = request.vars.itervalues()
+    #for x in project_id:
+        #project_id_trim = int(x)
+        
+    #LOGIC
+    #db.project_member.insert(member_id = auth.user_id, project_id = project_id_trim, project_membergroup_id_array=1)
+    jquery = "jQuery('.flash').html('%s').slideDown().delay(1000).slideUp();" % project_id
+
+    #jquery += "$('#join-collection-%s').fadeToggle(100);" % collection_id_trim
+    #jquery += "$('#leave-collection-%s').delay(100).fadeToggle(400);" % collection_id_trim   
+    return jquery      
+    
+################################
+####ajax_leave_project##########
+################################     
+def ajax_leave_project():
+    project_id = request.vars.itervalues()
+    for x in project_id:
+        project_id_trim = int(x)
+
+    #LOGIC
+    db((db.project_member.member_id==auth.user_id) & (db.project_member.project_id==project_id_trim)).delete()
+    jquery = "jQuery('.flash').html('left project').slideDown().delay(1000).slideUp();"
+
+    #jquery += "$('#leave-collection-%s').fadeToggle(100);" % collection_id_trim
+    #jquery += "$('#join-collection-%s').delay(100).fadeToggle(400);" % collection_id_trim   
+    return jquery
+
+
+
 

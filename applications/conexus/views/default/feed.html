@@ -1,5 +1,7 @@
 {{extend 'layout.html'}}
-<h3>feed</h3>
-{{for x in range(20):}}
-<p class="lead">feed item {{=x}}</p>
-{{pass}}
+<div class="centered-width">
+	<h3>feed</h3>
+	{{for x in range(20):}}
+		<p class="lead">feed item {{=x}}</p>
+	{{pass}}
+</div>

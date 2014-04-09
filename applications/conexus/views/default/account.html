@@ -1,25 +1,54 @@
 {{extend 'layout.html'}}
+<style>
 
-<h2>{{=T( request.args(0).replace('_',' ').capitalize() )}}</h2>
-<div id="web2py_user_form">
-{{
-if request.args(0)=='login':
-    if not 'register' in auth.settings.actions_disabled:
-        form.add_button(T('Register'),URL(args='register', vars={'_next': request.vars._next} if request.vars._next else None),_class='btn')
-    pass
-    if not 'request_reset_password' in auth.settings.actions_disabled:
-        form.add_button(T('Lost Password'),URL(args='request_reset_password'),_class='btn')
-    pass
-pass
-=form
-}}
+#contentwrapper{width: 100%;}    
+      
+
+#content {margin-left:250px;}
+
+#left { 
+    float: left;
+    width:200px;
+	border-right:1px solid rgb(238,238,238);
+	border-bottom:1px solid rgb(238,238,238);
+	padding-left:15px;
+	padding-bottom:15px;    
+}
+</style>
+
+<div id="left">
+    <h4><a href="/account/content/">content</a></h4>
+    <h4><a href="/account/accounts/">connected accounts</a></h4>
+    <h4><a href="/account/general/">general info</a></h4>
+	<h4><a href="/account/notification/">notification settings</a></h4>
+    <h4><a href="/account/privacy/">privacy settings</a></h4>
 </div>
-<script language="javascript"><!--
-jQuery("#web2py_user_form input:visible:enabled:first").focus();
-{{if request.args(0)=='register':}}
-    web2py_validate_entropy(jQuery('#auth_user_password'),100);
-{{elif request.args(0)=='change_password':}}
-    web2py_validate_entropy(jQuery('#no_table_new_password'),100);
-{{pass}}
-//--></script>
 
+<div id="contentwrapper">
+    <div id="content">
+        <h1>Account</h1>
+        <p class="lead">{{=session.auth.user.username}}</p><hr>
+       
+        {{if request.args(0) == 'general':}}
+			avatar
+		{{pass}}
+        
+        {{if request.args(0) == 'privacy':}}
+			privacy
+		{{pass}}
+        
+		{{if request.args(0) == 'notification':}}
+			notification
+		{{pass}}
+		{{if request.args(0) == 'accounts':}}
+
+        	Fb,twitter, g+, email
+			see friends
+			
+		{{pass}}
+		{{if request.args(0) == 'content':}}
+        	comments, threads, tags, likes, dislikes
+		{{pass}}
+
+    </div>
+</div>

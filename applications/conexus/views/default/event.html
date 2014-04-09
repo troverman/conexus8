@@ -29,21 +29,101 @@
 	border-right:1px solid rgb(238,238,238);  
 	padding-left:15px;    
 }
+.panel {
+  padding: 15px;
+  margin-bottom: 20px;
+  background-color: #ffffff;
+  border: 1px solid #dddddd;
+  border-radius: 4px;
+  -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+}
+
+.panel-heading {
+  padding: 10px 15px;
+  margin: -15px -15px 15px;
+  font-size: 17.5px;
+  font-weight: 500;      
+  background-color: #f5f5f5;
+  border-bottom: 1px solid #dddddd;
+  border-top-right-radius: 3px;
+  border-top-left-radius: 3px;
+}
+
+.panel-footer {
+  padding: 10px 15px;
+  margin: 15px -15px -15px;
+  background-color: #f5f5f5;
+  border-top: 1px solid #dddddd;
+  border-bottom-right-radius: 3px;
+  border-bottom-left-radius: 3px;
+}
+
+.panel-primary {
+  border-color: #428bca;
+}
+
+.panel-primary .panel-heading {
+  color: #ffffff;
+  background-color: #428bca;
+  border-color: #428bca;
+}
+
+.panel-success {
+  border-color: #d6e9c6;
+}
+
+.panel-success .panel-heading {
+  color: #468847;
+  background-color: #dff0d8;
+  border-color: #d6e9c6;
+}
+
+.panel-warning {
+  border-color: #fbeed5;
+}
+
+.panel-warning .panel-heading {
+  color: #c09853;
+  background-color: #fcf8e3;
+  border-color: #fbeed5;
+}
+
+.panel-danger {
+  border-color: #eed3d7;
+}
+
+.panel-danger .panel-heading {
+  color: #b94a48;
+  background-color: #f2dede;
+  border-color: #eed3d7;
+}
+
+.panel-info {
+  border-color: #bce8f1;
+}
+
+.panel-info .panel-heading {
+  color: #3a87ad;
+  background-color: #d9edf7;
+  border-color: #bce8f1;
+}
+
+
+
 </style>
 <script language="javascript" type="text/javascript" src="{{=URL(request.application,'static','js/jquery.countdown.js')}}"></script>
-<!--<script type="text/javascript">
+<script type="text/javascript">
 $(function() {
     $('.testing').countdown({
         date: "June 7, 2087 15:03:26",
         refresh:100
     });
 });
-</script>-->
-
+</script>
 <div id="index-header">
     <div id="index-header-container">
-		<h3 style="float:left;">{{=event_from_url['title']}}</h3>
-		<p class="btn" style="float:right">join</p>
+		<h3 style="float:left;"><a href="/event/{{=request.args(0)}}/">{{=event_from_url['title']}}</a></h3>
 		<div style="clear:both;"></div>
     </div>
 </div>
@@ -52,69 +132,195 @@ $(function() {
 	<strong>Holy guacamole!</strong> Best check yo self, you're looking great :D.
 </div>
       
-<div id="left" class="well">
-	<h4>overview</h4>
-	<h4>announcements</h4>
-	<h4>projects</h4>
-	<h4>participants</h4>
-	<h4>stats</h4>
-</div>
-<div id="right">
-	right sidebar
-</div>
 <div class="centered-width">
-	<div class="testing"></div>
-	<div class="event-join" id="join-event-{{=event_from_url['id']}}" style="margin-right:10px;">
-		<form style="display:none"><input type="hidden" id="" name="join-{{=event_from_url['id']}}" value="{{=event_from_url['id']}}" /></form> 
-		<a onclick="alert('hi');ajax('ajax_join_event', ['join-{{=event_from_url['id']}}'], ':eval')">
-			<h5>join</h5>      
-		</a>
+	<div id="left" class="well">
+		<h4><a href="/event/{{=request.args(0)}}/announcements/">announcements</a></h4>
+		<h4><a href="/event/{{=request.args(0)}}/projects/">projects</a></h4>
+		<h4><a href="/event/{{=request.args(0)}}/pages/">pages</a></h4>
+		<h4><a href="/event/{{=request.args(0)}}/streams/">streams</a></h4>
+		<h4><a href="/event/{{=request.args(0)}}/tasks/">tasks</a></h4>
+		<h4><a href="/event/{{=request.args(0)}}/discussion/">discussion</a></h4>
+
+		<h4><a>looking for a team?</a></h4>
+		<h4><a>mentor</a></h4>
+		<h4><a href="http://www.inlrn.com/academies/">learn</a></h4>
+		<h4><a href="http://www.inlrn.com/academies/">share</a></h4>
+
+
 	</div>
+	<div id="right">
 
-	<h3>start date</h3>
-	<h3>end date</h3>
-	<div class="well well-small">
-		well...
-		<a onclick="alert('hello')">sup</a>
+	    <div class="event-join" id="join-event-{{=event_from_url['id']}}" style="float:left;margin-right:10px;">
+	        <form style="display:none"><input type="hidden" id="" name="join-{{=event_from_url['id']}}" value="{{=event_from_url['id']}}" /></form> 
+	        <a onclick="ajax('/ajax_join_event/', ['join-{{=event_from_url['id']}}'], ':eval');">
+	        <h5 class="btn">join</h5>      
+	        </a>
+	    </div>
+	    <br><br><br>
+
+
+		<div class="panel panel-default">
+		  <div class="panel-heading">
+		    <h4 class="panel-title"><a href="http://www.givingfor.com/projects/">givingfor</a></h4>
+		  </div>
+		  <div class="panel-body">
+		    donation<br>
+		    donation<br>
+		    donation<br>
+		    donation<br>
+		  </div>
+		</div>
+		<div class="panel panel-default">
+		  <div class="panel-heading">
+		    <h4 class="panel-title"><a href="/event/{{=request.args(0)}}/members/">members</a></h4>
+		  </div>
+		  <div class="panel-body">
+			{{=event_member_list}}
+		  </div>
+		</div>
+		<div class="panel panel-default">
+		  <div class="panel-heading">
+		    <h4 class="panel-title">prizes</h4>
+		  </div>
+		  <div class="panel-body">
+		    prize<br>
+		  </div>
+		</div>
+		<div class="panel panel-default">
+		  <div class="panel-heading">
+		    <h4 class="panel-title">sponsors</h4>
+		  </div>
+		  <div class="panel-body">
+		    sponsor<br>
+		    sponsor<br>
+		  </div>
+		</div>
+		<div class="panel panel-default">
+		  <div class="panel-heading">
+		    <h4 class="panel-title"><a href="http://www.voetr.com/committees/">voetr</a></h4>
+		  </div>
+		  <div class="panel-body">
+		    voting<br>
+		    voting<br>
+		    voting<br>
+		    voting<br>
+		  </div>
+		</div>
+		 <div class="panel panel-default">
+		  <div class="panel-heading">
+		    <h4 class="panel-title"><a href="">similar</a></h4>
+		  </div>
+		  <div class="panel-body">
+		    event<br>
+		    project<br>
+		    thread<br>
+		    hm<br>
+		  </div>
+		</div>
 	</div>
+	<div class="content" style="display:inline-block;">
+		{{if request.args(1) is None:}}
+			<div style="float:left;margin-left:75%" class="testing"></div>
+			<div class="event-join" id="join-event-{{=event_from_url['id']}}" style="margin-right:10px;">
+				<form style="display:none"><input type="hidden" id="" name="join-{{=event_from_url['id']}}" value="{{=event_from_url['id']}}" /></form> 
+				<a onclick="ajax('/default/ajax_join_event/', ['join-{{=event_from_url['id']}}'], ':eval');">
+					<h5 style="float:right;">join</h5>      
+				</a>
+			</div>
 
-	<table class="table table-hover">
-	<thead>
-		<tr>
-			<th>First Name</th>
-			<th>Last Name</th>
-			<th>Username</th>
-		</tr>
-	</thead>
-	<tbody>
-		<tr>
-			<td>Trevor</td>
-			<td>Overman</td>
-			<td>@troverman</td>
-		</tr>
-		<tr>
-			<td>Mikey</td>
-			<td>Thompson</td>
-			<td>@fat</td>
-		</tr>
-		<tr>
-			<td colspan="2">hahahah</td>
-			<td>@lol</td>
-		</tr>
-	</tbody>
-	</table>
-	          
+			<h3>{{=event_from_url['title']}} description</h3>
 
-	<h3>{{=event_from_url['title']}} description</h3>
-	<h3>{{=event_from_url['title']}} participants</h3>
-	<h3>{{=event_from_url['title']}} projects</h3>
-	<h3>{{=event_from_url['title']}} sponsors</h3>
-	<h3>{{=event_from_url['title']}} prizes</h3>
-	<h3><a>{{=event_from_url['title']}} givingfor project</a></h3>
-	<h3><a>{{=event_from_url['title']}} voetr committee</a></h3>
-	<h3>notices</h3>
-	<h3>tasks</h3>
-	<h3>rules</h3>
+			<p>start date</p>
+			<p>end date</p>
+
+			<div class="panel panel-default">
+			  {{for x in range(15):}}
+			  <div class="panel-body">
+			    feed item<br>
+			    x person joined<br>
+			    x comment<br>
+			    x donation<br>
+			  </div>
+			  {{pass}}
+			</div>
+		{{elif request.args(1) == 'announcements':}}
+			<a>+ new announcement</a>
+			{{for x in range(10):}}
+				<h4> announcements {{=x}}</h4>
+			{{pass}}
+		{{elif request.args(1) == 'members':}}
+			<a>join</a>
+			{{for x in range(10):}}
+				<h4> member {{=x}}</h4>
+			{{pass}}
+		{{elif request.args(1) == 'discussion':}}
+    		<a data-toggle="modal" href="#create-thread" class="lead" style="text-align:center">+ new thread</a>
+			{{for thread in event_threads:}}
+				<h4><a>{{=thread['title']}}</a></h4>
+			{{pass}}
+		{{elif request.args(1) == 'pages':}}
+    		<a data-toggle="modal" href="#create-page" class="lead" style="text-align:center">+ new page</a>
+			{{for page in event_pages:}}
+				<h4>{{=page['title']}}</h4>
+			{{pass}}	
+		{{elif request.args(1) == 'projects':}}
+    		<a data-toggle="modal" href="#create-thread" class="lead" style="text-align:center">+ new project</a>
+			{{for x in range(10):}}
+				<h4>project {{=x}}</h4>
+			{{pass}}
+		{{elif request.args(1) == 'streams':}}
+			<a>+ new stream</a>
+			{{for x in range(10):}}
+				<h4>streams {{=x}}</h4>
+			{{pass}}
+		{{elif request.args(1) == 'tasks':}}
+			<a>+ new task</a>
+			{{for x in range(10):}}
+				<h4>tasks {{=x}}</h4>
+			{{pass}}
+		{{else:}}
+		{{pass}}
+
+	</div>
+	<div style="clear:both;"></div>
 </div>
 
 <br><br><br><br>
+
+
+
+<div class="modal fade" id="create-thread" style="display:none;">
+    <div class="modal-header" id="create-thread-header">
+        <a class="close" data-dismiss="modal">×</a>
+        <h3>+ new project</h3>
+    </div>
+    <br>
+    <div class="modal-body" style="">
+		{{=form_create_thread}}
+    </div>
+    <div class="modal-footer">
+        footer
+    </div>
+</div> 
+
+<div class="modal fade" id="create-page" style="display:none;">
+    <div class="modal-header" id="create-page-header">
+        <a class="close" data-dismiss="modal">×</a>
+        <h3>+ new page</h3>
+    </div>
+    <br>
+    <div class="modal-body" style="">
+		{{=form_create_page}}
+    </div>
+    <div class="modal-footer">
+        footer
+    </div>
+</div> 
+
+<script>
+    $("#create-thread").draggable({handle:"#create-thread-header", cursor:"move"}); 
+    $("#create-page").draggable({handle:"#create-page-header", cursor:"move"}); 
+
+</script>
+
+

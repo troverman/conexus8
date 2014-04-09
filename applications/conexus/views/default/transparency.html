@@ -1,15 +1,55 @@
 {{extend 'layout.html'}}
+<style>
+#index-header{
+    background-color:rgb(247,247,247);
+    border-bottom:1px solid rgb(225, 225, 225);
+    padding-top:15px;
+    padding-bottom:15px;
+}
+#index-header-container{
+    margin-left:5%;
+    margin-right:5%;
+}
+#share-footer{
+    background-color:rgb(247,247,247);
+    border-top:1px solid rgb(225, 225, 225);
+}
+#share-footer-container{margin-left:5%;margin-right:5%;}
 
-<h1>transparency</h1>
-<p class="lead">paving the way for a transparent future</p>
-<br><hr>
-{{member_list = db(db.auth_user).select()}}
-{{for member in member_list:}}
-	<a href="/member/{{=member['username']}}"><h3>{{=member['username']}}</h3></a>
-{{pass}}
-<br><hr>
-{{project_list = db(db.project).select()}}
-{{for project in project_list:}}
-	<a href="/project/{{=project['url_title']}}"><h3>{{=project['title']}}</h3></a>
-{{pass}}
-<br><br>
+.img-polaroid{padding:2px;}
+a{cursor: pointer;}
+#content { }
+#right { 
+	width: 255px;
+	float: right;
+	padding-left:5px;
+	padding-right:5px; 
+}
+#left {
+	width: 175px; 
+	float: left;
+	border-right:1px solid rgb(238,238,238);  
+	padding-left:15px;    
+}
+
+</style>
+<div id="index-header">
+    <div id="index-header-container">
+    	<h3><a>transparency</a></h3>
+    </div>
+</div>
+<div class="centered-width">
+	<br>
+	<p class="lead">paving the way for a transparent future</p>
+	<br><hr>
+	{{member_list = db(db.auth_user).select()}}
+	{{for member in member_list:}}
+		<a href="/member/{{=member['username']}}"><h3>{{=member['username']}}</h3></a>
+	{{pass}}
+	<br><hr>
+	{{project_list = db(db.project).select()}}
+	{{for project in project_list:}}
+		<a href="/project/{{=project['url_title']}}"><h3>{{=project['title']}}</h3></a>
+	{{pass}}
+</div>
+<br><br><br><br>
