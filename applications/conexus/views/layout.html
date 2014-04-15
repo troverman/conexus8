@@ -123,12 +123,12 @@
       margin-right:5%;
     }
     #site-header-container{
-      background-image:-webkit-gradient(linear, 0 100%, 0 0, from(rgb(255,255,255)), to(rgb(235,235,235)));
-      background-image:-webkit-linear-gradient(rgb(255,255,255), rgb(235,235,235));
-      background-image:-moz-linear-gradient(rgb(255,255,255), rgb(235,235,235));
-      background-image:-ms-linear-gradient(rgb(255,255,255), rgb(235,235,235));
-      background-image:-o-linear-gradient(rgb(255,255,255), rgb(235,235,235));
-      background-image:linear-gradient(rgb(255,255,255), rgb(235,235,235));
+      background-image:-webkit-gradient(linear, 0 100%, 0 0, from(rgb(238,235,235)), to(rgb(241,241,241)));
+      background-image:-webkit-linear-gradient(rgb(238,235,235), rgb(241,241,241));
+      background-image:-moz-linear-gradient(rgb(238,235,235), rgb(241,241,241));
+      background-image:-ms-linear-gradient(rgb(238,235,235), rgb(241,241,241));
+      background-image:-o-linear-gradient(rgb(238,235,235), rgb(241,241,241));
+      background-image:linear-gradient(rgb(238,235,235), rgb(241,241,241));
       border-bottom:1px solid rgb(51,72,83);
       height:67px;
     }
@@ -152,6 +152,7 @@
   </style>
   <!--/inline-styles -->
 
+  <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Ubuntu:regular,bold&subset=Latin">
   <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/themes/ui-lightness/jquery-ui.css" type="text/css" media="all" />
   <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js" type="text/javascript"></script>
   <noscript><link href="{{=URL('static', 'css/web2py_bootstrap_nojs.css')}}" rel="stylesheet" type="text/css" /></noscript>
@@ -179,7 +180,8 @@
           </div>
           <div id="header-icons" style="margin-top:30px;margin-left:3px;float:left;">
             <a href="/discover/"><i id="discover-icon" class="fa fa-random"></i></a>
-            <a href="/projects/"><i id="academies-icon" class="fa fa-th"></i></a>
+            <a href="/events/"><i id="discover-icon" class="fa fa-calendar-o"></i></a>
+            <a href="/projects/"><i id="academies-icon" class="fa fa-wrench"></i></a>
             <a href="/feed/"><i id="feed-icon" class="fa fa-align-justify"></i></a>
           </div>
           <div id="header-search" style="float:left;margin-left:20px;margin-top:23px;">

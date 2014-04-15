@@ -140,11 +140,8 @@ $(function() {
 		<h4><a href="/event/{{=request.args(0)}}/streams/">streams</a></h4>
 		<h4><a href="/event/{{=request.args(0)}}/tasks/">tasks</a></h4>
 		<h4><a href="/event/{{=request.args(0)}}/discussion/">discussion</a></h4>
-
-		<h4><a>looking for a team?</a></h4>
-		<h4><a>mentor</a></h4>
 		<h4><a href="http://www.inlrn.com/academies/">learn</a></h4>
-		<h4><a href="http://www.inlrn.com/academies/">share</a></h4>
+		<h4><a>share</a></h4>
 
 
 	</div>
@@ -221,12 +218,6 @@ $(function() {
 	<div class="content" style="display:inline-block;">
 		{{if request.args(1) is None:}}
 			<div style="float:left;margin-left:75%" class="testing"></div>
-			<div class="event-join" id="join-event-{{=event_from_url['id']}}" style="margin-right:10px;">
-				<form style="display:none"><input type="hidden" id="" name="join-{{=event_from_url['id']}}" value="{{=event_from_url['id']}}" /></form> 
-				<a onclick="ajax('/default/ajax_join_event/', ['join-{{=event_from_url['id']}}'], ':eval');">
-					<h5 style="float:right;">join</h5>      
-				</a>
-			</div>
 
 			<h3>{{=event_from_url['title']}} description</h3>
 

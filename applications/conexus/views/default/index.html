@@ -18,7 +18,12 @@
 #project-list-container{text-align:left;width:100%;}
 #project-list-item{border:2px solid rgb(180,180,180);display:inline-block;padding:10px;margin:7px;}
 #project-list-item:hover{border:2px solid rgb(110,110,110);display:inline-block;padding:11px;margin:7px;}
-
+#scroller{
+    background-color:rgb(227,227,227);
+    border-bottom:1px solid rgb(225, 225, 225);
+    padding-top:15px;
+    padding-bottom:15px;
+}
 </style>
 <script language="javascript" type="text/javascript" src="{{=URL(request.application,'static','js/jquery.flot.js')}}"></script>
 <script language="javascript" type="text/javascript" src="{{=URL(request.application,'static','js/jquery.flot.selection.js')}}"></script>
@@ -32,7 +37,10 @@
     </div>
 </div>
 <div id="scroller">
+    <br><br><br>
     <img style="width:300px;height:300px;" class="img-polaroid" src="/conexus/static/images/noimage-icon.png"/>
+    <br><br><br>
+    <br><br><br>
 </div>
 
 <div class="centered-width">
@@ -44,9 +52,20 @@
             <td><p class="lead" style="text-align:left;padding-left:25px;padding-right:25px;">how can we work together for a common goal?</p></td>
             <td><p class="lead" style="text-align:left;padding-left:25px;padding-right:25px;">imagine a 24/7 global hackaton</p></td>
             <td><p class="lead" style="text-align:left;padding-left:25px;padding-right:25px;">crowdsourced team building</p></td>
-            <td><p class="lead" style="text-align:left;padding-left:25px;padding-right:25px;">when a fire starts to burn, it starts to spread<span class="icon-fire"></span></p></td>
+            <td><p class="lead" style="text-align:left;padding-left:25px;padding-right:25px;">when a fire starts to burn, it starts to spread<span style="font-size:32px;" class="icon-fire"></span></p></td>
         </tr>
     </table>
+    <table style="margin-left:auto;margin-right:auto">
+        <tr>
+            <td style="padding:15px;"><i style="font-size:256px;" class="fa fa-users"></i></td>
+            <td style="padding:15px;"><i style="font-size:256px;" class="fa fa-bullhorn"></i></td>
+            <td style="padding:15px;"><i style="font-size:256px;" class="fa fa-wrench"></i></td>
+            <td style="padding:15px;"><i style="font-size:256px;" class="fa fa-calendar-o"></i></td>
+            <td style="padding:15px;"><i style="font-size:256px;" class="fa fa-thumbs-up"></i></td>
+
+        </tr>
+    </table>
+
 <br><br><br>
     <table style="margin-left:auto;margin-right:auto">
     	<tr>
@@ -57,17 +76,15 @@
             <td><p class="lead" style="text-align:left;padding-left:25px;padding-right:25px;"><a href="/feed/">feed</a></p></td>
             <td><p class="lead" style="text-align:left;padding-left:25px;padding-right:25px;"><a href="/feed/">streams</a></p></td>
             <td><p class="lead" style="text-align:left;padding-left:25px;padding-right:25px;"><a href="/transparency/">transparency</a></p></td>
-
         </tr>
-
     </table>
 
 <hr>
 <br><br><br>
-    <p class="lead" style="text-align:left">streams</p><hr>
 
 	<table style="margin: auto;">
 		<tr>
+            <td style="max-width:33%"><p class="lead" style="text-align:left"><i style="font-size:64px;" class="fa fa-video-camera"></i>streams</p></td>
 			<td style="max-width:33%"><p class="lead"><iframe src="//www.youtube.com/embed/8fpZ16cIVAQ?list=UUNceSFBcgkYqv4QiD374VTQ" frameborder="0" allowfullscreen></iframe></p></td>
 			<td style="max-width:33%"><p class="lead"><iframe src="//www.youtube.com/embed/xR4ibUq9iVw?list=UUNceSFBcgkYqv4QiD374VTQ" frameborder="0" allowfullscreen></iframe></p></td>
 			<td style="max-width:33%"><p class="lead"><iframe src="//www.youtube.com/embed/medBPRNlV0w?list=UUNceSFBcgkYqv4QiD374VTQ" frameborder="0" allowfullscreen></iframe></p></td>
@@ -170,9 +187,10 @@
 <div>
     <div id="placeholder" style="width:75%;height:250px;display: table;margin: 0 auto;"></div>
 </div>
+    <p style="text-align:center"><i style="font-size:256px;" class="fa fa-link fa-spin"></i></p>
     <p class="lead" style="text-align:left">work with people, together</p>
     <p class="lead" style="text-align:left">donate toward promising projects</p>
-    <p class="lead" style="text-align:left">epoint.me connected, givingfor connected, voetr connected, inlrn connected</p>
+    <p class="lead" style="text-align:left"><a href="http://www.epoint.me/">epoint.me</a> connected, <a href="http://www.givingfor.com/projects/conexus/">givingfor</a> connected, <a href="http://www.voetr.com/committee/conexus/">voetr</a> connected, <a href="http://www.inlrn.com/">inlrn connected</a></p>
     <p class="lead" style="text-align:left">democratic</p>
     <p class="lead" style="text-align:left">help change the business model. crowdowned</p>
     <p class="lead" style="text-align:left">we're all cofounders</p>
