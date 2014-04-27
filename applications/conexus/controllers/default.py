@@ -263,6 +263,27 @@ def test():
 
 
 
+def inlrn_login():
+    from xmlrpclib import ServerProxy
+    from google.appengine.api import urlfetch
+    URL = "https://troverman:trev77922@troverman-inlrn.appspot.com/inlrn/default/call/xmlrpc"
+    urlfetch.set_default_fetch_deadline(60)
+    service = ServerProxy(URL, verbose=True)
+    test = service.test_add(50, 2)
+
+    return test
+
+
+
+
+
+
+
+
+
+
+
+
 ################################################################
 ####ajax########################################################
 ################################################################
@@ -277,7 +298,7 @@ def ajax_join_event():
         
     #LOGIC
     #db.event_member.insert(member_id = auth.user_id, event_id = event_id_trim, event_membergroup_id_array=1)
-    jquery = "jQuery('.flash').html('%s').slideDown().delay(1000).slideUp();" % event_id
+    jquery = "jQuery('.flash').html('hello world').slideDown().delay(1000).slideUp();"
 
     #jquery += "$('#join-collection-%s').fadeToggle(100);" % collection_id_trim
     #jquery += "$('#leave-collection-%s').delay(100).fadeToggle(400);" % collection_id_trim   
@@ -310,7 +331,7 @@ def ajax_join_project():
         
     #LOGIC
     #db.project_member.insert(member_id = auth.user_id, project_id = project_id_trim, project_membergroup_id_array=1)
-    jquery = "jQuery('.flash').html('%s').slideDown().delay(1000).slideUp();" % project_id
+    jquery = "jQuery('.flash').html('hello world').slideDown().delay(1000).slideUp();"
 
     #jquery += "$('#join-collection-%s').fadeToggle(100);" % collection_id_trim
     #jquery += "$('#leave-collection-%s').delay(100).fadeToggle(400);" % collection_id_trim   

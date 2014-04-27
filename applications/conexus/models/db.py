@@ -102,6 +102,8 @@ db.define_table('project_membergroup',
 db.define_table('event',
     Field('url_title','string'),
     Field('title','string'),
+    Field('start_time','datetime'),
+    Field('end_time','datetime'),
 )
 
 ################################
