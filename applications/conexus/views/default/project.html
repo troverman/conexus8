@@ -118,7 +118,7 @@ a{cursor: pointer;}
 
 <div id="index-header">
     <div id="index-header-container">
-    	<h3><a>{{=project_from_url['title']}}</a></h3>
+    	<h3><a href="/project/{=project_from_url['url_title']}}/">{{=project_from_url['title']}}</a></h3>
     </div>
 </div>
 <div class="alert fade in">
@@ -139,8 +139,8 @@ a{cursor: pointer;}
 		<div class="well">
 
 		    <div class="project-join" id="join-project-{{=project_from_url['id']}}" style="float:left;margin-right:10px;">
-		        <form style="display:none"><input type="hidden" id="" name="join-{{=project_from_url['id']}}" value="{{=project_from_url['id']}}" /></form> 
-		        <a onclick="ajax('/ajax_join_project/', ['join-{{=project_from_url['id']}}'], ':eval');">
+		        <form style="display:none"><input type="hidden" id="" name="id" value="{{=project_from_url['id']}}" /></form> 
+		        <a onclick="ajax('/ajax_join_project/', ['id'], ':eval');">
 		        <h5 class="btn">join</h5>      
 		        </a>
 		    </div>
@@ -213,6 +213,7 @@ a{cursor: pointer;}
 			{{pass}}
 		{{elif request.args(1) == 'members':}}
 			{{for member in project_member_list:}}
+			    <a href="/member/{{=member['id']}}/"><img class="img-polaroid" style="width:64px;" src="/conexus/static/images/noimage-icon.png"/></a>
 				<h4><a>{{=member}}</a></h4>
 			{{pass}}
 		{{elif request.args(1) == 'pages':}}

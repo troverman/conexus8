@@ -32,7 +32,6 @@ def discover():
 def event():
     try:
         event_from_url = db(db.event.url_title == request.args(0)).select()[0]
-        response.flash = 'hello world'
         event_threads = db(db.event_thread.event_id == event_from_url['id']).select()
         event_pages = db(db.event_page.event_id == event_from_url['id']).select()
 
@@ -292,17 +291,15 @@ def inlrn_login():
 ####ajax_join_event#############
 ################################                     
 def ajax_join_event():
-    event_id = request.vars.itervalues()
-    #for x in event_id:
-        #event_id_trim = int(x)
+    event_id = int(request.vars.id)
         
     #LOGIC
-    #db.event_member.insert(member_id = auth.user_id, event_id = event_id_trim, event_membergroup_id_array=1)
-    jquery = "jQuery('.flash').html('hello world').slideDown().delay(1000).slideUp();"
+    db.event_member.insert(member_id = auth.user_id, event_id = event_id, event_membergroup_id_array=1)
+    jquery = "jQuery('.flash').html('joined event').slideDown().delay(1000).slideUp();"
 
-    #jquery += "$('#join-collection-%s').fadeToggle(100);" % collection_id_trim
-    #jquery += "$('#leave-collection-%s').delay(100).fadeToggle(400);" % collection_id_trim   
-    return jquery      
+    return jquery 
+
+
     
 ################################
 ####ajax_leave_event############
@@ -316,8 +313,6 @@ def ajax_leave_event():
     db((db.event_member.member_id==auth.user_id) & (db.event_member.collection_id==event_id_trim)).delete()
     jquery = "jQuery('.flash').html('left event').slideDown().delay(1000).slideUp();"
 
-    #jquery += "$('#leave-collection-%s').fadeToggle(100);" % collection_id_trim
-    #jquery += "$('#join-collection-%s').delay(100).fadeToggle(400);" % collection_id_trim   
     return jquery
        
 
@@ -325,16 +320,13 @@ def ajax_leave_event():
 ####ajax_join_project###########
 ################################                     
 def ajax_join_project():
-    project_id = request.vars.itervalues()
-    #for x in project_id:
-        #project_id_trim = int(x)
+    project_id = int(request.vars.id)
         
     #LOGIC
-    #db.project_member.insert(member_id = auth.user_id, project_id = project_id_trim, project_membergroup_id_array=1)
-    jquery = "jQuery('.flash').html('hello world').slideDown().delay(1000).slideUp();"
+    db.project_member.insert(member_id = auth.user_id, project_id = project_id, project_membergroup_id_array=1)
+    jquery = "jQuery('.flash').html('joined project').slideDown().delay(1000).slideUp();"
 
-    #jquery += "$('#join-collection-%s').fadeToggle(100);" % collection_id_trim
-    #jquery += "$('#leave-collection-%s').delay(100).fadeToggle(400);" % collection_id_trim   
+
     return jquery      
     
 ################################

@@ -148,11 +148,13 @@ $(function() {
 	<div id="right">
 
 	    <div class="event-join" id="join-event-{{=event_from_url['id']}}" style="float:left;margin-right:10px;">
-	        <form style="display:none"><input type="hidden" id="" name="join-{{=event_from_url['id']}}" value="{{=event_from_url['id']}}" /></form> 
-	        <a onclick="ajax('/ajax_join_event/', ['join-{{=event_from_url['id']}}'], ':eval');">
-	        <h5 class="btn">join</h5>      
+	        <form style="display:none"><input type="hidden" id="" name="id" value="{{=event_from_url['id']}}" /></form> 
+	        <a onclick="ajax('/ajax_join_event/', ['id'], ':eval');">
+	        	<h5 class="btn">join</h5>      
 	        </a>
 	    </div>
+
+
 	    <br><br><br>
 
 
@@ -171,7 +173,7 @@ $(function() {
 		  <div class="panel-heading">
 		    <h4 class="panel-title"><a href="/event/{{=request.args(0)}}/members/">members</a></h4>
 		  </div>
-		  <div class="panel-body">
+		  <div class="panel-body" id="member_list">
 			{{=event_member_list}}
 		  </div>
 		</div>

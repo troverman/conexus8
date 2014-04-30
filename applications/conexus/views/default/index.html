@@ -20,13 +20,14 @@
 #share-footer-container{margin-left:5%;margin-right:5%;}
 #project-list-container{text-align:left;width:100%;}
 #project-list-item{border:2px solid rgb(180,180,180);display:inline-block;padding:10px;margin:7px;}
-#project-list-item:hover{border:2px solid rgb(110,110,110);display:inline-block;padding:11px;margin:7px;}
+#project-list-item:hover{border:2px solid rgb(110,110,110);display:inline-block;padding:11px;margin:7px;background-color:rgb(255,255,255);}
 #scroller{
     background-color:rgb(247,247,247);
     border-bottom:1px solid rgb(225, 225, 225);
     padding-top:15px;
     padding-bottom:15px;
 }
+#banner-area p{color:rgb(255,255,255);}
 </style>
 <script language="javascript" type="text/javascript" src="{{=URL(request.application,'static','js/jquery.flot.js')}}"></script>
 <script language="javascript" type="text/javascript" src="{{=URL(request.application,'static','js/jquery.flot.selection.js')}}"></script>
@@ -39,11 +40,10 @@
 		<p class="lead">paving the way for a transparent future</p>
     </div>
 </div>
-</script>
 <div style="background-image: url(../conexus/static/images/cam.JPG); height: 600px;">
-    <p class="lead" style="text-align:center;">this is some text yo</p>
+    <p class="lead" style="text-align:center;font-family:ubuntu;font-weight:bold;">this is some text yo</p>
     <p style="text-align:center"><i style="font-size:256px;color:rgb(240,240,240);" class="fa fa-refresh fa-spin"></i></p>
-    <p class="lead" style="text-align:center;">this is some text yo</p>
+    <p class="lead" style="text-align:center;font-family:ubuntu;font-weight:bold;">this is some text yo</p>
     <p class="lead btn" style="display:block;margin: 0 auto;width:100px;padding:10px;">i love this</p>
 
     <br><br>
@@ -55,7 +55,6 @@
             </div>
         </div>
     </div>
-
 </div>
 <div id="scroller">
     <!--<img style="" class="" src="/conexus/static/images/cam.JPG"/>-->
@@ -63,35 +62,12 @@
     <p class="lead" style="text-align:center;">let's make the world a better place, together.</p>
 
     <br><br><br>
-    <br><br><br>
 </div>
-
 <div class="centered-width">
 
 <hr>
-
-	<table style="margin-left:auto;margin-right:auto">
-    	<tr>
-            <td><p class="lead" style="text-align:left;padding-left:25px;padding-right:25px;">how can we work together for a common goal?</p></td>
-            <td><p class="lead" style="text-align:left;padding-left:25px;padding-right:25px;">imagine a 24/7 global hackaton</p></td>
-            <td><p class="lead" style="text-align:left;padding-left:25px;padding-right:25px;">crowdsourced team building</p></td>
-            <td><p class="lead" style="text-align:left;padding-left:25px;padding-right:25px;">when a fire starts to burn, it starts to spread<span style="font-size:32px;" class="icon-fire"></span></p></td>
-        </tr>
-    </table>
     <table style="margin-left:auto;margin-right:auto">
         <tr>
-            <td style="padding:15px;"><i style="font-size:256px;" class="fa fa-users"></i></td>
-            <td style="padding:15px;"><i style="font-size:256px;" class="fa fa-bullhorn"></i></td>
-            <td style="padding:15px;"><i style="font-size:256px;" class="fa fa-wrench"></i></td>
-            <td style="padding:15px;"><i style="font-size:256px;" class="fa fa-calendar-o"></i></td>
-            <td style="padding:15px;"><i style="font-size:256px;" class="fa fa-thumbs-up"></i></td>
-
-        </tr>
-    </table>
-
-<br><br><br>
-    <table style="margin-left:auto;margin-right:auto">
-    	<tr>
             <td><p class="lead" style="text-align:left;padding-left:25px;padding-right:25px;"><a href="/discover/">discover</a></p></td>
             <td><p class="lead" style="text-align:left;padding-left:25px;padding-right:25px;"><a href="/events/">events</a></p></td>
             <td><p class="lead" style="text-align:left;padding-left:25px;padding-right:25px;"><a href="/projects/">projects</a></p></td>
@@ -101,13 +77,39 @@
             <td><p class="lead" style="text-align:left;padding-left:25px;padding-right:25px;"><a href="/transparency/">transparency</a></p></td>
         </tr>
     </table>
+    <table style="margin-left:auto;margin-right:auto">
+        <tr>
+            <td style="padding:25px;"><i style="font-size:128px;" class="fa fa-users"></i></td>
+            <td style="padding:25px;"><i style="font-size:128px;" class="fa fa-bullhorn"></i></td>
+            <td style="padding:25px;"><i style="font-size:128px;" class="fa fa-wrench"></i></td>
+            <td style="padding:25px;"><i style="font-size:128px;" class="fa fa-calendar-o"></i></td>
+            <td style="padding:25px;"><i style="font-size:128px;" class="fa fa-money"></i></td>
+            <td style="padding:25px;"><i style="font-size:128px;" class="fa fa-thumbs-up"></i></td>
+
+        </tr>
+    </table>
+
+    <br><br><br>
+    <table style="margin-left:auto;margin-right:auto">
+        <tr>
+            <td><p class="lead" style="text-align:left;padding-left:25px;padding-right:25px;">how can we work together for a common goal?</p></td>
+            <td><p class="lead" style="text-align:left;padding-left:25px;padding-right:25px;">imagine a 24/7 global hackaton</p></td>
+            <td><p class="lead" style="text-align:left;padding-left:25px;padding-right:25px;">crowdsourced team building</p></td>
+            <td><p class="lead" style="text-align:left;padding-left:25px;padding-right:25px;">earn value though working together</p></td>
+            <td><p class="lead" style="text-align:left;padding-left:25px;padding-right:25px;">when a fire starts to burn, it starts to spread<span style="font-size:32px;" class="icon-fire"></span></p></td>
+        </tr>
+    </table>
 
 <hr>
+</div>
+<div style="background-image: url(../conexus/static/images/global_map.svg); height: 300px; background-repeat:no-repeat;background-color:rgb(247,247,247);background-position:center;"></div>
 <br><br><br>
 
+<div class="centered-width">
+
+    <p class="lead" style="text-align:left;text-align:center">live streams <i style="font-size:64px;margin-left:15px;" class="fa fa-video-camera"></i></p><hr>
 	<table style="margin: auto;">
 		<tr>
-            <td style="max-width:33%"><p class="lead" style="text-align:left"><i style="font-size:64px;" class="fa fa-video-camera"></i>streams</p></td>
 			<td style="max-width:33%"><p class="lead"><iframe src="//www.youtube.com/embed/8fpZ16cIVAQ?list=UUNceSFBcgkYqv4QiD374VTQ" frameborder="0" allowfullscreen></iframe></p></td>
 			<td style="max-width:33%"><p class="lead"><iframe src="//www.youtube.com/embed/xR4ibUq9iVw?list=UUNceSFBcgkYqv4QiD374VTQ" frameborder="0" allowfullscreen></iframe></p></td>
 			<td style="max-width:33%"><p class="lead"><iframe src="//www.youtube.com/embed/medBPRNlV0w?list=UUNceSFBcgkYqv4QiD374VTQ" frameborder="0" allowfullscreen></iframe></p></td>
@@ -119,9 +121,9 @@
 </div>
 
 <br><br>
-<div style="background-color:rgb(24,95,192);">
+<div id="banner-area" style="background-color:rgb(24,95,192);">
     <br><br><br>
-    <p style="text-align:center;color:rgb(200,200,200)">connecting us</p> 
+    <p style="text-align:center;color:rgb(200,200,200);font-size:24px;font-family:ubuntu;font-weight:bold;">connecting us</p> 
     <br><br><br>
 </div>
 <br><br><br>
@@ -219,15 +221,15 @@
     <p class="lead" style="text-align:left">we're all cofounders</p>
     <p class="lead" style="text-align:left">transparent</p>
     <p class="lead" style="text-align:left">paving the way for a transparent future</p>
-
-
-
+    <p class="lead" style="text-align:left">recieve value for what you do</p>
+    <p class="lead" style="text-align:left">crowd funded projects</p>
+    <p class="lead" style="text-align:left">PICTURE</p>
 </div>
 
 <br><br>
-<div style="background-color:rgb(100,150,50);">
+<div id="banner-area" style="background-color:rgb(100,150,50);">
     <br><br><br>
-    <p style="text-align:center;"><a style="color:rgb(240,250,255)" href="/projects/">projects</a></p> 
+    <p style="text-align:center;"><a style="color:rgb(240,250,255);font-size:24px;font-family:ubuntu;font-weight:bold;" href="/projects/">projects</a></p> 
     <br><br><br>
 </div>
 <br><br><br>
@@ -246,12 +248,16 @@
     <p class="lead" style="text-align:left">i like to work together with people</p>
     <p class="lead" style="text-align:left">group projects can be fun :D</p>
     <p class="lead" style="text-align:left">let's do awesome things</p>
+    <p class="lead" style="text-align:left">we can do it</p>
+    <p class="lead" style="text-align:left">PICTURE</p>
+
+
 </div>
 <br><br>
 
-<div style="background-color:rgb(140,120,90);">
+<div id="banner-area" style="background-color:rgb(140,120,90);">
     <br><br><br>
-    <p style="text-align:center;"><a style="color:rgb(240,250,255)" href="/events/">events</a></p> 
+    <p style="text-align:center;"><a style="color:rgb(240,250,255);font-size:24px;font-family:ubuntu;font-weight:bold;" href="/events/">events</a></p> 
     <br><br><br>
 </div>
 <br><br><br>
@@ -269,15 +275,17 @@
     <p class="lead" style="text-align:left">24/7 global hackathon</p>
     <p class="lead" style="text-align:left">win prizes</p>
     <p class="lead" style="text-align:left">collaborative competition</p>
-    <p class="lead" style="text-align:left">let's make awesome things</p>
+    <p class="lead" style="text-align:left">let's make awesome things, together</p>
     <p class="lead" style="text-align:left">we can do it</p>
+    <p class="lead" style="text-align:left">PICTURE</p>
+
 
 </div>
 <br><br>
 
-<div style="background-color:rgb(51,72,83);">
+<div id="banner-area" style="background-color:rgb(51,72,83);">
     <br><br><br>
-    <p style="text-align:center;color:rgb(200,200,200)">evolution</p> 
+    <p style="text-align:center;color:rgb(200,200,200);font-size:24px;font-family:ubuntu;font-weight:bold;">evolution</p> 
     <br><br><br>
 </div>
 <br><br><br>
@@ -286,6 +294,8 @@
     <p class="lead" style="text-align:left">the world decided to work together</p>
     <p class="lead" style="text-align:left">toward a common goal</p>
     <p class="lead" style="text-align:left">conex.us</p>
+    <p class="lead" style="text-align:left">PICTURE</p>
+
 </div>
 
 
@@ -295,7 +305,7 @@
     <div id="share-footer-container">
     	<div style="float:left;">
     		<h1>share</h1>
-    		<p>facebook, twittter, reddit, 4chan, lealr</p>
+    		<p>facebook, twitter, google+, reddit, lealr</p>
     	</div>
 		<div style="float:right;">
 		    <h1>get the app</h1>

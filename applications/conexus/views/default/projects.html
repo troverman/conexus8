@@ -15,25 +15,51 @@
     border-top:1px solid rgb(225, 225, 225);
 }
 #share-footer-container{margin-left:5%;margin-right:5%;}
+#item-block-list-item{border:2px solid rgb(210,210,210);display:inline-block;padding:10px;margin:7px;}
+#item-block-list-item:hover{border:2px solid rgb(110,110,110);display:inline-block;padding:11px;margin:7px;background-color:rgb(255,255,255);}
+
 </style>
 <div id="index-header">
     <div id="index-header-container">
-		<h1>projects</h1><br>
-		<p>this a filter</p>
+		<h1 style="float:left;">projects</h1><br>
+        <a data-toggle="modal" href="#new-project" class="lead btn" style="text-align:center;float:right">+ new project</a>
+        <div style="clear:both;"></div>
     </div>
 </div>
 
 <div style="margin-left:5%;">
 
-	<p class="lead" style="text-align:center">trending projects</p>
-	<p class="lead" style="text-align:center">local</p>
-    <a data-toggle="modal" href="#new-project" class="lead" style="text-align:center">+ new project</a>
+    <div class="dropdown" style="float:right;margin-right:15px;">
+        <a class="dropdown-toggle" data-toggle="dropdown" href="#">sort by: <b style="margin-left:5px;"class="caret"></b></a>
+        <ul class="dropdown-menu pull-right" style="left:auto;width:158px;min-width:0px;" role="menu" aria-labelledby="dLabel">
+            <li><a tabindex="-1" href="#">most recent</a></li>
+            <li><a tabindex="-1" href="#">relevancy</a></li>
+            <li><a tabindex="-1" href="#">highest price</a></li>
+            <li><a tabindex="-1" href="#">lowest price</a></li>
+        </ul>
+    </div>
+    <div class="btn-toolbar" style="margin-left:15px;float:left;">
+        <div class="btn-group">
+            <a class="btn active" id="view-list"><i class="icon-align-justify"></i></a>
+            <a class="btn" id="view-table"><i class="icon-th"></i></a>
+        </div>
+    </div>
+    <hr><br>
 
-	{{for project in project_list:}}
-		<a href="/project/{{=project['url_title']}}/"><h3>{{=project['title']}}</h3></a>
-        <a>follow</a>
-        <a>members</a>
-	{{pass}}
+    <div id="item-list-container" style="">
+        {{for project in project_list:}}
+            <h3><a href="/project/{{=project['url_title']}}/">{{=project['title']}}</a></h3>
+        {{pass}}
+    </div>
+    <div id="item-block-list-container" style="display:none;">
+        {{for project in project_list:}}
+            <div id="item-block-list-item">
+                <h4><a href="/project/{{=project['title']}}">{{=project['title']}}</a></h4>
+                <a href="/project/{{=project['title']}}"><img class="img-polaroid" src="/conexus/static/images/noimage-icon.png"/></a>
+                <h4><a href="/project/{{=project['title']}}">details</a></h4>
+            </div>
+        {{pass}}
+    </div>
 
 </div>
 
@@ -62,4 +88,22 @@
 
 <script>
     $("#new-project" ).draggable({handle:"#new-project-header", cursor:"move"}); 
+    $("#view-list").click(function() {
+        if ($(this).hasClass("active")){}
+        else{
+            $(this).addClass("active");
+            $("#view-table").removeClass("active");
+            $("#item-block-list-container").fadeToggle(); 
+            $("#item-list-container").fadeToggle();
+        }
+    });
+    $("#view-table").click(function() {
+        if ($(this).hasClass("active")){}
+        else{
+            $(this).addClass("active");
+            $("#view-list").removeClass("active");
+            $("#item-block-list-container").fadeToggle(); 
+            $("#item-list-container").fadeToggle();
+        }
+    });
 </script>
