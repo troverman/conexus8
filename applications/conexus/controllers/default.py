@@ -55,6 +55,11 @@ def event():
 
         event_member_list = db(db.event_member.event_id == event_from_url['id']).select()
 
+        the_event_member_list = []
+        for member in event_member_list:
+            the_event_member_list.append(db(db.auth_user.id == member['member_id']).select()[0])
+
+
     except IndexError:
         redirect(URL('events'))
 
@@ -65,6 +70,7 @@ def event():
         event_pages=event_pages,
         form_create_page=form_create_page,
         event_member_list=event_member_list,
+        the_event_member_list=the_event_member_list,
 
     )
 
@@ -109,7 +115,23 @@ def help():
 ####inbox#######################
 ################################
 def inbox():
-    return dict()
+
+    message_list = db(db.message.member_id_array.contains(auth.user_id)).select()
+
+    form_create_message = SQLFORM(db.message)
+    if form_create_message.process(formname='form_create_message').accepted:
+        #db.collection_member.insert(collection_id = form_create_collection.vars.id, user_id = auth.user_id, collection_usergroup_id=0)
+        session.flash = 'message sent'
+        redirect(URL('/inbox/' + str(form_create_message.vars.id)))  
+    elif form_create_message.errors:
+        session.flash = 'Error'   
+        redirect(URL(''))
+
+
+    return dict(
+        form_create_message=form_create_message,
+        message_list=message_list,
+    )
 
 ################################
 ####index#######################
@@ -129,10 +151,32 @@ def index():
 def member():
     try:
         member_from_url = db(db.auth_user.username == request.args(0)).select()[0]
+        project_list = db(db.project_member.member_id == member_from_url['id']).select()
+        message_list = db(db.message.member_id_array.contains(member_from_url['id'])).select()
+        event_list = db(db.event_member.member_id == member_from_url['id']).select()
+
+        the_project_list = []
+        for project in project_list:
+            the_project_list.append(db(db.project.id == project['project_id']).select())
+
+        the_event_list = []
+        for event in event_list:
+            the_event_list.append(db(db.event.id == event['event_id']).select())
+
+        member_picture = db(db.member_picture.member_id == member_from_url['id']).select()
+        member_account = db(db.member_account.member_id == member_from_url['id']).select()
+
     except IndexError:
         redirect(URL('index'))
 
-    return dict(member_from_url=member_from_url)
+    return dict(
+        member_from_url=member_from_url,
+        the_project_list=the_project_list,
+        the_event_list=the_event_list,
+        message_list=message_list,
+        member_picture=member_picture,
+        member_account=member_account,
+    )
 ################################
 ####mission#####################
 ################################
@@ -175,13 +219,78 @@ def project():
     try:
         project_from_url = db(db.project.url_title == request.args(0)).select()[0]
         project_member_list = db(db.project_member.project_id == project_from_url['id']).select()
+        the_project_member_list = []
+        for member in project_member_list:
+            the_project_member_list.append(db(db.auth_user.id == member['member_id']).select()[0])
+
+
+        create_new_page_form = SQLFORM(db.project_page)
+        if create_new_page_form.process(formname='create_new_page_form').accepted:           
+            db(db.project_page.id==create_new_page_form.vars.id).update(project_id=project_from_url['id'])
+            session.flash = 'Page Created'
+            redirect(URL('/project/' + project_from_url['url_title'] + '/pages'))
+        elif create_new_page_form.errors:
+            session.flash = 'Error' 
+            redirect(URL(''))
+
+
+
+        form_create_task = SQLFORM(db.project_task)
+        if form_create_task.process(formname='form_create_task').accepted:
+            db(db.project_task.id==form_create_task.vars.id).update(project_id=project_from_url['id'])
+            session.flash = 'task created'
+            redirect(URL('/project/' + str(project_from_url['url_title'])))     
+        elif form_create_task.errors:
+            session.flash = 'Error'   
+            redirect(URL(''))
+
+
+        task_list = db(db.project_task.project_id == project_from_url['id']).select()
+        page_list = db(db.project_page.project_id == project_from_url['id']).select()
+
+        task_tag_list = []
+        for task in task_list:
+            task_tag_list.append((db(db.project_task_tag.project_task_id == task['id']).select()))
+
+        task_tag_list_array = []
+        for tag_list in task_tag_list:
+            for tag in tag_list:
+                task_tag_list_array.append(tag['tag'])   
+
+        set_task_tag_list = set(task_tag_list_array)
+        tag_task_list_unsorted = list(set_task_tag_list)
+        combined_count_and_tag_array=[]
+        for tag in tag_task_list_unsorted:
+            combined_count_and_tag_array.append([tag, task_tag_list_array.count(tag)])
+        from operator import itemgetter
+        tag_task_list_sorted_by_total_count = sorted(combined_count_and_tag_array, key=itemgetter(1))  
+
+        feed_array = []
+        for task in task_list:
+            feed_array.append(task)
+        for page in page_list:
+            feed_array.append(page)
+        for member in project_member_list:
+            feed_array.append(member)
+
+        project_picture = db(db.project_picture.project_id == project_from_url['id']).select()
+
+
+
 
     except IndexError:
         redirect(URL('projects'))
 
     return dict(
+        page_list=page_list,
+        create_new_page_form=create_new_page_form,
         project_from_url=project_from_url,
-        project_member_list=project_member_list,
+        form_create_task=form_create_task,
+        task_list=task_list,
+        the_project_member_list=the_project_member_list,
+        tag_task_list_sorted_by_total_count=tag_task_list_sorted_by_total_count,
+        feed_array=feed_array,
+        project_picture=project_picture,
     )
 
 
@@ -189,6 +298,13 @@ def project():
 ####search######################
 ################################
 def search():
+    return dict(message=T('Hello World'))
+
+
+################################
+####streams#####################
+################################
+def streams():
     return dict(message=T('Hello World'))
 
 ################################
@@ -263,12 +379,16 @@ def test():
 
 
 def inlrn_login():
+    import base64
     from xmlrpclib import ServerProxy
     from google.appengine.api import urlfetch
-    URL = "https://troverman:trev77922@troverman-inlrn.appspot.com/inlrn/default/call/xmlrpc"
+    URL = "https://troverman-inlrn.appspot.com/inlrn/default/call/xmlrpc"
     urlfetch.set_default_fetch_deadline(60)
+    #result = urlfetch.fetch(URL, headers={"Authorization": "Basic %s" % base64.b64encode("troverman:trev77922")})
+
     service = ServerProxy(URL, verbose=True)
     test = service.test_add(50, 2)
+
 
     return test
 
@@ -293,8 +413,8 @@ def inlrn_login():
 def ajax_join_event():
     event_id = int(request.vars.id)
         
-    #LOGIC
-    db.event_member.insert(member_id = auth.user_id, event_id = event_id, event_membergroup_id_array=1)
+    if auth.user_id is not None:
+        db.event_member.insert(member_id = auth.user_id, event_id = event_id, event_membergroup_id_array=1)
     jquery = "jQuery('.flash').html('joined event').slideDown().delay(1000).slideUp();"
 
     return jquery 
@@ -322,8 +442,8 @@ def ajax_leave_event():
 def ajax_join_project():
     project_id = int(request.vars.id)
         
-    #LOGIC
-    db.project_member.insert(member_id = auth.user_id, project_id = project_id, project_membergroup_id_array=1)
+    if auth.user_id is not None:
+        db.project_member.insert(member_id = auth.user_id, project_id = project_id, project_membergroup_id_array=1)
     jquery = "jQuery('.flash').html('joined project').slideDown().delay(1000).slideUp();"
 
 

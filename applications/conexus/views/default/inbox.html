@@ -28,44 +28,40 @@
 </style>
 
 <div id="left">
-    <h5>title, people</h5>
-	<h5>title, people</h5>  
-    <h5>title, people</h5>  
-    <h5>title, people</h5>  
-    <h5>title, people</h5>  
-    <h5>title, people</h5>  
-    <h5>title, people</h5>  
-    <h5>title, people</h5>  
-    <h5>title, people</h5>  
-    <h5>title, people</h5>   
+    {{for message in message_list:}}
+        <h5><a>{{=message['message_title']}}</a>, people</h5>
+    {{pass}}  
 </div>
 
 <div id="right">
 	<a class="btn">+ new message</a>
     <br><br>
-    member..
+    {{=form_create_message}}
     <h4>search</h4>
     
 
 </div>
 <div id="contentwrapper">
     <div id="content">
-		<a class="btn">options</a>
-        
-        add member
-        leave message
-        add title
-        
-        <h5>message history</h5>
-        <h5>message history</h5>
-        <h5>message history</h5>
-        <h5>message history</h5>
-        <h5>message history</h5>
-        <h5>message history</h5>
-        <h5>message history</h5>
-        <h5>message history</h5>
-        <h5>message history</h5>
-        <h5>message history</h5>
+        <div class="btn-group">
+            <div class="btn-group">
+                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                    <i class="fa fa-cog"></i>
+                    <span class="caret"></span>
+                </button>
+            <ul class="dropdown-menu">
+                <li><a href="#">add member</a></li>
+                <li><a href="#">leave message</a></li>
+                <li><a href="#">add / edit title</a></li>
+            </ul>
+            </div>
+        </div>
+
+
+        {{for message in message_list:}}
+            {{=XML(message['message_content'])}}
+            <br><hr>
+        {{pass}}
 
     </div>
 </div>

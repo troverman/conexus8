@@ -174,7 +174,10 @@ $(function() {
 		    <h4 class="panel-title"><a href="/event/{{=request.args(0)}}/members/">members</a></h4>
 		  </div>
 		  <div class="panel-body" id="member_list">
-			{{=event_member_list}}
+
+			{{for member in the_event_member_list:}}
+				<h4><a href="/member/{{=member['username']}}/">{{=member['username']}}</a></h4>
+			{{pass}}
 		  </div>
 		</div>
 		<div class="panel panel-default">
@@ -221,7 +224,7 @@ $(function() {
 		{{if request.args(1) is None:}}
 			<div style="float:left;margin-left:75%" class="testing"></div>
 
-			<h3>{{=event_from_url['title']}} description</h3>
+			<h5>{{=event_from_url['description']}}</h5>
 
 			<p>start date</p>
 			<p>end date</p>

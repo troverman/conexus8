@@ -15,39 +15,102 @@
     border-top:1px solid rgb(225, 225, 225);
 }
 #share-footer-container{margin-left:5%;margin-right:5%;}
+#stream-block{padding:15px;border:1px solid rgb(225,225,225);}
+#map img {
+	max-width: none;
+}
 </style>
+
+<script src="http://maps.google.com/maps/api/js?sensor=true"></script>
+<script src="{{=URL('static','js/gmaps.js')}}"></script>
+<script>   
+	$(document).ready(function(){                                                         
+	    map = new GMaps({
+	        div: '#map',
+	        lat:0,
+	        lng:0 
+	    });                       
+	    map.fitZoom();
+	}); 
+</script>  
+
 <div id="index-header">
     <div id="index-header-container">
-		<h3 style="float:left;">{{=member_from_url['username']}}</h3>
+    	{{for picture in member_picture:}}
+    		<img src="{{=URL('download',args=picture['picture'])}}" style="height:64px;float:left;" class="img-polaroid" />
+    	{{pass}}
+		<h3 style="float:left;margin-left:15px;">{{=member_from_url['username']}}</h3>
 		<p class="btn" style="float:right;">follow</p>
 		<p class="btn" style="float:right;">message</p>
 		<div style="clear:both;"></div>
     </div>
 </div>
-
 <div class="centered-width">
 
+	<iframe src='http://cdn.knightlab.com/libs/timeline/latest/embed/index.html?source=0Agl_Dv6iEbDadHdKcHlHcTB5bzhvbF9iTWwyMmJHdkE&font=Bevan-PotanoSans&maptype=toner&lang=en&height=650' width='100%' height='650' frameborder='0'></iframe>
+	<br><br>
 
-	<p>facebook</p>
-	<p>twitter</p>
-	<p>lealr</p>
-	<p>bankingfor</p>
-	<p>inlrn</p>
-	<p>voetr</p>
-	<p>live stream</p>
-	<iframe width="560" height="315" src="//www.youtube.com/embed/2qG-izMLGSk?list=UUNceSFBcgkYqv4QiD374VTQ" frameborder="0" allowfullscreen></iframe>
-	<p>time breakdown / hrly / daily / etc view</p>
-	<p>data feeds</p>
-	<p>heart rate</p>
-	<p>gps location</p>
-	<p>video feed</p>
-	<p>messaging</p>
-	<p>finance</p>
-	<h1>timeline</h1>
-	{{for x in range(12):}}
-		<h2>{{=x}} am/pm</h2>
-		<p>data</p>
+	<div id="map" style="height:200px;"></div>
+	<br><br>
+
+	<div id="stream-block">
+		<h5>accounts</h5>
+		{{for member in member_account:}}
+			<a href="{{=member['facebook_url']}}">facebook</a><br>
+			<a href="{{=member['twitter_url']}}">twitter</a><br>
+			<a href="{{=member['google_plus_url']}}">google +</a><br>
+			<a href="{{=member['linkedin_url']}}">linkedin</a><br>
+			<a href="{{=member['bankingfor_url']}}">bankingfor</a><br>
+			<a href="{{=member['lealr_url']}}">lealr</a><br>
+			<a href="{{=member['inlrn_url']}}">inlrn</a><br>
+			<a href="{{=member['voetr_url']}}">voetr</a><br>
+		{{pass}}
+
+	</div>
+
+	<br><br>
+	<div id="stream-block">
+		<p>live stream</p>
+		<iframe width="560" height="315" src="//www.youtube.com/embed/2qG-izMLGSk?list=UUNceSFBcgkYqv4QiD374VTQ" frameborder="0" allowfullscreen></iframe>
+	</div>
+
+	<br><br>
+	<div id="stream-block">
+		<h5>data feeds</h5>
+		<p>time breakdown / hrly / daily / etc view</p>
+		<p>data feeds</p>
+		<p>heart rate</p>
+		<p>gps location</p>
+		<p>video feed</p>
+		<p>messaging</p>
+		<p>finance</p>
+	</div>
+	
+	<h5>following</h5><hr>
+	<h5>followers</h5><hr>
+
+	<h3>projects</h3><hr>
+	{{for projects in the_project_list:}}
+		{{for project in projects:}}
+			<h5><a href="/project/{{=project['url_title']}}/">{{=project['title']}}</a><h5>
+		{{pass}}
+	{{pass}}
+	<br><br><br>
+
+	<h3>events</h3><hr>
+	{{for events in the_event_list:}}
+		{{for event in events:}}
+			<h5><a href="/event/{{=event['url_title']}}/">{{=event['title']}}</a><h5>
+		{{pass}}
+	{{pass}}
+	<br><br><br>
+
+	<h3>messages</h3><hr>
+	{{for message in message_list:}}
+		<h5><a href="/message/{{=message['id']}}/">{{=message['message_title']}}</a><h5>
 		<br>
+    	{{=XML(message['message_content'])}}
+
 	{{pass}}
 </div>
 <br>
@@ -55,17 +118,5 @@
 <br>
 <br>
 
-
-<script src="/conexus/static/js/gmaps.js"></script>
-<script>   
-	$(document).ready(function(){                                                         
-		new GMaps({
-		  div: '#map',
-		  lat: -12.043333,
-		  lng: -77.028333
-		}); 
-	}); 
-</script>
-<div id="map" ></div>   
 
 

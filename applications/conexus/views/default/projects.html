@@ -15,8 +15,8 @@
     border-top:1px solid rgb(225, 225, 225);
 }
 #share-footer-container{margin-left:5%;margin-right:5%;}
-#item-block-list-item{border:2px solid rgb(210,210,210);display:inline-block;padding:10px;margin:7px;}
-#item-block-list-item:hover{border:2px solid rgb(110,110,110);display:inline-block;padding:11px;margin:7px;background-color:rgb(255,255,255);}
+#item-block-list-item{border:1px solid rgb(225,225,225);display:inline-block;padding:10px;margin:7px;}
+#item-block-list-item:hover{border:1px solid rgb(200,200,200);display:inline-block;padding:11px;margin:7px;background-color:rgb(255,255,255);}
 
 </style>
 <div id="index-header">
@@ -47,8 +47,13 @@
     <hr><br>
 
     <div id="item-list-container" style="">
+        <br>
+        <hr>
         {{for project in project_list:}}
-            <h3><a href="/project/{{=project['url_title']}}/">{{=project['title']}}</a></h3>
+            <img style="height:64px;float:left;" class="img-polaroid" src="/conexus/static/images/noimage-icon.png" >
+            <h3 style="float:left;margin-left:15px;"><a href="/project/{{=project['url_title']}}/">{{=project['title']}}</a></h3>
+            <div style="clear:both;"></div>
+            <hr><br>
         {{pass}}
     </div>
     <div id="item-block-list-container" style="display:none;">

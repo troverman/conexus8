@@ -31,6 +31,36 @@ a{cursor: pointer;}
 	border-right:1px solid rgb(238,238,238);  
 	padding-left:15px;    
 }
+#collapsed-left {
+        float: left;
+		border-bottom:1px solid rgb(238,238,238);
+    	border-right:1px solid rgb(238,238,238);
+    	padding-left:7px;
+		padding-right:7px;
+}
+#collapsed-left:hover {
+        float: left;
+    	padding-left:7px;
+		padding-right:7px;
+		background-color:rgb(245,245,248);
+        border-right:1px solid rgb(235,235,238);
+		border-bottom:1px solid rgb(235,235,238)
+}
+#collapse-left {
+        padding-left:5px;
+        padding-right:5px;
+        float:right;
+        border-left:1px solid rgb(238,238,238);
+        border-bottom:1px solid rgb(238,238,238);
+}
+#collapse-left:hover {
+        padding-left:5px;
+        padding-right:5px;
+        float:right;
+        background-color:rgb(245,245,248);
+        border-left:1px solid rgb(235,235,238);
+		border-bottom:1px solid rgb(235,235,238) 
+}
 .panel {
   padding: 15px;
   margin-bottom: 20px;
@@ -114,11 +144,68 @@ a{cursor: pointer;}
 
 
 </style>
+<script type="text/javascript" src="{{=URL(request.application,'static','js/jquery.tagsinput.js')}}"></script>  
+<link rel="stylesheet" type="text/css" href="/conexus/static/css/jquery.tagsinput.css" />
+<script>
+ 	function onAddTag_marketplace(tag) {
+		ajax('ajax_add_tag_collection', ['collection_add_tag_form'], ':eval');
+ 	}
+	$(document).ready(function(){      
+	    $('#sidebar_add_tag_form').tagsInput({
+	        onAddTag:onAddTag_marketplace,
+	        onRemoveTag:onAddTag_marketplace,
+	        'defaultText':'tags',
+	        'width':'auto',
+	        'height':'auto'     
+	    });  
+	    $("#view-list").click(function() {
+	        if ($(this).hasClass("active")){}
+	        else{
+	            $(this).addClass("active");
+	            $("#view-table").removeClass("active");
+	            $("#item-block-list-container").fadeToggle(); 
+	            $("#item-list-container").fadeToggle();
+	        }
+    	});
+    	$("#view-table").click(function() {
+	        if ($(this).hasClass("active")){}
+	        else{
+	            $(this).addClass("active");
+	            $("#view-list").removeClass("active");
+	            $("#item-block-list-container").fadeToggle(); 
+	            $("#item-list-container").fadeToggle();
+	        }
+    	});
 
+	    $("#collapse-left").click(function() {	
+			$("#left").fadeToggle(300);
+			$("#collapsed-left").delay(300).fadeToggle(300);
+		});
+		$("#open-left").click(function() {	
+			$("#collapsed-left").fadeOut(300);	
+			$("#left").delay(300).fadeIn(300);	
+		});
+	    $("#close-ad").click(function() {       
+	        $("#ad_block").fadeToggle();        
+	    });                                                 
+	});
+
+</script>  
 
 <div id="index-header">
     <div id="index-header-container">
-    	<h3><a href="/project/{=project_from_url['url_title']}}/">{{=project_from_url['title']}}</a></h3>
+		<img src="{{=URL('download',args=project_picture[0]['picture'])}}" style="height:64px;float:left;" class="img-polaroid" />
+    	<h3 style="float:left;margin-left:15px;"><a href="/project/{{=project_from_url['url_title']}}/">{{=project_from_url['title']}}</a></h3>
+    	<div style="float:right">
+			<div class="project-join" id="join-project-{{=project_from_url['id']}}" style="float:left;margin-right:10px;">
+		        <form style="display:none"><input type="hidden" id="" name="id" value="{{=project_from_url['id']}}" /></form> 
+		        <a onclick="ajax('/ajax_join_project/', ['id'], ':eval');">
+		        <h5 class="btn">join</h5>      
+		        </a>
+		    </div>
+		    <a class="btn">follow</a>
+		</div>
+    	<div style="clear:both;"></div>
     </div>
 </div>
 <div class="alert fade in">
@@ -127,28 +214,67 @@ a{cursor: pointer;}
 </div>
       
 <div class="centered-width">
+	<div id="collapsed-left" style="display:none;">
+	    <a id="open-left">
+	        <div style="">
+	        	<h5 title="expand" style="margin:0px;padding:3px;"> >> </h5>
+	        </div>
+	    </a>
+	</div>
+
 	<div id="left">
-		<h4>announcements</h4>
-		<h4><a href="/project/{{=project_from_url['url_title']}}/">feed</a></h4>
-		<h4><a href="/project/{{=project_from_url['url_title']}}/pages/">pages</a></h4>
-		<h4><a href="/project/{{=project_from_url['url_title']}}/streams/">streams</a></h4>
-		<h4><a href="/project/{{=project_from_url['url_title']}}/tasks/">tasks</a></h4>
+    <a id="collapse-left"> <h5 style="margin:0px;padding:3px;" title="minimize"> << </h5> </a>
+    <br>
+		<h5><a href="/project/{{=project_from_url['url_title']}}/admin/"><i style="margin-right:15px;" class="fa fa-cog"></i> admin</a></h5>
+		<h5><a href="/project/{{=project_from_url['url_title']}}/announcements/"><i style="margin-right:15px;" class="fa fa-bullhorn"></i> announcements</a></h5>
+		<h5><a href="/project/{{=project_from_url['url_title']}}/calendar/"><i style="margin-right:15px;" class="fa fa-calendar"></i> calendar</a></h5>
+		<h5><a href="/project/{{=project_from_url['url_title']}}/members/"><i style="margin-right:15px;" class="fa fa-users"></i> members</a></h5>
+		<h5><a href="/project/{{=project_from_url['url_title']}}/pages/"><i style="margin-right:15px;" class="fa fa-file-text-o"></i> pages</a></h5>
+		<h5><a href="/project/{{=project_from_url['url_title']}}/streams/"><i style="margin-right:15px;" class="fa fa-video-camera"></i> streams</a></h5>
+		<h5><a href="/project/{{=project_from_url['url_title']}}/tasks/"><i style="margin-right:15px;" class="fa fa-tasks"></i> tasks</a></h5>
+
+		{{if request.args(1) is None:}}
+
+		{{elif request.args(1) == 'members':}}
+			<hr>
+			<p> member filter </p>
+			search
+			<input name="" type="text" /></div>
+
+		{{elif request.args(1) == 'tasks':}}
+			<hr>
+			<div style="margin-right:16px;" id="div_sidebar_add_tag"><input name = "sidebar_add_tag" type="text" id="sidebar_add_tag_form" /></div><br>   
+			    <hr style="margin-top:10px;"><br>
+			    <div id="tag-list">
+			      {{for tag in reversed(tag_task_list_sorted_by_total_count):}}
+			        <div id="tag-list-item" style="margin-right:15px;font-family:ubuntu;">                         
+			          <a href="/tags/{{=tag[0]}}" >{{=tag[0]}}</a>
+			          <a style="color:rgb(210,210,210);" href="/tags/{{=tag[0]}}"> ( {{=tag[1]}} ) </a>
+			          <a id="plus-{{=tag[0]}}" class="filter_tag_item" onclick="add_tag_sidebar('{{=tag[0]}}');" >+</a>                        
+			          <script>
+			            function add_tag_sidebar(tag){
+			              if ($('#sidebar_add_tag_form').tagExist(tag)) {
+			                $('#sidebar_add_tag_form').removeTag(tag);
+			              }
+			              else{
+			                $('#sidebar_add_tag_form').addTag(tag);
+			              }
+			            }
+			          </script>
+			        </div>
+			      {{pass}}
+			    <br>
+			    <p style="text-align:center;"><a>view more</a></p>
+			  </div>
+
+		{{else:}}
+
+		{{pass}}
+
 
 	</div>
 	<div id="right">
-		<div class="well">
-
-		    <div class="project-join" id="join-project-{{=project_from_url['id']}}" style="float:left;margin-right:10px;">
-		        <form style="display:none"><input type="hidden" id="" name="id" value="{{=project_from_url['id']}}" /></form> 
-		        <a onclick="ajax('/ajax_join_project/', ['id'], ':eval');">
-		        <h5 class="btn">join</h5>      
-		        </a>
-		    </div>
-		    <br><br>
-
-			<h4><a>settings</a></h4>
-			<p>require inlrn degree</p>
-		</div>
+		
 		<div class="panel panel-default">
 		  <div class="panel-heading">
 		    <h4 class="panel-title"><a href="http://www.givingfor.com/projects/">givingfor</a></h4>
@@ -163,8 +289,8 @@ a{cursor: pointer;}
 		    <h4 class="panel-title"><a href="/project/{{=project_from_url['url_title']}}/members/">members</a></h4>
 		  </div>
 		  <div class="panel-body">
-			{{for member in project_member_list:}}
-				<h4><a>{{=member}}</a></h4>
+			{{for member in the_project_member_list:}}
+				<h4><a href="/member/{{=member['username']}}/">{{=member['username']}}</a></h4>
 			{{pass}}
 		  </div>
 		</div>
@@ -197,39 +323,212 @@ a{cursor: pointer;}
 		  </div>
 		</div>
 	</div>
-	<div id="content" style="float:left;">
+	<div id="content" style="">
+
 
 		{{if request.args(1) is None:}}
-			<h4>description</h4>
-			    <ul class="nav nav-tabs">
-				    <li><a href="#home" data-toggle="tab">feed</a></li>
-				    <li><a href="#profile" data-toggle="tab">tasks</a></li>
-				    <li><a href="#messages" data-toggle="tab">finance</a></li>
-				    <li><a href="#settings" data-toggle="tab">members</a></li>
-			    </ul>
-			
-			{{for x in range(20):}}
-				<p class="lead">{{=x}}</p>
+			<h3 style="margin-left:15px;display:inline-block;"><i style="margin-right:15px;" class="fa fa-bars"></i> feed</h3>
+			<hr><br>
+			{{for feed in feed_array:}}
+				{{=feed}}<br><br>
 			{{pass}}
+
+		{{elif request.args(1) == 'admin':}}
+			<h3 style="display:inline-block;margin-left:15px;"><i style="margin-right:15px;" class="fa fa-cog"></i> admin</h3><hr>
+
+			<a>+ new member group</a>
+			<h1>member group</h1>
+			<a>+ permission</a>
+			<h1>permissions</h1>
 		{{elif request.args(1) == 'members':}}
-			{{for member in project_member_list:}}
-			    <a href="/member/{{=member['id']}}/"><img class="img-polaroid" style="width:64px;" src="/conexus/static/images/noimage-icon.png"/></a>
-				<h4><a>{{=member}}</a></h4>
+			<h3 style="display:inline-block;margin-left:15px;"><i style="margin-right:15px;" class="fa fa-users"></i> members</h3><hr>
+
+			{{for member in the_project_member_list:}}
+			    <a style="display:inline-block;margin-left:15px;" href="/member/{{=member['username']}}/"><img src="{{=URL('download',args=project_picture[0]['picture'])}}" style="height:64px;" class="img-polaroid" /></a>
+				<h4 style="display:inline-block;margin-left:15px;"><a href="/member/{{=member['username']}}/">{{=member['username']}}</a></h4>
+				<br>
+				<br>
+				<p style="margin-left:15px;">description / member group / tasks</p>
+				<br><br><br>
+				<hr>
 			{{pass}}
 		{{elif request.args(1) == 'pages':}}
-			<a>+ new page</a>
-			<h1>pages</h1>
+			<h3 style="display:inline-block;margin-left:15px;"><i style="margin-right:15px;" class="fa fa-file-text-o"></i> pages</h3><hr>
+
+            <a style="display:inline-block;margin-left:15px;" data-toggle="modal" href="#new-page">+ new page</a><hr>
+            {{for page in page_list:}}
+                <a style="display:inline-block;margin-left:15px;" class="lead" href="/project/{{=project_from_url['url_title']}}/page/{{=page['id']}}/">{{=page['title']}}</a><br>
+            {{pass}}
 		{{elif request.args(1) == 'streams':}}
-			<h1>streams</h1>
+			<h3 style="display:inline-block;margin-left:15px;"><i style="margin-right:15px;" class="fa fa-video-camera"></i> streams</h3>
 			{{for x in range(30):}}
 				{{=x}}
 			{{pass}}
 		{{elif request.args(1) == 'tasks':}}
-			<a>+ new task</a>
-			<h1>tasks</h1>
+			<h3 style="display:inline-block;margin-left:15px;"><i style="margin-right:15px;" class="fa fa-tasks"></i> tasks</h3><hr>
+            <a style="display:inline-block;margin-left:15px;" data-toggle="modal" href="#new-task">+ new task</a><hr>
+			<h1>tasks</h1><hr>
+
+		    <div class="btn-toolbar" style="margin-left:15px;float:left;">
+		        <div class="btn-group">
+		            <a class="btn active" id="view-list"><i class="icon-align-justify"></i></a>
+		            <a class="btn" id="view-table"><i class="icon-th"></i></a>
+		        </div>
+		    </div>
+		    <br><br><br>
+		    show completed
+   			{{for task in task_list:}}
+				<h5>{{=task['title']}}</h5>
+				<h5>{{=task['description']}}</h5>
+				<h5>{{=task['task_member_array']}}</h5>
+				<h5>{{=task['task_start_time']}}</h5>
+				<h5>{{=task['task_end_time']}}</h5>
+				<br>
+			{{pass}}
+		{{elif request.args(1) == 'calendar':}}
+			<h3 style="display:inline-block;margin-left:15px;"><i style="margin-right:15px;" class="fa fa-calendar"></i> calendar</h3><hr>
+			<a style="float:right;" class="btn">+ new event / task</a>
+
+			<link href='/conexus/static/css/fullcalendar.css' rel='stylesheet' />
+			<link href='/conexus/static/css/fullcalendar.print.css' rel='stylesheet' media='print' />
+			<script src='/conexus/static/js/lib/jquery.min.js'></script>
+			<script src='/conexus/static/js/lib/jquery-ui.custom.min.js'></script>
+			<script src='/conexus/static/js/fullcalendar.min.js'></script>
+			<script>
+				$(document).ready(function() {
+					var date = new Date();
+					var d = date.getDate();
+					var m = date.getMonth();
+					var y = date.getFullYear();
+					
+					var calendar = $('#calendar').fullCalendar({
+						header: {
+							left: 'prev,next today',
+							center: 'title',
+							right: 'month,agendaWeek,agendaDay'
+						},
+						selectable: true,
+						selectHelper: true,
+						select: function(start, end, allDay) {
+							var title = prompt('Event Title:');
+							if (title) {
+								calendar.fullCalendar('renderEvent',
+									{
+										title: title,
+										start: start,
+										end: end,
+										allDay: allDay
+									},
+									true // make the event "stick"
+								);
+							}
+							calendar.fullCalendar('unselect');
+						},
+						editable: true,
+						events: [
+							{
+								title: 'All Day Event',
+								start: new Date(y, m, 1)
+							},
+							{
+								title: 'Long Event',
+								start: new Date(y, m, d-5),
+								end: new Date(y, m, d-2)
+							},
+							{
+								id: 999,
+								title: 'Repeating Event',
+								start: new Date(y, m, d-3, 16, 0),
+								allDay: false
+							},
+							{
+								id: 999,
+								title: 'Repeating Event',
+								start: new Date(y, m, d+4, 16, 0),
+								allDay: false
+							},
+							{
+								title: 'Meeting',
+								start: new Date(y, m, d, 10, 30),
+								allDay: false
+							},
+							{
+								title: 'Lunch',
+								start: new Date(y, m, d, 12, 0),
+								end: new Date(y, m, d, 14, 0),
+								allDay: false
+							},
+							{
+								title: 'Birthday Party',
+								start: new Date(y, m, d+1, 19, 0),
+								end: new Date(y, m, d+1, 22, 30),
+								allDay: false
+							},
+							{
+								title: 'Click for Google',
+								start: new Date(y, m, 28),
+								end: new Date(y, m, 29),
+								url: 'http://google.com/'
+							}
+						]
+					});
+					
+					
+				});
+
+			</script>
+			<style>
+				#calendar {
+					width: 900px;
+					height: auto;
+					margin: 0 auto;
+					}
+			</style>
+			<div style="display:inline-block;" id="calendar"></div>
+
 		{{else:}}
 		{{pass}}
 	</div>
 	<div style="clear:both;"></div>
 </div>
+
+
+
+
+
+<div class="modal fade" id="new-page" style="display:none;">
+    <div class="modal-header" id="new-page-header">
+        <a class="close" data-dismiss="modal">×</a>
+        <h3>+ new page</h3>
+    </div>
+    <br>
+    <div class="modal-body" style="">
+        {{=create_new_page_form}}
+    </div>
+    <div class="modal-footer">
+    </div>
+</div> 
+
+<div class="modal fade" id="new-task" style="display:none;">
+    <div class="modal-header" id="new-task-header">
+        <a class="close" data-dismiss="modal">×</a>
+        <h3>+ new task</h3>
+    </div>
+    <br>
+    <div class="modal-body" style="">
+		{{=form_create_task}}
+    </div>
+    <div class="modal-footer">
+    </div>
+</div> 
+
+
+
+<script>
+    $("#new-page").draggable({handle:"#new-page-header", cursor:"move"}); 
+	$("#new-task").draggable({handle:"#new-task-header", cursor:"move"}); 
+
+</script>
+
+
 <br><br><br><br>

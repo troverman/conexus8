@@ -28,6 +28,7 @@
     padding-bottom:15px;
 }
 .banner-area p{color:rgb(255,255,255);}
+#header-icons a{color:rgb(52,73,94);}
 </style>
 <script language="javascript" type="text/javascript" src="{{=URL(request.application,'static','js/jquery.flot.js')}}"></script>
 <script language="javascript" type="text/javascript" src="{{=URL(request.application,'static','js/jquery.flot.selection.js')}}"></script>
@@ -41,6 +42,7 @@ $(function() {
         }, 500);
         return false;
     });
+
 });
 
 </script>
@@ -50,19 +52,57 @@ $(function() {
 		<p class="lead">paving the way for a transparent future</p>
     </div>
 </div>
-<div style="background-image: url(../conexus/static/images/hi.jpg); height: 600px;background-size: 600px 100%;">
-    <p class="lead" style="text-align:center;font-family:ubuntu;font-weight:bold;">this is some text yo</p>
-    <p class="lead" style="text-align:center;font-family:ubuntu;font-weight:bold;"><a href="#events">events</a></p>
-    <p class="lead" style="text-align:center;font-family:ubuntu;font-weight:bold;"><a href="#evolution">something interactive</a></p>
-    <p style="text-align:center"><i style="font-size:128px;color:rgb(240,240,240);" class="fa fa-calendar-o"></i></p>
-
-    <p class="lead" style="text-align:center;font-family:ubuntu;font-weight:bold;"><a href="#projects">projects</a></p>
-
-    <p class="lead" style="text-align:center;font-family:ubuntu;font-weight:bold;"><a href="#connecting-us">something interactive</a></p>
-    <p class="lead btn" style="display:block;margin: 0 auto;width:100px;padding:10px;">join</p>
+<div style="background-image: url(../conexus/static/images/pattern.jpg); height: 400px;">
 
     <br><br>
-    <div id="header-search" style="display:block;margin: 0 auto;width:350px">
+    <br>
+<div id="header-icons">
+    <a href="#events" style="margin-left:10%;">
+        <span class="fa-stack fa-lg">
+          <i style="font-size:128px;" class="fa fa-circle fa-stack-2x fa-inverse" id="event-icon"></i>
+          <i style="font-size:64px;margin-top:43px;margin-left:25px;" class="fa fa-calendar-o fa-stack-1x"></i>
+        </span>
+    </a>
+
+    <a href="#projects" style="margin-left:10%;">
+        <span class="fa-stack fa-lg">
+          <i style="font-size:128px;" class="fa fa-circle fa-stack-2x fa-inverse"></i>
+          <i style="font-size:64px;margin-top:43px;margin-left:25px;" class="fa fa-wrench fa-stack-1x"></i>
+        </span>
+    </a>
+    <a href="#projects" style="margin-left:10%;">
+        <span class="fa-stack fa-lg">
+          <i style="font-size:128px;" class="fa fa-circle fa-stack-2x fa-inverse"></i>
+          <i style="font-size:64px;margin-top:43px;margin-left:25px;" class="fa fa-video-camera fa-stack-1x"></i>
+        </span>
+    </a>
+    <a href="#projects" style="margin-left:10%;">
+        <span class="fa-stack fa-lg">
+          <i style="font-size:128px;" class="fa fa-circle fa-stack-2x fa-inverse"></i>
+          <i style="font-size:64px;margin-top:43px;margin-left:25px;" class="fa fa-eye fa-stack-1x"></i>
+        </span>
+    </a>
+    <a href="#projects" style="margin-left:10%;">
+        <span class="fa-stack fa-lg">
+          <i style="font-size:128px;" class="fa fa-circle fa-stack-2x fa-inverse"></i>
+          <i style="font-size:64px;margin-top:43px;margin-left:25px;" class="fa fa-money fa-stack-1x"></i>
+        </span>
+    </a>
+    <a href="#projects" style="margin-left:10%;">
+        <span class="fa-stack fa-lg">
+          <i style="font-size:128px;" class="fa fa-circle fa-stack-2x fa-inverse"></i>
+          <i style="font-size:64px;margin-top:43px;margin-left:25px;" class="fa fa-tasks fa-stack-1x"></i>
+        </span>
+    </a>
+</div>
+
+
+
+    <br><br>
+    <br><br>
+    <br>
+    <div style="padding:15px;background-color:rgb(245,234,245);display:inline;">
+        <h1 style="color:rgb(40,40,20);margin-left:35px;">discover</h1>
         <div class="input-append">
             <input type="text">
             <div class="btn-group" style="margin-top:0px;">
@@ -70,6 +110,7 @@ $(function() {
             </div>
         </div>
     </div>
+    <br><br>
 </div>
 <div id="scroller">
     <!--<img style="" class="" src="/conexus/static/images/cam.JPG"/>-->
@@ -89,7 +130,7 @@ $(function() {
             <td><p class="lead" style="text-align:left;padding-left:25px;padding-right:25px;"><a href="/projects/">projects</a></p></td>
             <td><p class="lead" style="text-align:left;padding-left:25px;padding-right:25px;"><a href="/tasks/">tasks</a></p></td>
             <td><p class="lead" style="text-align:left;padding-left:25px;padding-right:25px;"><a href="/feed/">feed</a></p></td>
-            <td><p class="lead" style="text-align:left;padding-left:25px;padding-right:25px;"><a href="/feed/">streams</a></p></td>
+            <td><p class="lead" style="text-align:left;padding-left:25px;padding-right:25px;"><a href="/streams/">streams</a></p></td>
             <td><p class="lead" style="text-align:left;padding-left:25px;padding-right:25px;"><a href="/transparency/">transparency</a></p></td>
         </tr>
     </table>
@@ -142,12 +183,8 @@ $(function() {
     <p style="text-align:center;color:rgb(200,200,200);font-size:24px;font-family:ubuntu;font-weight:bold;">connecting us</p> 
     <br><br><br>
 </div>
-<br><br><br>
-
+<br>
 <div class="centered-width">
-
-    <td><p class="lead" style="text-align:left;">watch the world create</p></td>
-	<p style="text-align:left" class="lead">this is a graph</p><hr>
 	<script>
 	{{an_array=[]}}
     {{import time}}
@@ -224,21 +261,41 @@ $(function() {
         });
     });
 </script>
-    
-<div>
-    <div id="placeholder" style="width:75%;height:250px;display: table;margin: 0 auto;"></div>
-</div>
-    <p style="text-align:center"><i style="font-size:256px;" class="fa fa-link fa-spin"></i></p>
-    <p class="lead" style="text-align:left">work with people, together</p>
-    <p class="lead" style="text-align:left">donate toward promising projects</p>
-    <p class="lead" style="text-align:left"><a href="http://www.epoint.me/">epoint.me</a> connected, <a href="http://www.givingfor.com/projects/conexus/">givingfor</a> connected, <a href="http://www.voetr.com/committee/conexus/">voetr</a> connected, <a href="http://www.inlrn.com/">inlrn</a> connected</p>
-    <p class="lead" style="text-align:left">democratic</p>
-    <p class="lead" style="text-align:left">help change the business model. crowdowned</p>
-    <p class="lead" style="text-align:left">we're all cofounders</p>
-    <p class="lead" style="text-align:left">transparent</p>
-    <p class="lead" style="text-align:left">paving the way for a transparent future</p>
-    <p class="lead" style="text-align:left">recieve value for what you do</p>
-    <p class="lead" style="text-align:left">crowd funded projects</p>
+<script src="http://maps.google.com/maps/api/js?sensor=true"></script>
+<script src="{{=URL('static','js/gmaps.js')}}"></script>
+<script>   
+$(document).ready(function(){                                                         
+    map = new GMaps({
+        div: '#map',
+        lat:0,
+        lng:0 
+    });                       
+    map.fitZoom();
+}); 
+</script>   
+    <p class="lead" style="text-align:left;">local stuff</p>
+    <div style="width:100%; height:300px;" id="map" ></div>   
+    <p class="lead" style="text-align:left;">watch the world create</p>
+    <p style="text-align:left" class="lead">this is a graph</p><hr>
+
+    <div>
+        <div id="placeholder" style="width:75%;height:250px;display: table;margin: 0 auto;"></div>
+    </div>
+    <p style="text-align:center"><i style="font-size:128px;" class="fa fa-link fa-spin"></i></p>
+    <div class="well">
+        <p class="lead" style="text-align:left">work with people, together</p>
+        <p class="lead" style="text-align:left">donate toward promising projects</p>
+        <p class="lead" style="text-align:left"><a href="http://www.epoint.me/">epoint.me</a> connected, <a href="http://www.givingfor.com/projects/conexus/">givingfor</a> connected, <a href="http://www.voetr.com/committee/conexus/">voetr</a> connected, <a href="http://www.inlrn.com/">inlrn</a> connected</p>
+        <p class="lead" style="text-align:left">democratic</p>
+        <p class="lead" style="text-align:left">help change the business model. crowdowned</p>
+        <p class="lead" style="text-align:left">we're all cofounders</p>
+        <p class="lead" style="text-align:left">paving the way for a transparent future</p>
+        <p class="lead" style="text-align:left">recieve value for what you do</p>
+        <p class="lead" style="text-align:left">crowd funded projects</p>
+    </div>
+    <p style="text-align:center;"><i style="font-size:128px;" class="fa fa-money"></i></p>
+    <p style="text-align:center;"><i style="font-size:128px;" class="fa fa-bullhorn"></i></p>
+
     <p class="lead" style="text-align:left">PICTURE</p>
 </div>
 
@@ -248,25 +305,28 @@ $(function() {
     <p style="text-align:center;"><a style="color:rgb(240,250,255);font-size:24px;font-family:ubuntu;font-weight:bold;" href="/projects/">projects</a></p> 
     <br><br><br>
 </div>
-<br><br><br>
+<br>
 <div class="centered-width">
     <div id="project-list-container">
-        {{for project in project_list[:10]:}}
+        {{for project in project_list[:5]:}}
         <div id="project-list-item">
             <a href="/project/{{=project['url_title']}}/"><p style="text-align:left;">{{=project['title']}}</p></a>
             <a href="/project/{{=project['url_title']}}/"><img style="width:256px;" class="img-polaroid" src="/conexus/static/images/noimage-icon.png"/></a>
         </div>
         {{pass}}
-        <br><br>
+        <br><hr><br>
     </div>
     <br><br><br>
-    <p class="lead" style="text-align:left">collaboration is good</p>
-    <p class="lead" style="text-align:left">i like to work together with people</p>
-    <p class="lead" style="text-align:left">group projects can be fun :D</p>
-    <p class="lead" style="text-align:left">let's do awesome things</p>
-    <p class="lead" style="text-align:left">we can do it</p>
-    <p class="lead" style="text-align:left">PICTURE</p>
+    <div class="well">
+        <p class="lead" style="text-align:left">open positions</p>
+        <p class="lead" style="text-align:left">task list of things to be done</p>
+        <p class="lead" style="text-align:left">transparent, completly. see what all the team members a doing</p>
+        <p class="lead" style="text-align:left">issue tracking</p>
+        <p class="lead" style="text-align:left">we can do it</p>
+    </div>
 
+    <p style="text-align:center;"><i style="font-size:128px;" class="fa fa-wrench"></i></p>
+    <p class="lead" style="text-align:left">PICTURE</p>
 
 </div>
 <br><br>
@@ -276,25 +336,27 @@ $(function() {
     <p style="text-align:center;"><a style="color:rgb(240,250,255);font-size:24px;font-family:ubuntu;font-weight:bold;" href="/events/">events</a></p> 
     <br><br><br>
 </div>
-<br><br><br>
+<br>
 <div class="centered-width">
     <div id="project-list-container">
-        {{for event in event_list[:10]:}}
+        {{for event in event_list[:5]:}}
         <div id="project-list-item">
             <a href="/event/{{=event['url_title']}}/"><p style="text-align:left;">{{=event['title']}}</p></a>
             <a href="/event/{{=event['url_title']}}/"><img style="width:256px;" class="img-polaroid" src="/conexus/static/images/noimage-icon.png"/></a>
         </div>
         {{pass}}
-        <br><br>
+        <br><hr><br>
     </div>
     <br><br><br>
-    <p class="lead" style="text-align:left">24/7 global hackathon</p>
-    <p class="lead" style="text-align:left">win prizes</p>
-    <p class="lead" style="text-align:left">collaborative competition</p>
-    <p class="lead" style="text-align:left">let's make awesome things, together</p>
-    <p class="lead" style="text-align:left">we can do it</p>
-    <p class="lead" style="text-align:left">PICTURE</p>
+    <div class="well">
+        <p class="lead" style="text-align:left">24/7 global hackathon</p>
+        <p class="lead" style="text-align:left">win prizes</p>
+        <p class="lead" style="text-align:left">collaborative competition</p>
+        <p class="lead" style="text-align:left">let's make awesome things, together</p>
+    </div>
 
+        <p style="text-align:center;"><i style="font-size:128px;" class="fa fa-calendar-o"></i></p>
+        <p class="lead" style="text-align:left">PICTURE</p>
 
 </div>
 <br><br>
@@ -306,11 +368,15 @@ $(function() {
 </div>
 <br><br><br>
 <div class="centered-width">
-    <p class="lead" style="text-align:left">once upon a time</p>
-    <p class="lead" style="text-align:left">the world decided to work together</p>
-    <p class="lead" style="text-align:left">toward a common goal</p>
-    <p class="lead" style="text-align:left">conex.us</p>
-    <p class="lead" style="text-align:left">PICTURE</p>
+    <div class="well">
+        <p class="lead" style="text-align:left">once upon a time</p>
+        <p class="lead" style="text-align:left">the world decided to work together</p>
+        <p class="lead" style="text-align:left">toward a common goal</p>
+        <p class="lead" style="text-align:left">conex.us</p>
+    </div>
+
+        <p style="text-align:center;"><i style="font-size:128px;" class="fa fa-thumbs-up"></i></p>
+        <p class="lead" style="text-align:left">PICTURE</p>
 
 </div>
 
