@@ -15,14 +15,18 @@
     border-top:1px solid rgb(225, 225, 225);
 }
 #share-footer-container{margin-left:5%;margin-right:5%;}
-#item-block-list-item{border:1px solid rgb(225,225,225);display:inline-block;padding:10px;margin:7px;}
-#item-block-list-item:hover{border:1px solid rgb(200,200,200);display:inline-block;padding:11px;margin:7px;background-color:rgb(255,255,255);}
+#item-block-list-item{border:1px solid rgb(225,225,225);display:inline-block;padding:10px;margin:7px;border-radius:5px;}
+#item-block-list-item:hover{border:1px solid rgb(200,200,200);display:inline-block;padding:11px;margin:7px;background-color:rgb(255,255,255);border-radius:5px;}
 
 </style>
 <div id="index-header">
     <div id="index-header-container">
-		<h1 style="float:left;">projects</h1><br>
+        <h3 style="color:rgb(80, 84, 92);font-size:45px;float:left"><i class="fa fa-wrench"></i> projects</h3><br>
+        {{if auth.is_logged_in():}}
         <a data-toggle="modal" href="#new-project" class="lead btn" style="text-align:center;float:right">+ new project</a>
+        {{else:}}
+            <a data-toggle="modal" href="#login-or-signup" class="lead btn" style="text-align:center;float:right">+ new project</a>
+        {{pass}}
         <div style="clear:both;"></div>
     </div>
 </div>
@@ -52,6 +56,8 @@
         {{for project in project_list:}}
             <img style="height:64px;float:left;" class="img-polaroid" src="/conexus/static/images/noimage-icon.png" >
             <h3 style="float:left;margin-left:15px;"><a href="/project/{{=project['url_title']}}/">{{=project['title']}}</a></h3>
+            <h3 style="float:right;margin-right:15px;" class="btn">follow</h3>
+            <h3 style="float:right;margin-right:15px;"><a href="">x followers</a></h3>
             <div style="clear:both;"></div>
             <hr><br>
         {{pass}}
@@ -61,7 +67,7 @@
             <div id="item-block-list-item">
                 <h4><a href="/project/{{=project['title']}}">{{=project['title']}}</a></h4>
                 <a href="/project/{{=project['title']}}"><img class="img-polaroid" src="/conexus/static/images/noimage-icon.png"/></a>
-                <h4><a href="/project/{{=project['title']}}">details</a></h4>
+                <h4><a href="/project/{{=project['title']}}">x followers</a></h4>
             </div>
         {{pass}}
     </div>

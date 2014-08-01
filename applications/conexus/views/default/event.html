@@ -29,6 +29,36 @@
 	border-right:1px solid rgb(238,238,238);  
 	padding-left:15px;    
 }
+#collapsed-left {
+        float: left;
+		border-bottom:1px solid rgb(238,238,238);
+    	border-right:1px solid rgb(238,238,238);
+    	padding-left:7px;
+		padding-right:7px;
+}
+#collapsed-left:hover {
+        float: left;
+    	padding-left:7px;
+		padding-right:7px;
+		background-color:rgb(245,245,248);
+        border-right:1px solid rgb(235,235,238);
+		border-bottom:1px solid rgb(235,235,238)
+}
+#collapse-left {
+        padding-left:5px;
+        padding-right:5px;
+        float:right;
+        border-left:1px solid rgb(238,238,238);
+        border-bottom:1px solid rgb(238,238,238);
+}
+#collapse-left:hover {
+        padding-left:5px;
+        padding-right:5px;
+        float:right;
+        background-color:rgb(245,245,248);
+        border-left:1px solid rgb(235,235,238);
+		border-bottom:1px solid rgb(235,235,238) 
+}
 .panel {
   padding: 15px;
   margin-bottom: 20px;
@@ -119,6 +149,16 @@ $(function() {
         date: "June 7, 2087 15:03:26",
         refresh:100
     });
+    $("#collapse-left").click(function() {	
+		$("#left").fadeToggle(300);
+		$("#collapsed-left").delay(300).fadeToggle(300);
+	});
+	$("#open-left").click(function() {	
+		$("#collapsed-left").fadeOut(300);	
+		$("#left").delay(300).fadeIn(300);	
+	});
+	$("#share-popover").popover({ html : true });
+
 });
 </script>
 <div id="index-header">
@@ -127,22 +167,41 @@ $(function() {
 		<div style="clear:both;"></div>
     </div>
 </div>
-<div class="alert fade in">
+<!--<div class="alert fade in">
 	<button type="button" class="close" data-dismiss="alert">×</button>
 	<strong>Holy guacamole!</strong> Best check yo self, you're looking great :D.
-</div>
+</div>-->
       
 <div class="centered-width">
-	<div id="left" class="well">
-		<h4><a href="/event/{{=request.args(0)}}/announcements/">announcements</a></h4>
-		<h4><a href="/event/{{=request.args(0)}}/projects/">projects</a></h4>
-		<h4><a href="/event/{{=request.args(0)}}/pages/">pages</a></h4>
-		<h4><a href="/event/{{=request.args(0)}}/streams/">streams</a></h4>
-		<h4><a href="/event/{{=request.args(0)}}/tasks/">tasks</a></h4>
-		<h4><a href="/event/{{=request.args(0)}}/discussion/">discussion</a></h4>
-		<h4><a href="http://www.inlrn.com/academies/">learn</a></h4>
-		<h4><a>share</a></h4>
 
+
+	<div id="collapsed-left" style="display:none;">
+		<a id="open-left">
+			<div style="">
+		    	<h5 title="expand" style="margin:0px;padding:3px;"> >> </h5>
+		    </div>
+		</a>
+	</div>
+
+	<div id="left">
+		<a id="collapse-left"> <h5 style="margin:0px;padding:3px;" title="minimize"> << </h5> </a>
+	    <br>
+		<h5><a href="/event/{{=event_from_url['url_title']}}/admin/"><i style="margin-right:15px;" class="fa fa-cog"></i> admin</a></h5>
+		<h5><a href="/event/{{=event_from_url['url_title']}}/announcements/"><i style="margin-right:15px;" class="fa fa-bullhorn"></i> announcements</a></h5>
+		<h5><a href="/event/{{=event_from_url['url_title']}}/projects/"> awards</a></h5>
+		<h5><a href="/event/{{=event_from_url['url_title']}}/discussion/"><i style="margin-right:15px;" class="fa fa-comments-o"></i> discussion</a></h5>
+		<h5><a href="http://www.inlrn.com/academies/"><i style="margin-right:15px;" class="fa fa-pencil"></i> learn</a></h5>
+		<h5><a href="/event/{{=event_from_url['url_title']}}/members/"><i style="margin-right:15px;" class="fa fa-users"></i> members</a></h5>
+		<h5><a href="/event/{{=event_from_url['url_title']}}/givingfor/">givingfor</a></h5>
+		<h5><a href="/event/{{=event_from_url['url_title']}}/pages/"><i style="margin-right:15px;" class="fa fa-file-text-o"></i> pages</a></h5>
+		<h5><a href="/event/{{=event_from_url['url_title']}}/projects/"><i style="margin-right:15px;" class="fa fa-wrench"></i> projects</a></h5>
+
+		<h5><a id="share-popover" rel="popover" data-content="<p>share on your profile</p><p>facebook</p><p>twitter</p><p>google +</p><p>lealr</p>" data-original-title="{{=event_from_url['title']}}"><i style="margin-right:15px;" class="fa fa-share"></i> share</a></h5>
+		<h5><a href="/event/{{=event_from_url['url_title']}}/streams/"><i style="margin-right:15px;" class="fa fa-video-camera"></i> streams</a></h5>
+		<h5><a href="/event/{{=event_from_url['url_title']}}/streams/"> sponsors</a></h5>
+
+		<h5><a href="/event/{{=event_from_url['url_title']}}/tasks/"><i style="margin-right:15px;" class="fa fa-tasks"></i> tasks</a></h5>
+		<h5><a href="/event/{{=event_from_url['url_title']}}/voetr/"><i style="margin-right:15px;" class="fa fa-check-square"></i> voetr</a></h5>
 
 	</div>
 	<div id="right">
@@ -153,83 +212,41 @@ $(function() {
 	        	<h5 class="btn">join</h5>      
 	        </a>
 	    </div>
-
-
-	    <br><br><br>
-
-
-		<div class="panel panel-default">
-		  <div class="panel-heading">
-		    <h4 class="panel-title"><a href="http://www.givingfor.com/projects/">givingfor</a></h4>
-		  </div>
-		  <div class="panel-body">
-		    donation<br>
-		    donation<br>
-		    donation<br>
-		    donation<br>
-		  </div>
-		</div>
-		<div class="panel panel-default">
-		  <div class="panel-heading">
-		    <h4 class="panel-title"><a href="/event/{{=request.args(0)}}/members/">members</a></h4>
-		  </div>
-		  <div class="panel-body" id="member_list">
-
-			{{for member in the_event_member_list:}}
+		<br><br>
+		<a class="btn">follow</a>
+		<br><br>
+		<h5><a>members</a></h5>
+		<hr>
+		<div style="padding:5px;">
+	    	{{for member in the_event_member_list:}}
 				<h4><a href="/member/{{=member['username']}}/">{{=member['username']}}</a></h4>
 			{{pass}}
-		  </div>
-		</div>
-		<div class="panel panel-default">
-		  <div class="panel-heading">
-		    <h4 class="panel-title">prizes</h4>
-		  </div>
-		  <div class="panel-body">
-		    prize<br>
-		  </div>
-		</div>
-		<div class="panel panel-default">
-		  <div class="panel-heading">
-		    <h4 class="panel-title">sponsors</h4>
-		  </div>
-		  <div class="panel-body">
-		    sponsor<br>
-		    sponsor<br>
-		  </div>
-		</div>
-		<div class="panel panel-default">
-		  <div class="panel-heading">
-		    <h4 class="panel-title"><a href="http://www.voetr.com/committees/">voetr</a></h4>
-		  </div>
-		  <div class="panel-body">
-		    voting<br>
-		    voting<br>
-		    voting<br>
-		    voting<br>
-		  </div>
-		</div>
-		 <div class="panel panel-default">
-		  <div class="panel-heading">
-		    <h4 class="panel-title"><a href="">similar</a></h4>
-		  </div>
-		  <div class="panel-body">
-		    event<br>
-		    project<br>
-		    thread<br>
-		    hm<br>
-		  </div>
-		</div>
+	    </div>
+		<a>see all</a>
+		<br><br>
+		<h5><a href="/project/{{=event_from_url['url_title']}}/givingfor/"><i style="margin-right:15px;" class="fa fa-check-square"></i> givingfor</a></h5>
+		<h5><a href="/project/{{=event_from_url['url_title']}}/voetr/"><i style="margin-right:15px;" class="fa fa-check-square"></i> voetr</a></h5>
+
+
+	    <div style="padding:5px; border:1px solid rgb(100,100,100)">
+	    	similar events
+	    	{{for x in range(5):}}
+	    		<div>event{{=x}}</div>
+	    	{{pass}}
+	    </div>
+
+
 	</div>
 	<div class="content" style="display:inline-block;">
 		{{if request.args(1) is None:}}
 			<div style="float:left;margin-left:75%" class="testing"></div>
 
-			<h5>{{=event_from_url['description']}}</h5>
+			<h5 style="margin-left:15px;">{{=event_from_url['description']}}</h5>
 
-			<p>start date</p>
-			<p>end date</p>
+			<p style="margin-left:15px;">start date</p>
+			<p style="margin-left:15px;">end date</p>
 
-			<div class="panel panel-default">
+			<div class="panel panel-default" style="margin:15px;">
 			  {{for x in range(15):}}
 			  <div class="panel-body">
 			    feed item<br>
@@ -245,9 +262,9 @@ $(function() {
 				<h4> announcements {{=x}}</h4>
 			{{pass}}
 		{{elif request.args(1) == 'members':}}
-			{{for member in event_member_list:}}
-				<img style="height:64px;float:left;" src=""/>
-				<h4 style="float:left;"><a>{{=member['member_id']}}</a></h4>
+			{{for member in the_event_member_list:}}
+				<img style="height:64px;float:left;" class="img-polaroid" src=""/>
+				<h4 style="float:left;"><a>{{=member['username']}}</a></h4>
 				<br><br>
 				<hr>
 			{{pass}}
@@ -262,7 +279,7 @@ $(function() {
 				<h4>{{=page['title']}}</h4>
 			{{pass}}	
 		{{elif request.args(1) == 'projects':}}
-    		<a data-toggle="modal" href="#create-thread" class="lead" style="text-align:center">+ new project</a>
+    		<a data-toggle="modal" href="#create-event-project" class="lead" style="text-align:center">+ new project</a>
 			{{for x in range(10):}}
 				<h4>project {{=x}}</h4>
 			{{pass}}
@@ -290,7 +307,7 @@ $(function() {
 <div class="modal fade" id="create-thread" style="display:none;">
     <div class="modal-header" id="create-thread-header">
         <a class="close" data-dismiss="modal">×</a>
-        <h3>+ new project</h3>
+        <h3>+ new thread</h3>
     </div>
     <br>
     <div class="modal-body" style="">
@@ -315,9 +332,24 @@ $(function() {
     </div>
 </div> 
 
+<div class="modal fade" id="create-event-project" style="display:none;">
+    <div class="modal-header" id="create-event-project-header">
+        <a class="close" data-dismiss="modal">×</a>
+        <h3>submit event project</h3>
+    </div>
+    <br>
+    <div class="modal-body" style="">
+		{{=form_create_event_project}}
+    </div>
+    <div class="modal-footer">
+        footer
+    </div>
+</div> 
+
 <script>
     $("#create-thread").draggable({handle:"#create-thread-header", cursor:"move"}); 
     $("#create-page").draggable({handle:"#create-page-header", cursor:"move"}); 
+    $("#create-event-project").draggable({handle:"#create-event-project-header", cursor:"move"}); 
 
 </script>
 

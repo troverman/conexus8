@@ -101,6 +101,7 @@ db.define_table('project',
     Field('url_title','string'),
     Field('title','string'),
     Field('description','string'),
+    Field('date_submitted','datetime', default=request.now),
 )
 
 ################################
@@ -182,6 +183,7 @@ db.define_table('event',
     Field('description','string'),
     Field('start_time','datetime'),
     Field('end_time','datetime'),
+    Field('date_submitted','datetime', default=request.now),
 )
 
 ################################
@@ -190,6 +192,7 @@ db.define_table('event',
 db.define_table('event_member',
     Field('member_id','string'),
     Field('event_id','string'),
+    Field('member_join', 'datetime', default=request.now),
     Field('event_membergroup_id_array','list:string'),
 )
 
@@ -209,6 +212,7 @@ db.define_table('event_thread',
     Field('member_id','string'),
     Field('event_id','string'),
     Field('title','string'),
+    Field('thread_create', 'datetime', default=request.now),
     Field('thread_content','text'),
 )
 
@@ -218,7 +222,7 @@ db.define_table('event_thread',
 db.define_table('event_project',
     Field('event_id','string'),
     Field('project_id','string'),
-    Field('date_submitted','string'),
+    Field('date_submitted','datetime', default=request.now),
 )
 
 ################################
@@ -229,14 +233,17 @@ db.define_table('event_page',
     Field('event_id','string'),
     Field('title','string'),
     Field('page_content','text'),
+    Field('date_submitted','datetime', default=request.now),
+
 )
 
 ################################
 ####follower####################
 ################################
 db.define_table('follower',
-    Field('user_following_id', 'reference auth_user', default=auth.user_id, readable=False, writable=False),
-    Field('user_followed_id','reference auth_user', readable=False, writable=False)
+    Field('following_id', 'string', default=auth.user_id, readable=False, writable=False),
+    Field('followed_id','string', readable=False, writable=False),
+    Field('type','string', readable=False, writable=False),
 )
 
 ################################

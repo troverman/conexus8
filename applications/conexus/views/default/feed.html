@@ -1,7 +1,25 @@
 {{extend 'layout.html'}}
+<style>
+#index-header{
+    background-color:rgb(247,247,247);
+    border-bottom:1px solid rgb(225, 225, 225);
+    padding-top:5px;
+    padding-bottom:5px;
+}
+#index-header-container{
+    margin-left:5%;
+    margin-right:5%;
+}
+</style>
+<div id="index-header">
+    <div id="index-header-container">
+        <br><h3 style="color:rgb(80, 84, 92);font-size:45px;"><i class="fa fa-align-justify"></i> feed</h3><br>
+    </div>
+</div>
 <div class="centered-width">
-	<h3>feed</h3>
 	{{for x in range(20):}}
 		<p class="lead">feed item {{=x}}</p>
 	{{pass}}
 </div>
+
+<br><br><br><br>

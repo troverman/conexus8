@@ -40,7 +40,15 @@
     		<img src="{{=URL('download',args=picture['picture'])}}" style="height:64px;float:left;" class="img-polaroid" />
     	{{pass}}
 		<h3 style="float:left;margin-left:15px;">{{=member_from_url['username']}}</h3>
-		<p class="btn" style="float:right;">follow</p>
+
+	    <div class="follow-member" id="follow-member-{{=member_from_url['username']}}" style="float:right;margin-right:10px;">
+	        <form style="display:none"><input type="hidden" id="" name="id" value="{{=member_from_url['id']}}" /></form> 
+	        <a onclick="ajax('/ajax_follow_member/', ['id'], ':eval');">
+	        	<h5 class="btn">follow</h5>      
+	        </a>
+	    </div>
+
+
 		<p class="btn" style="float:right;">message</p>
 		<div style="clear:both;"></div>
     </div>

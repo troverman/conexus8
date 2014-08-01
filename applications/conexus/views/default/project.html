@@ -20,16 +20,22 @@
 a{cursor: pointer;}
 #content { }
 #right { 
+	padding-right:3%;
 	width: 255px;
 	float: right;
 	padding-left:5px;
-	padding-right:5px; 
+	//padding-right:5px; 
+	border-left:1px solid rgb(238,238,238);  
+	border-bottom:1px solid rgb(238,238,238);  
+
 }
 #left {
+	padding-left:3%;
 	width: 175px; 
 	float: left;
 	border-right:1px solid rgb(238,238,238);  
-	padding-left:15px;    
+	padding-bottom:20px; 
+	border-bottom:1px solid rgb(238,238,238);  
 }
 #collapsed-left {
         float: left;
@@ -194,26 +200,22 @@ a{cursor: pointer;}
 
 <div id="index-header">
     <div id="index-header-container">
-		<img src="{{=URL('download',args=project_picture[0]['picture'])}}" style="height:64px;float:left;" class="img-polaroid" />
+    	{{try:}}
+    	{{picture = project_picture[0]['picture']}}
+			<img src="{{=URL('download',args=picture)}}" style="height:64px;float:left;" class="img-polaroid" />
+    	{{except IndexError:}}
+    		<img class="img-polaroid" style="height:64px;float:left;" src="/conexus/static/images/noimage-icon.png"/>
+    	{{pass}}
     	<h3 style="float:left;margin-left:15px;"><a href="/project/{{=project_from_url['url_title']}}/">{{=project_from_url['title']}}</a></h3>
-    	<div style="float:right">
-			<div class="project-join" id="join-project-{{=project_from_url['id']}}" style="float:left;margin-right:10px;">
-		        <form style="display:none"><input type="hidden" id="" name="id" value="{{=project_from_url['id']}}" /></form> 
-		        <a onclick="ajax('/ajax_join_project/', ['id'], ':eval');">
-		        <h5 class="btn">join</h5>      
-		        </a>
-		    </div>
-		    <a class="btn">follow</a>
-		</div>
     	<div style="clear:both;"></div>
     </div>
 </div>
-<div class="alert fade in">
+
+<!--<div class="alert fade in">
 	<button type="button" class="close" data-dismiss="alert">×</button>
 	<strong>Holy guacamole!</strong> You look awesome :D.
-</div>
+</div>-->
       
-<div class="centered-width">
 	<div id="collapsed-left" style="display:none;">
 	    <a id="open-left">
 	        <div style="">
@@ -225,13 +227,23 @@ a{cursor: pointer;}
 	<div id="left">
     <a id="collapse-left"> <h5 style="margin:0px;padding:3px;" title="minimize"> << </h5> </a>
     <br>
-		<h5><a href="/project/{{=project_from_url['url_title']}}/admin/"><i style="margin-right:15px;" class="fa fa-cog"></i> admin</a></h5>
 		<h5><a href="/project/{{=project_from_url['url_title']}}/announcements/"><i style="margin-right:15px;" class="fa fa-bullhorn"></i> announcements</a></h5>
 		<h5><a href="/project/{{=project_from_url['url_title']}}/calendar/"><i style="margin-right:15px;" class="fa fa-calendar"></i> calendar</a></h5>
+		<h5><a href="/project/{{=project_from_url['url_title']}}/discussion/"><i style="margin-right:15px;" class="fa fa-comments-o"></i> discussion</a></h5>
+		<h5><a href="/project/{{=project_from_url['url_title']}}/documents/"><i style="margin-right:15px;" class="fa fa-file-text-o"></i> documents</a></h5>
+		<h5><a href="/project/{{=project_from_url['url_title']}}/finance/"><i style="margin-right:15px;" class="fa fa-money"></i> finance</a></h5>
+		<h5><a href="/project/{{=project_from_url['url_title']}}/givingfor/">givingfor</a></h5>
+
 		<h5><a href="/project/{{=project_from_url['url_title']}}/members/"><i style="margin-right:15px;" class="fa fa-users"></i> members</a></h5>
 		<h5><a href="/project/{{=project_from_url['url_title']}}/pages/"><i style="margin-right:15px;" class="fa fa-file-text-o"></i> pages</a></h5>
+		<h5><a href="/project/{{=project_from_url['url_title']}}/projects/"><i style="margin-right:15px;" class="fa fa-wrench"></i> projects</a></h5>
+		<h5><a href="/project/{{=project_from_url['url_title']}}/settings/"><i style="margin-right:15px;" class="fa fa-cog"></i> settings</a></h5>
+
 		<h5><a href="/project/{{=project_from_url['url_title']}}/streams/"><i style="margin-right:15px;" class="fa fa-video-camera"></i> streams</a></h5>
 		<h5><a href="/project/{{=project_from_url['url_title']}}/tasks/"><i style="margin-right:15px;" class="fa fa-tasks"></i> tasks</a></h5>
+		<h5><a href="/project/{{=project_from_url['url_title']}}/tools/"><i style="margin-right:15px;" class="fa fa-code"></i> tools</a></h5>
+		<h5><a href="/project/{{=project_from_url['url_title']}}/voetr/"><i style="margin-right:15px;" class="fa fa-check-square"></i> voetr</a></h5>
+
 
 		{{if request.args(1) is None:}}
 
@@ -274,81 +286,91 @@ a{cursor: pointer;}
 
 	</div>
 	<div id="right">
-		
-		<div class="panel panel-default">
-		  <div class="panel-heading">
-		    <h4 class="panel-title"><a href="http://www.givingfor.com/projects/">givingfor</a></h4>
-		  </div>
-		  <div class="panel-body">
-		    donation<br>
-		    donation<br>
-		  </div>
+
+		{{member_joined=db((db.project_member.member_id == auth.user_id) & (db.project_member.project_id == project_from_url['id'])).select()}}
+		{{if member_joined:}}
+		{{else:}}
+		<div class="project-join" id="join-project-{{=project_from_url['id']}}" style="float:left;margin-right:10px;">
+		    <form style="display:none"><input type="hidden" id="" name="id" value="{{=project_from_url['id']}}" /></form> 
+		    <a onclick="ajax('/ajax_join_project/', ['id'], ':eval');">
+		    	<h5 class="btn">join (n)</h5>      
+		    </a>
 		</div>
-		<div class="panel panel-default">
-		  <div class="panel-heading">
-		    <h4 class="panel-title"><a href="/project/{{=project_from_url['url_title']}}/members/">members</a></h4>
-		  </div>
-		  <div class="panel-body">
-			{{for member in the_project_member_list:}}
-				<h4><a href="/member/{{=member['username']}}/">{{=member['username']}}</a></h4>
-			{{pass}}
-		  </div>
+		{{pass}}
+		<br><br>
+		<a class="btn">follow (n)</a>
+		<br><br>
+		<h5><a>members</a></h5>
+		<hr>
+		<div style="padding:5px;">
+		{{for member in the_project_member_list:}}
+			<h4><a href="/member/{{=member['username']}}/">{{=member['username']}}</a></h4>
+		{{pass}}
 		</div>
-		<div class="panel panel-default">
-		  <div class="panel-heading">
-		    <h4 class="panel-title"><a href="/project/{{=project_from_url['url_title']}}/finance/">finance</a></h4>
-		  </div>
-		  <div class="panel-body">
-		    money<br>
-			<p>epoint <a href="">market</a> buy points at x value, like a stock / store credit. transparent and open..</p>
-		  </div>
-		</div>
-		<div class="panel panel-default">
-		  <div class="panel-heading">
-		    <h4 class="panel-title"><a href="/project/{{=project_from_url['url_title']}}/tools/">tools</a></h4>
-		  </div>
-		  <div class="panel-body">
-		    github<br>
-		    google docs / pages<br>
-		    python editor, collab code<br>
-		  </div>
-		</div>
-		<div class="panel panel-default">
-		  <div class="panel-heading">
-		    <h4 class="panel-title"><a href="http://www.voetr.com/committees/">voetr</a></h4>
-		  </div>
-		  <div class="panel-body">
-		    vote<br>
-		    vote<br>
-		  </div>
-		</div>
+		<a href="/project/{{=project_from_url['url_title']}}/members/">see all</a>
+		<br><br>
+		<p class="lead">to enable donations <a href="/project/{{=project_from_url['url_title']}}/givingfor/">connect</a> to givingfor</p>
+		<p class="lead">to enable collective decision making <a href="/project/{{=project_from_url['url_title']}}/voetr/">connect</a> to voetr</p>
+
+
+
+
+
+
 	</div>
+<div class="centered-width">
+
 	<div id="content" style="">
 
 
 		{{if request.args(1) is None:}}
-			<h3 style="margin-left:15px;display:inline-block;"><i style="margin-right:15px;" class="fa fa-bars"></i> feed</h3>
-			<hr><br>
-			{{for feed in feed_array:}}
-				{{=feed}}<br><br>
-			{{pass}}
 
-		{{elif request.args(1) == 'admin':}}
-			<h3 style="display:inline-block;margin-left:15px;"><i style="margin-right:15px;" class="fa fa-cog"></i> admin</h3><hr>
+			<h3 style="margin-left:15px;display:inline-block;"><i style="margin-right:15px;" class="fa fa-bars"></i> feed</h3>
+			<p style="float:right">filters</p>
+			<hr><br>
+			
+			<div id="feed-list">
+				<div id="feed-item">
+
+				</div>
+				{{for feed in feed_array:}}
+				<div class="panel panel-default" style="margin:15px;">
+				<div class="panel-body">
+					{{=feed}}
+					<a>comment</a>
+					<br><br>
+				</div>
+				</div>
+				{{pass}}
+			</div>
+			<a class="lead">more</a>
+
+		{{elif request.args(1) == 'settings':}}
+			<h3 style="display:inline-block;margin-left:15px;"><i style="margin-right:15px;" class="fa fa-cog"></i> settings</h3><hr>
 
 			<a>+ new member group</a>
 			<h1>member group</h1>
+			{{for membergroup in membergroup_array:}}
+				{{=membergroup}}
+			{{pass}}
 			<a>+ permission</a>
 			<h1>permissions</h1>
+
+			<br><br><br>
+
+			<h3>leave project</h3>
+			<br><br>
+			<hr>
+
 		{{elif request.args(1) == 'members':}}
 			<h3 style="display:inline-block;margin-left:15px;"><i style="margin-right:15px;" class="fa fa-users"></i> members</h3><hr>
 
 			{{for member in the_project_member_list:}}
-			    <a style="display:inline-block;margin-left:15px;" href="/member/{{=member['username']}}/"><img src="{{=URL('download',args=project_picture[0]['picture'])}}" style="height:64px;" class="img-polaroid" /></a>
+			    <a style="display:inline-block;margin-left:15px;" href="/member/{{=member['username']}}/"><img src="" style="height:64px;" class="img-polaroid" /></a>
 				<h4 style="display:inline-block;margin-left:15px;"><a href="/member/{{=member['username']}}/">{{=member['username']}}</a></h4>
 				<br>
 				<br>
-				<p style="margin-left:15px;">description / member group / tasks</p>
+				<p style="margin-left:15px;color:rgb(150,150,150)">description / member group / tasks</p>
 				<br><br><br>
 				<hr>
 			{{pass}}
@@ -359,20 +381,62 @@ a{cursor: pointer;}
             {{for page in page_list:}}
                 <a style="display:inline-block;margin-left:15px;" class="lead" href="/project/{{=project_from_url['url_title']}}/page/{{=page['id']}}/">{{=page['title']}}</a><br>
             {{pass}}
+        {{elif request.args(1) == 'page':}}
+
+            {{if request.args(2):}}
+            	<h3 style="display:inline-block;margin-left:15px">{{=page_content[0]['title']}}</h3>
+            	<hr>
+            	<div style="margin:25px;display:inline-block">
+            		{{=XML(page_content[0]['page_content'])}}
+            	</div>
+            	{{for x in range(20):}}
+            	<h5>comment {{=x}}</h5>
+            	{{pass}}
+            {{pass}}
+
+
 		{{elif request.args(1) == 'streams':}}
 			<h3 style="display:inline-block;margin-left:15px;"><i style="margin-right:15px;" class="fa fa-video-camera"></i> streams</h3>
-			{{for x in range(30):}}
-				{{=x}}
-			{{pass}}
+			<script>
+			(function(){
+			  var mediaOptions = { audio: false, video: true };
+			 
+			  if (!navigator.getUserMedia) {
+			      navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia || navigator.msGetUserMedia;
+			  }
+			 
+			  if (!navigator.getUserMedia){
+			    return alert('getUserMedia not supported in this browser.');
+			  }
+			 
+			  navigator.getUserMedia(mediaOptions, success, function(e) {
+			    console.log(e);
+			  });
+			 
+			  function success(stream){
+			    var video = document.querySelector("#player");
+			    video.src = window.URL.createObjectURL(stream);
+			  }
+			})();
+			</script>
+			<style>
+			#player {
+			  width: 500px;
+			  height: 500px;
+			}
+			</style>
+			<br><br>
+			<div id="video-div" style="margin-left:10%;margin-right:10%;display:inline">
+			    <video id="player" autoplay="true"></video>
+			</div>
 		{{elif request.args(1) == 'tasks':}}
 			<h3 style="display:inline-block;margin-left:15px;"><i style="margin-right:15px;" class="fa fa-tasks"></i> tasks</h3><hr>
             <a style="display:inline-block;margin-left:15px;" data-toggle="modal" href="#new-task">+ new task</a><hr>
-			<h1>tasks</h1><hr>
 
 		    <div class="btn-toolbar" style="margin-left:15px;float:left;">
 		        <div class="btn-group">
 		            <a class="btn active" id="view-list"><i class="icon-align-justify"></i></a>
-		            <a class="btn" id="view-table"><i class="icon-th"></i></a>
+		            <a class="btn" id="view-table"><i class="fa fa-calendar"></i> </a>
 		        </div>
 		    </div>
 		    <br><br><br>
@@ -387,20 +451,19 @@ a{cursor: pointer;}
 			{{pass}}
 		{{elif request.args(1) == 'calendar':}}
 			<h3 style="display:inline-block;margin-left:15px;"><i style="margin-right:15px;" class="fa fa-calendar"></i> calendar</h3><hr>
-			<a style="float:right;" class="btn">+ new event / task</a>
-
 			<link href='/conexus/static/css/fullcalendar.css' rel='stylesheet' />
 			<link href='/conexus/static/css/fullcalendar.print.css' rel='stylesheet' media='print' />
 			<script src='/conexus/static/js/lib/jquery.min.js'></script>
 			<script src='/conexus/static/js/lib/jquery-ui.custom.min.js'></script>
 			<script src='/conexus/static/js/fullcalendar.min.js'></script>
+
 			<script>
 				$(document).ready(function() {
 					var date = new Date();
 					var d = date.getDate();
 					var m = date.getMonth();
 					var y = date.getFullYear();
-					
+
 					var calendar = $('#calendar').fullCalendar({
 						header: {
 							left: 'prev,next today',
@@ -426,54 +489,17 @@ a{cursor: pointer;}
 						},
 						editable: true,
 						events: [
-							{
-								title: 'All Day Event',
-								start: new Date(y, m, 1)
-							},
-							{
-								title: 'Long Event',
-								start: new Date(y, m, d-5),
-								end: new Date(y, m, d-2)
-							},
-							{
-								id: 999,
-								title: 'Repeating Event',
-								start: new Date(y, m, d-3, 16, 0),
-								allDay: false
-							},
-							{
-								id: 999,
-								title: 'Repeating Event',
-								start: new Date(y, m, d+4, 16, 0),
-								allDay: false
-							},
-							{
-								title: 'Meeting',
-								start: new Date(y, m, d, 10, 30),
-								allDay: false
-							},
-							{
-								title: 'Lunch',
-								start: new Date(y, m, d, 12, 0),
-								end: new Date(y, m, d, 14, 0),
-								allDay: false
-							},
-							{
-								title: 'Birthday Party',
-								start: new Date(y, m, d+1, 19, 0),
-								end: new Date(y, m, d+1, 22, 30),
-								allDay: false
-							},
-							{
-								title: 'Click for Google',
-								start: new Date(y, m, 28),
-								end: new Date(y, m, 29),
-								url: 'http://google.com/'
-							}
+							{{import time}}
+							{{for task in task_list:}}
+								{
+									title: '{{=task['title']}}',
+									start: new Date({{=time.mktime(task['task_start_time'].timetuple())*1000}}),
+									end: new Date({{=time.mktime(task['task_end_time'].timetuple())*1000}}),
+									allDay: false
+								},
+							{{pass}}
 						]
 					});
-					
-					
 				});
 
 			</script>

@@ -53,6 +53,15 @@ def event():
             session.flash = 'Error'   
             redirect(URL(''))
 
+        form_create_event_project = SQLFORM(db.event_project)
+        if form_create_event_project.process(formname='form_create_event_project').accepted:
+            #db.collection_member.insert(collection_id = form_create_collection.vars.id, user_id = auth.user_id, collection_usergroup_id=0)
+            session.flash = 'project submitted'
+            redirect(URL('/event/' + str(event_from_url['url_title']) + '/projects/'))     
+        elif form_create_event_project.errors:
+            session.flash = 'Error'   
+            redirect(URL(''))
+
         event_member_list = db(db.event_member.event_id == event_from_url['id']).select()
 
         the_event_member_list = []
@@ -64,6 +73,7 @@ def event():
         redirect(URL('events'))
 
     return dict(
+        form_create_event_project=form_create_event_project,
         event_threads=event_threads,
         event_from_url=event_from_url,
         form_create_thread=form_create_thread,
@@ -79,7 +89,19 @@ def event():
 ################################
 def events():
     event_list = db(db.event).select()
-    return dict(event_list=event_list)  
+
+    form_create_event = SQLFORM(db.event)
+    if form_create_event.process(formname='form_create_event').accepted:
+        #db.collection_member.insert(collection_id = form_create_collection.vars.id, user_id = auth.user_id, collection_usergroup_id=0)
+        session.flash = 'event created'
+        redirect(URL('/event/' + str(form_create_collection.vars.url_title) + '/admin/'))     
+    elif form_create_event.errors:
+        session.flash = 'Error'   
+        redirect(URL('events'))
+    return dict(
+        event_list=event_list,
+        form_create_event=form_create_event,
+    )  
   
 ################################
 ####faq#########################
@@ -138,11 +160,18 @@ def inbox():
 ################################
 def index():
     project_list = db(db.project).select()
+    project_list_array = []
+    for project in project_list:
+        picture = db(db.project_picture.project_id == project['id']).select()
+        project_list_array.append([project, picture])
+
+
     event_list = db(db.event).select()
 
     return dict(
         project_list=project_list,
         event_list=event_list,
+        project_list_array=project_list_array,
     )
 
 ################################
@@ -207,6 +236,16 @@ def privacy():
 def projects():
     project_list = db(db.project).select()
     create_project = SQLFORM(db.project)
+    if create_project.process(formname='create_new_page_form').accepted:           
+        db.project_membergroup.insert(project_id=create_project.vars.id, title="admin", description="this is the admin")
+        db.project_membergroup.insert(project_id=create_project.vars.id, title="member", description="project member")
+        db.project_member.insert(project_id=create_project.vars.id, member_id=auth.user_id, join_date=request.now, project_membergroup_id_array=[])
+
+        session.flash = 'project created'
+        redirect(URL('/project/' + create_project.vars.url_title))
+    elif create_project.errors:
+        session.flash = 'Error' 
+        redirect(URL(''))
     return dict(
         project_list=project_list,
         create_project=create_project,
@@ -227,7 +266,7 @@ def project():
         create_new_page_form = SQLFORM(db.project_page)
         if create_new_page_form.process(formname='create_new_page_form').accepted:           
             db(db.project_page.id==create_new_page_form.vars.id).update(project_id=project_from_url['id'])
-            session.flash = 'Page Created'
+            session.flash = 'page created'
             redirect(URL('/project/' + project_from_url['url_title'] + '/pages'))
         elif create_new_page_form.errors:
             session.flash = 'Error' 
@@ -275,13 +314,21 @@ def project():
 
         project_picture = db(db.project_picture.project_id == project_from_url['id']).select()
 
+        page_content=''
+        membergroup_array=''
+        if request.args(1) == 'page':
+            if request.args(2):
+                page_content = db(db.project_page.id == request.args(2)).select()
 
+        if request.args(1) == 'settings':
+            membergroup_array = db(db.project_membergroup.project_id == project_from_url['id']).select()
 
 
     except IndexError:
         redirect(URL('projects'))
 
     return dict(
+        membergroup_array=membergroup_array,
         page_list=page_list,
         create_new_page_form=create_new_page_form,
         project_from_url=project_from_url,
@@ -291,6 +338,7 @@ def project():
         tag_task_list_sorted_by_total_count=tag_task_list_sorted_by_total_count,
         feed_array=feed_array,
         project_picture=project_picture,
+        page_content=page_content,
     )
 
 
@@ -392,9 +440,16 @@ def inlrn_login():
 
     return test
 
+def test_deliveryfor():
 
-
-
+    from gluon.contrib.simplejsonrpc import ServerProxy
+    from google.appengine.api import urlfetch
+    URL = "https://troverman-deliveryfor.appspot.com/deliveryfor/default/call/jsonrpc"
+    urlfetch.set_default_fetch_deadline(60)
+    service = ServerProxy(URL, verbose=True)
+    test = service.test_add(50, 2)
+    #test=''
+    return test
 
 
 
@@ -406,6 +461,15 @@ def inlrn_login():
 ################################################################
 ####ajax########################################################
 ################################################################
+################################
+####ajax_discover###############
+################################                     
+def ajax_discover():
+    discover_content = DIV('lolololol') + BR()
+    jquery = "$('#discover-content').append('%s');" % discover_content
+    jquery += "jQuery('.flash').html('check it out').slideDown().delay(1000).slideUp();"
+
+    return jquery 
 
 ################################
 ####ajax_join_event#############
@@ -465,6 +529,27 @@ def ajax_leave_project():
     #jquery += "$('#join-collection-%s').delay(100).fadeToggle(400);" % collection_id_trim   
     return jquery
 
-
+################################
+####ajax_follow_member##########
+################################                                         
+def ajax_follow_member():
+    member_id = int(request.vars.id)
+    #LOGIC
+    #db.follower.insert(user_following_id = auth.user_id, user_followed_id = member_id_trim)
+    jquery = "jQuery('.flash').html('following').slideDown().delay(1000).slideUp();"
+    return jquery
+    
+################################
+####ajax_un_follow_member#######
+################################ 
+def ajax_un_follow_member():
+    #member_id = request.vars.itervalues()
+    #for x in member_id:
+        #member_id_trim = int(x)  
+    #db((db.follower.user_following_id==auth.user_id) & (db.follower.user_followed_id==member_id_trim)).delete()
+    jquery = "jQuery('.flash').html('unfollowed').slideDown().delay(1000).slideUp();"
+    #jquery += "$('#unfollow').fadeToggle(100);"
+    #jquery += "$('#follow').delay(100).fadeToggle(100);"
+    return jquery
 
 

@@ -19,8 +19,8 @@
 }
 #share-footer-container{margin-left:5%;margin-right:5%;}
 #project-list-container{text-align:left;width:100%;}
-#project-list-item{border:2px solid rgb(180,180,180);display:inline-block;padding:10px;margin:7px;}
-#project-list-item:hover{border:2px solid rgb(110,110,110);display:inline-block;padding:11px;margin:7px;background-color:rgb(255,255,255);}
+#project-list-item{border:2px solid rgb(180,180,180);display:inline-block;padding:10px;margin:7px;border-radius:5px;}
+#project-list-item:hover{border:2px solid rgb(110,110,110);display:inline-block;padding:11px;margin:7px;background-color:rgb(255,255,255);border-radius:5px;}
 #scroller{
     background-color:rgb(247,247,247);
     border-bottom:1px solid rgb(225, 225, 225);
@@ -29,6 +29,9 @@
 }
 .banner-area p{color:rgb(255,255,255);}
 #header-icons a{color:rgb(52,73,94);}
+#map img{
+    max-width: none;
+}
 </style>
 <script language="javascript" type="text/javascript" src="{{=URL(request.application,'static','js/jquery.flot.js')}}"></script>
 <script language="javascript" type="text/javascript" src="{{=URL(request.application,'static','js/jquery.flot.selection.js')}}"></script>
@@ -52,69 +55,85 @@ $(function() {
 		<p class="lead">paving the way for a transparent future</p>
     </div>
 </div>
-<div style="background-image: url(../conexus/static/images/pattern.jpg); height: 400px;">
+<div style="background-image: url(../conexus/static/images/pattern.jpg); height: 440px;">
 
+    <br><br><br>
+    <p style="font-size:48px;color:rgb(240,240,240);text-align:center">watch the world create</p>
+    <p style="font-size:30px;color:rgb(230,230,230);text-align:center">a transparent + opensource network</p>
     <br><br>
-    <br>
 <div id="header-icons">
-    <a href="#events" style="margin-left:10%;">
+    <a href="#events" style="margin-left:8%;">
         <span class="fa-stack fa-lg">
-          <i style="font-size:128px;" class="fa fa-circle fa-stack-2x fa-inverse" id="event-icon"></i>
+          <i style="font-size:128px;border:1px solid rgb(100,100,100)" class="fa fa-circle fa-stack-2x fa-inverse"></i>
           <i style="font-size:64px;margin-top:43px;margin-left:25px;" class="fa fa-calendar-o fa-stack-1x"></i>
         </span>
     </a>
-
-    <a href="#projects" style="margin-left:10%;">
+    <a href="#discover" style="margin-left:8%;">
+        <span class="fa-stack fa-lg">
+          <i style="font-size:128px;" class="fa fa-circle fa-stack-2x fa-inverse"></i>
+          <i style="font-size:64px;margin-top:43px;margin-left:25px;" class="fa fa-random fa-stack-1x"></i>
+        </span>
+    </a>
+    <a href="#projects" style="margin-left:8%;">
         <span class="fa-stack fa-lg">
           <i style="font-size:128px;" class="fa fa-circle fa-stack-2x fa-inverse"></i>
           <i style="font-size:64px;margin-top:43px;margin-left:25px;" class="fa fa-wrench fa-stack-1x"></i>
         </span>
     </a>
-    <a href="#projects" style="margin-left:10%;">
+    <a href="#projects" style="margin-left:8%;">
         <span class="fa-stack fa-lg">
           <i style="font-size:128px;" class="fa fa-circle fa-stack-2x fa-inverse"></i>
           <i style="font-size:64px;margin-top:43px;margin-left:25px;" class="fa fa-video-camera fa-stack-1x"></i>
         </span>
     </a>
-    <a href="#projects" style="margin-left:10%;">
-        <span class="fa-stack fa-lg">
-          <i style="font-size:128px;" class="fa fa-circle fa-stack-2x fa-inverse"></i>
-          <i style="font-size:64px;margin-top:43px;margin-left:25px;" class="fa fa-eye fa-stack-1x"></i>
-        </span>
-    </a>
-    <a href="#projects" style="margin-left:10%;">
-        <span class="fa-stack fa-lg">
-          <i style="font-size:128px;" class="fa fa-circle fa-stack-2x fa-inverse"></i>
-          <i style="font-size:64px;margin-top:43px;margin-left:25px;" class="fa fa-money fa-stack-1x"></i>
-        </span>
-    </a>
-    <a href="#projects" style="margin-left:10%;">
-        <span class="fa-stack fa-lg">
-          <i style="font-size:128px;" class="fa fa-circle fa-stack-2x fa-inverse"></i>
-          <i style="font-size:64px;margin-top:43px;margin-left:25px;" class="fa fa-tasks fa-stack-1x"></i>
-        </span>
-    </a>
-</div>
-
-
-
-    <br><br>
-    <br><br>
-    <br>
-    <div style="padding:15px;background-color:rgb(245,234,245);display:inline;">
-        <h1 style="color:rgb(40,40,20);margin-left:35px;">discover</h1>
+    <div style="text-align:center">
+    <div style="padding:15px;background-color:rgba(0,0,0,0.4);color:white;display:inline-block;border:1px solid rgb(150,150,150);border-radius:5px;margin-left:30%;">
+        <h1 style="color:rgb(240,240,240);margin-left:35px;">discover, signup, etc</h1>
+        <input type="text">
         <div class="input-append">
             <input type="text">
             <div class="btn-group" style="margin-top:0px;">
                 <a href="/search/"><button class="btn" tabindex="-1"><i class="icon-search"></i></button></a>          
             </div>
+             <div class="btn-group">
+              <a href="#test" class="btn btn-primary">info</a>
+              <a href="/discover" class="btn btn-success">discover</a>
+              <a href="/about/" class="btn btn-default">learn more</a>
+            </div>
         </div>
     </div>
+    </div>
+    <a href="#projects" style="margin-left:8%;">
+        <span class="fa-stack fa-lg">
+          <i style="font-size:128px;" class="fa fa-circle fa-stack-2x fa-inverse"></i>
+          <i style="font-size:64px;margin-top:43px;margin-left:25px;" class="fa fa-eye fa-stack-1x"></i>
+        </span>
+    </a>
+    <a href="#projects" style="margin-left:8%;">
+        <span class="fa-stack fa-lg">
+          <i style="font-size:128px;" class="fa fa-circle fa-stack-2x fa-inverse"></i>
+          <i style="font-size:64px;margin-top:43px;margin-left:25px;" class="fa fa-money fa-stack-1x"></i>
+        </span>
+    </a>
+    <a href="#projects" style="margin-left:8%;">
+        <span class="fa-stack fa-lg">
+          <i style="font-size:128px;" class="fa fa-circle fa-stack-2x fa-inverse"></i>
+          <i style="font-size:64px;margin-top:43px;margin-left:25px;" class="fa fa-tasks fa-stack-1x"></i>
+        </span>
+    </a>
+    <a href="#projects" style="margin-left:8%;">
+        <span class="fa-stack fa-lg">
+          <i style="font-size:128px;" class="fa fa-circle fa-stack-2x fa-inverse"></i>
+          <i style="font-size:64px;margin-top:43px;margin-left:25px;" class="fa fa-users fa-stack-1x"></i>
+        </span>
+    </a>
+    
+</div>
+    <br><br>
     <br><br>
 </div>
 <div id="scroller">
-    <!--<img style="" class="" src="/conexus/static/images/cam.JPG"/>-->
-    <br><br>
+    <br><br><br>
     <p style="font-size:100px;text-align:center;color:rgb(70,70,70)">collaboration</p><br><br><br>
     <p class="lead" style="text-align:center;">let's make the world a better place, together.</p>
 
@@ -136,12 +155,12 @@ $(function() {
     </table>
     <table style="margin-left:auto;margin-right:auto">
         <tr>
-            <td style="padding:25px;"><i style="font-size:128px;" class="fa fa-users"></i></td>
-            <td style="padding:25px;"><i style="font-size:128px;" class="fa fa-bullhorn"></i></td>
-            <td style="padding:25px;"><i style="font-size:128px;" class="fa fa-wrench"></i></td>
-            <td style="padding:25px;"><i style="font-size:128px;" class="fa fa-calendar-o"></i></td>
-            <td style="padding:25px;"><i style="font-size:128px;" class="fa fa-money"></i></td>
-            <td style="padding:25px;"><i style="font-size:128px;" class="fa fa-thumbs-up"></i></td>
+            <td style="padding:25px;"><i style="font-size:96px;" class="fa fa-users"></i></td>
+            <td style="padding:25px;"><i style="font-size:96px;" class="fa fa-bullhorn"></i></td>
+            <td style="padding:25px;"><i style="font-size:96px;" class="fa fa-wrench"></i></td>
+            <td style="padding:25px;"><i style="font-size:96px;" class="fa fa-calendar-o"></i></td>
+            <td style="padding:25px;"><i style="font-size:96px;" class="fa fa-money"></i></td>
+            <td style="padding:25px;"><i style="font-size:96px;" class="fa fa-thumbs-up"></i></td>
 
         </tr>
     </table>
@@ -159,33 +178,75 @@ $(function() {
 
 <hr>
 </div>
-<div style="background-image: url(../conexus/static/images/global_map.svg); height: 300px; background-repeat:no-repeat;background-color:rgb(247,247,247);background-position:center;"></div>
+
+
+
+    <!--conex.us is a platform for creating crowd-founded, open source startups built and owned by their makers. Talented minds everywhere are invited to help, and success is shared equitably.-->
+
+       <!-- <div class="row" style="margin-bottom: 24px;">
+          <div class="col-xs-4 text-right text-muted" style="margin-top: 20px;">
+            <h6>Traditional companies</h6>
+            <ul class="list-unstyled list-ruled text-sans">
+              <li>Investors and founders have ownership</li>
+              <li style="line-height: 50px;">Complex organizational structure</li>
+              <li>Most work happens in the office,<br>during the day</li>
+              <li>Employment contracts</li>
+            </ul>
+          </div>
+
+          <div class="col-xs-4">
+            <div class="card card-lg text-center" style="box-shadow: inset 0 0 0 2px rgba(123, 171, 94, 0.48), 0 1px 0 0 rgba(0, 0, 0, 0.04);">
+              <div class="card-body">
+                <h6 class="text-serif">Open Source Startups</h6>
+                <ul class="list-unstyled list-ruled omega text-success">
+                  <li>Everyone has ownership</li>
+                  <li>Everyone contributes where they are most effective</li>
+                  <li>Collaboration can happen around-the-clock by people everywhere</li>
+                  <li>Revenue is split equitably between contributors, monthly</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-xs-4 text-muted" style="margin-top: 20px;">
+            <h6>Side projects</h6>
+            <ul class="list-unstyled list-ruled text-sans">
+              <li>Creator has ownership</li>
+              <li style="line-height: 50px;">Working alone</li>
+              <li>Work happens at home, on nights<br>and weekends</li>
+              <li>Revenue is rare</li>
+            </ul>
+          </div>
+        </div>-->
+      
+
+
+<div style="background-image: url(../conexus/static/images/global_map.svg); height: 300px; background-repeat:no-repeat;background-color:rgb(247,247,247);background-position:center;opacity:.2">
+    
+</div>
 <br><br><br>
 
 <div class="centered-width">
 
-    <p class="lead" style="text-align:left;text-align:center">live streams <i style="font-size:64px;margin-left:15px;" class="fa fa-video-camera"></i></p><hr>
-	<table style="margin: auto;">
-		<tr>
-			<td style="max-width:33%"><p class="lead"><iframe src="//www.youtube.com/embed/8fpZ16cIVAQ?list=UUNceSFBcgkYqv4QiD374VTQ" frameborder="0" allowfullscreen></iframe></p></td>
-			<td style="max-width:33%"><p class="lead"><iframe src="//www.youtube.com/embed/xR4ibUq9iVw?list=UUNceSFBcgkYqv4QiD374VTQ" frameborder="0" allowfullscreen></iframe></p></td>
-			<td style="max-width:33%"><p class="lead"><iframe src="//www.youtube.com/embed/medBPRNlV0w?list=UUNceSFBcgkYqv4QiD374VTQ" frameborder="0" allowfullscreen></iframe></p></td>
-		</tr>
-	</table>
-
-
-
+    <p class="lead" style="text-align:left;text-align:center"><a href="/streams/"><i style="font-size:64px;margin-right:15px;" class="fa fa-video-camera"></i></a></p><hr>
+    {{for x in range(5):}}
+        <div id="project-list-item">
+            <p>streaming name</p>
+            <a href="/stream/{{=x}}/"><img style="width:256px;" class="img-polaroid" src="/conexus/static/images/noimage-icon.png"/></a>
+        </div>
+    {{pass}}
+    <hr><br><br>
 </div>
 
 <br><br>
-<div class="banner-area" id="connecting-us" style="background-color:rgb(24,95,192);">
+<div class="banner-area" id="connecting-us" style="background-color:rgb(24,95,192);border-bottom:3px solid rgb(220,220,220)">
     <br><br><br>
-    <p style="text-align:center;color:rgb(200,200,200);font-size:24px;font-family:ubuntu;font-weight:bold;">connecting us</p> 
+    <p style="float:left;margin-left:6%;color:rgb(200,200,200);font-size:24px;font-family:ubuntu;font-weight:bold;">connecting us</p> 
+    <p style="float:right;margin-right:6%;disply:inline"><i style="font-size:96px;margin-top:-32px" class="fa fa-users fa-inverse"></i></p><br>
+
     <br><br><br>
 </div>
-<br>
-<div class="centered-width">
-	<script>
+<script>
 	{{an_array=[]}}
     {{import time}}
     {{array = [1,2,3,4,5]}}
@@ -271,73 +332,110 @@ $(document).ready(function(){
         lng:0 
     });                       
     map.fitZoom();
+    options = $.extend({
+        scrollwheel: false
+    }, options);
 }); 
 </script>   
-    <p class="lead" style="text-align:left;">local stuff</p>
-    <div style="width:100%; height:300px;" id="map" ></div>   
-    <p class="lead" style="text-align:left;">watch the world create</p>
-    <p style="text-align:left" class="lead">this is a graph</p><hr>
+<div style="width:100%; height:300px;" id="map" ></div> 
+<div class="centered-width">
+    <br>
+    <p class="lead" style="text-align:left;"><a>discover</a> what's around you</p>
+    <p class="lead" style="text-align:left;"><a href="/streams/">watch</a> the world create</p>
 
     <div>
         <div id="placeholder" style="width:75%;height:250px;display: table;margin: 0 auto;"></div>
     </div>
-    <p style="text-align:center"><i style="font-size:128px;" class="fa fa-link fa-spin"></i></p>
+    <br><br>
+    <p style="text-align:left" class="lead">and <a>we're getting stuff done</a></p><hr>
+    <br><br>
     <div class="well">
         <p class="lead" style="text-align:left">work with people, together</p>
         <p class="lead" style="text-align:left">donate toward promising projects</p>
-        <p class="lead" style="text-align:left"><a href="http://www.epoint.me/">epoint.me</a> connected, <a href="http://www.givingfor.com/projects/conexus/">givingfor</a> connected, <a href="http://www.voetr.com/committee/conexus/">voetr</a> connected, <a href="http://www.inlrn.com/">inlrn</a> connected</p>
+        <p class="lead" style="text-align:left"><a href="http://www.epoint.me/">epoint.me</a>, <a href="http://www.givingfor.com/projects/conexus/">givingfor</a>, <a href="http://www.voetr.com/committee/conexus/">voetr</a>, and <a href="http://www.inlrn.com/">inlrn</a> connected</p>
+        <br><br>
+
         <p class="lead" style="text-align:left">democratic</p>
         <p class="lead" style="text-align:left">help change the business model. crowdowned</p>
         <p class="lead" style="text-align:left">we're all cofounders</p>
         <p class="lead" style="text-align:left">paving the way for a transparent future</p>
-        <p class="lead" style="text-align:left">recieve value for what you do</p>
+        <p class="lead" style="text-align:left">receive value for what you do</p>
         <p class="lead" style="text-align:left">crowd funded projects</p>
-    </div>
-    <p style="text-align:center;"><i style="font-size:128px;" class="fa fa-money"></i></p>
-    <p style="text-align:center;"><i style="font-size:128px;" class="fa fa-bullhorn"></i></p>
 
+    </div>
+    
     <p class="lead" style="text-align:left">PICTURE</p>
+    <img style="width:256px;" class="img-polaroid" src="/conexus/static/images/noimage-icon.png"/>
+
 </div>
 
 <br><br>
-<div class="banner-area" id="projects" style="background-color:rgb(100,150,50);">
+<div class="banner-area" id="projects" style="background-color:rgb(100,150,50);border-bottom:3px solid rgb(220,220,220);">
     <br><br><br>
-    <p style="text-align:center;"><a style="color:rgb(240,250,255);font-size:24px;font-family:ubuntu;font-weight:bold;" href="/projects/">projects</a></p> 
+    <p style="float:left;margin-left:6%;"><a style="color:rgb(240,250,255);font-size:24px;font-family:ubuntu;font-weight:bold;" href="/projects/">projects</a></p> 
+    <p style="float:right;margin-right:6%;disply:inline;margin-top:-15px;"><i style="font-size:128px;" class="fa fa-wrench fa-inverse"></i></p><br>
+
     <br><br><br>
 </div>
 <br>
 <div class="centered-width">
+    <br><br>
+    <div class="well">
+        <p class="lead" style="text-align:left;display:inline">open positions</p><br>
+        <p class="lead" style="text-align:left;display:inline">task list of things to be done</p><br>
+        <p class="lead" style="text-align:left;display:inline">transparent, completly. see what all the team members are doing</p><br>
+        <p class="lead" style="text-align:left;display:inline">issue tracking</p><br>
+        <p class="lead" style="text-align:left;display:inline">we can do it</p><br>
+        <div style="clear:both;"></div>
+
+    </div>
+    <p class="lead" style="text-align:left">PICTURE</p>
+    <img style="width:256px;" class="img-polaroid" src="/conexus/static/images/noimage-icon.png"/>
+
+    <br><hr><br>
+
     <div id="project-list-container">
-        {{for project in project_list[:5]:}}
+        {{for project in project_list_array[:5]:}}
         <div id="project-list-item">
-            <a href="/project/{{=project['url_title']}}/"><p style="text-align:left;">{{=project['title']}}</p></a>
-            <a href="/project/{{=project['url_title']}}/"><img style="width:256px;" class="img-polaroid" src="/conexus/static/images/noimage-icon.png"/></a>
+            <a href="/project/{{=project[0]['url_title']}}/"><p style="text-align:left;">{{=project[0]['title']}}</p></a>
+            {{try:}}
+            {{picture = project[1][0]['picture']}}
+                <a href="/project/{{=project[0]['url_title']}}/"><img style="width:256px;" class="img-polaroid" src="{{=URL('download',args=project[1][0]['picture'])}}"/></a>
+            {{except IndexError:}}
+                <a href="/project/{{=project[0]['url_title']}}/"><img style="width:256px;" class="img-polaroid" src="/conexus/static/images/noimage-icon.png"/></a>
+            {{pass}}
         </div>
         {{pass}}
         <br><hr><br>
     </div>
-    <br><br><br>
-    <div class="well">
-        <p class="lead" style="text-align:left">open positions</p>
-        <p class="lead" style="text-align:left">task list of things to be done</p>
-        <p class="lead" style="text-align:left">transparent, completly. see what all the team members a doing</p>
-        <p class="lead" style="text-align:left">issue tracking</p>
-        <p class="lead" style="text-align:left">we can do it</p>
-    </div>
 
-    <p style="text-align:center;"><i style="font-size:128px;" class="fa fa-wrench"></i></p>
-    <p class="lead" style="text-align:left">PICTURE</p>
 
 </div>
 <br><br>
 
-<div class="banner-area" id="events" style="background-color:rgb(140,120,90);">
+<div class="banner-area" id="events" style="background-color:rgb(140,120,90);border-bottom:3px solid rgb(220,220,220);">
     <br><br><br>
-    <p style="text-align:center;"><a style="color:rgb(240,250,255);font-size:24px;font-family:ubuntu;font-weight:bold;" href="/events/">events</a></p> 
+    <p style="float:left;margin-left:6%;disply:inline"><a style="color:rgb(237, 237, 237);;font-size:24px;font-family:ubuntu;font-weight:bold;" href="/events/">events</a></p> 
+    <p style="float:right;margin-right:6%;margin-top:-15px;"><i style="font-size:128px;color:rgb(237, 237, 237);" class="fa fa-calendar-o fa-inverse"></i></p><br>
+
     <br><br><br>
 </div>
+<div style="background-color:rgb(237, 237, 237);">
 <br>
 <div class="centered-width">
+
+    <br><br>
+    <div class="well">
+        <p class="lead" style="text-align:left;display:inline">24/7 global hackathon</p><br>
+        <p class="lead" style="text-align:left;display:inline">win prizes</p><br>
+        <p class="lead" style="text-align:left;display:inline">collaborative competition</p><br>
+        <p class="lead" style="text-align:left;display:inline">let's make awesome things, together</p><br>
+        <div style="clear:both;"></div>
+    </div>
+    <p class="lead" style="text-align:left">PICTURE</p>
+    <img style="width:256px;" class="img-polaroid" src="/conexus/static/images/noimage-icon.png"/>
+
+    <br><hr><br>
     <div id="project-list-container">
         {{for event in event_list[:5]:}}
         <div id="project-list-item">
@@ -347,36 +445,33 @@ $(document).ready(function(){
         {{pass}}
         <br><hr><br>
     </div>
-    <br><br><br>
-    <div class="well">
-        <p class="lead" style="text-align:left">24/7 global hackathon</p>
-        <p class="lead" style="text-align:left">win prizes</p>
-        <p class="lead" style="text-align:left">collaborative competition</p>
-        <p class="lead" style="text-align:left">let's make awesome things, together</p>
-    </div>
-
-        <p style="text-align:center;"><i style="font-size:128px;" class="fa fa-calendar-o"></i></p>
-        <p class="lead" style="text-align:left">PICTURE</p>
 
 </div>
 <br><br>
-
-<div class="banner-area" id="evolution" style="background-color:rgb(51,72,83);">
+</div>
+<div class="banner-area" id="evolution" style="background-color:rgb(51,72,83);border-bottom:3px solid rgb(220,220,220);">
     <br><br><br>
-    <p style="text-align:center;color:rgb(200,200,200);font-size:24px;font-family:ubuntu;font-weight:bold;">evolution</p> 
+    <p style="float:left;margin-left:6%;color:rgb(200,200,200);font-size:24px;font-family:ubuntu;font-weight:bold;">evolution</p> 
+    <p style="float:right;margin-right:6%;margin-top:-42px;"><i style="font-size:110px;" class="fa fa-thumbs-up fa-inverse"></i></p><br>
+
     <br><br><br>
 </div>
 <br><br><br>
 <div class="centered-width">
     <div class="well">
-        <p class="lead" style="text-align:left">once upon a time</p>
-        <p class="lead" style="text-align:left">the world decided to work together</p>
-        <p class="lead" style="text-align:left">toward a common goal</p>
-        <p class="lead" style="text-align:left">conex.us</p>
-    </div>
+        <p class="lead" style="text-align:left;display:inline">tasklists</p><br>
+        <p class="lead" style="text-align:left;display:inline">transparency</p><br>
+        <br>
+        <p class="lead" style="text-align:left;display:inline">once upon a time</p><br>
+        <p class="lead" style="text-align:left;display:inline">the world decided to work together</p><br>
+        <p class="lead" style="text-align:left;display:inline">toward a common goal</p><br>
+        <p class="lead" style="text-align:left;display:inline">conex.us</p><br>
+        <div style="clear:both;"></div>
 
-        <p style="text-align:center;"><i style="font-size:128px;" class="fa fa-thumbs-up"></i></p>
-        <p class="lead" style="text-align:left">PICTURE</p>
+    </div>
+    <p class="lead" style="text-align:left">PICTURE</p>
+    <img style="width:256px;" class="img-polaroid" src="/conexus/static/images/noimage-icon.png"/>
+
 
 </div>
 

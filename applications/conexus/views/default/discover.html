@@ -1,9 +1,324 @@
 {{extend 'layout.html'}}
+<style>
+#project-list-container{text-align:left;width:100%;}
+#project-list-item{border:2px solid rgb(180,180,180);display:inline-block;padding:10px;margin:7px;}
+#project-list-item:hover{border:2px solid rgb(110,110,110);display:inline-block;padding:11px;margin:7px;background-color:rgb(255,255,255);}
+#index-header{
+    background-color:rgb(247,247,247);
+    border-bottom:1px solid rgb(225, 225, 225);
+    padding-top:5px;
+    padding-bottom:5px;
+}
+#index-header-container{
+    margin-left:5%;
+    margin-right:5%;
+}
+</style>
+<style>
+#index-header{
+    background-color:rgb(247,247,247);
+    border-bottom:1px solid rgb(225, 225, 225);
+    padding-top:15px;
+    padding-bottom:15px;
+}
+#index-header-container{
+    margin-left:5%;
+    margin-right:5%;
+}
+#share-footer{
+    background-color:rgb(247,247,247);
+    border-top:1px solid rgb(225, 225, 225);
+}
+#share-footer-container{margin-left:5%;margin-right:5%;}
+#item-block-list-container{text-align:center;width:100%;}
+#item-block-list-item{border:2px solid rgb(210,210,210);display:inline-block;padding:10px;margin:7px;}
+#item-block-list-item:hover{border:2px solid rgb(110,110,110);display:inline-block;padding:11px;margin:7px;background-color:rgb(255,255,255);}
+
+#left {
+    width: 175px; 
+    float: left;
+    border-right:1px solid rgb(238,238,238);  
+    padding-left:15px;    
+}
+#collapsed-left {
+        float: left;
+        border-bottom:1px solid rgb(238,238,238);
+        border-right:1px solid rgb(238,238,238);
+        padding-left:7px;
+        padding-right:7px;
+}
+#collapsed-left:hover {
+        float: left;
+        padding-left:7px;
+        padding-right:7px;
+        background-color:rgb(245,245,248);
+        border-right:1px solid rgb(235,235,238);
+        border-bottom:1px solid rgb(235,235,238)
+}
+#collapse-left {
+        padding-left:5px;
+        padding-right:5px;
+        float:right;
+        border-left:1px solid rgb(238,238,238);
+        border-bottom:1px solid rgb(238,238,238);
+}
+#collapse-left:hover {
+        padding-left:5px;
+        padding-right:5px;
+        float:right;
+        background-color:rgb(245,245,248);
+        border-left:1px solid rgb(235,235,238);
+        border-bottom:1px solid rgb(235,235,238) 
+}
+</style>
+<div id="index-header">
+    <div id="index-header-container">
+        <br><h3 style="color:rgb(80, 84, 92);font-size:45px;"><i class="fa fa-random"></i> discover</h3><br>
+    </div>
+</div>
 <div class="centered-width">
-<h3>discover</h3>
-<p class="btn">button</p>
-<p class="lead">discover stuff!</p>
-<p class="lead">what do you want to find?</p>
-<p class="lead">stumble upon</p>
+  <br><br>
+  <div class="project-join" id="discover" style="">
+    <form style="display:none"><input type="hidden" id="" name="input" value="input" /></form> 
+    <a onclick="ajax('/ajax_discover/', ['input'], ':eval');">
+      <h5 class="btn">discover</h5>      
+    </a>
+  </div>
+  <br><hr><br>
+	<p class="lead">discover stuff!</p>
+	<p class="lead">what do you want to find?</p>
+	<p class="lead">stumble upon</p>
+  <p class="lead">options</p>
+  <p class="lead">options</p>
+  <p class="lead">options</p>
+  <p class="lead">options</p>
+
+  <br><hr><br>
+
+
+  <div id="project-list-container">
+    {{for project in range(30):}}
+      <div id="project-list-item">
+        <a href="/project/"><p style="text-align:left;">{{=project}}</p></a>
+        <a href="/project/"><img style="width:256px;" class="img-polaroid" src="/conexus/static/images/noimage-icon.png"/></a>
+      </div>
+    {{pass}}
+    <br><hr><br>
+  </div>
+
+    <br><hr><br>
+
+  <div id="discover-content"></div>
 </div>
 <hr>
+
+<style>
+
+.link {
+  fill: none;
+  stroke: #000;
+  stroke-width: 1.5px;
+}
+
+</style>
+<body>
+<script src="http://d3js.org/d3.v3.min.js"></script>
+<script>
+$(function() {
+
+var margin = {top: 20, right: 20, bottom: 20, left: 20},
+    width = 960 - margin.left - margin.right,
+    height = 500 - margin.top - margin.bottom;
+
+var N = 1 << 0,
+    S = 1 << 1,
+    W = 1 << 2,
+    E = 1 << 3;
+
+var root = generateTree(40, 40);
+
+var tree = d3.layout.tree()
+    .size([height, width]);
+
+var nodes = tree.nodes(root),
+    links = tree.links(nodes);
+
+var svg = d3.select("#tree-area").append("svg")
+    .attr("width", width + margin.left + margin.right)
+    //.attr("width", '100%')
+    .attr("height", height + margin.top + margin.bottom)
+  .append("g")
+    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+svg.selectAll(".link")
+    .data(links)
+  .enter().append("path")
+    .attr("class", "link")
+    .attr("d", function(d) { return "M" + d.source.y + "," + d.source.x + "L" + d.target.y + "," + d.target.x; });
+
+function generateTree(width, height) {
+  var cells = generateMaze(width, height), // each cell’s edge bits
+      visited = d3.range(width * height).map(function() { return false; }),
+      root = {index: cells.length - 1, children: []},
+      frontier = [root],
+      parent,
+      child,
+      childIndex,
+      cell;
+
+  while ((parent = frontier.pop()) != null) {
+    cell = cells[parent.index];
+    if (cell & E && !visited[childIndex = parent.index + 1]) visited[childIndex] = true, child = {index: childIndex, children: []}, parent.children.push(child), frontier.push(child);
+    if (cell & W && !visited[childIndex = parent.index - 1]) visited[childIndex] = true, child = {index: childIndex, children: []}, parent.children.push(child), frontier.push(child);
+    if (cell & S && !visited[childIndex = parent.index + width]) visited[childIndex] = true, child = {index: childIndex, children: []}, parent.children.push(child), frontier.push(child);
+    if (cell & N && !visited[childIndex = parent.index - width]) visited[childIndex] = true, child = {index: childIndex, children: []}, parent.children.push(child), frontier.push(child);
+  }
+
+  return root;
+}
+
+function generateMaze(width, height) {
+  var cells = new Array(width * height),
+      frontier = [],
+      startIndex = (height - 1) * width;
+
+  cells[startIndex] = 0;
+  frontier.push({index: startIndex, direction: N});
+  frontier.push({index: startIndex, direction: E});
+
+  while ((edge = popRandom(frontier)) != null) {
+    var edge,
+        i0 = edge.index,
+        d0 = edge.direction,
+        i1 = i0 + (d0 === N ? -width : d0 === S ? width : d0 === W ? -1 : +1),
+        x0 = i0 % width,
+        y0 = i0 / width | 0,
+        x1,
+        y1,
+        d1,
+        open = cells[i1] == null; // opposite not yet part of the maze
+
+    if (d0 === N) x1 = x0, y1 = y0 - 1, d1 = S;
+    else if (d0 === S) x1 = x0, y1 = y0 + 1, d1 = N;
+    else if (d0 === W) x1 = x0 - 1, y1 = y0, d1 = E;
+    else x1 = x0 + 1, y1 = y0, d1 = W;
+
+    if (open) {
+      cells[i0] |= d0, cells[i1] |= d1;
+      if (y1 > 0 && cells[i1 - width] == null) frontier.push({index: i1, direction: N});
+      if (y1 < height - 1 && cells[i1 + width] == null) frontier.push({index: i1, direction: S});
+      if (x1 > 0 && cells[i1 - 1] == null) frontier.push({index: i1, direction: W});
+      if (x1 < width - 1 && cells[i1 + 1] == null) frontier.push({index: i1, direction: E});
+    }
+  }
+
+  return cells;
+
+  function popRandom(array) {
+    if (!(n = array.length)) return;
+    var n, i = Math.random() * n | 0, t = array[i];
+    array[i] = array[--n], array.pop();
+    return t;
+  }
+}
+});
+
+</script>
+
+<div id="tree-area" style="margin-left:15%"></div>
+
+
+<style>
+
+path {
+  fill: none;
+  stroke: #000;
+  stroke-width: 1px;
+  pointer-events: all;
+}
+
+path:hover {
+  fill: orange;
+}
+
+</style>
+<script>
+$(function() {
+	var width = 960,
+    height = 500;
+
+var colors = [
+  "rgb(197,27,125)",
+  "rgb(222,119,174)",
+  "rgb(241,182,218)",
+  "rgb(253,224,239)",
+  "rgb(247,247,247)",
+  "rgb(230,245,208)",
+  "rgb(184,225,134)",
+  "rgb(127,188,65)",
+  "rgb(77,146,33)"
+];
+
+var sites = d3.range(100).map(function(d) {
+  return [Math.random() * width, Math.random() * height];
+});
+
+var voronoi = d3.geom.voronoi();
+
+var canvas = d3.select("#thing").append("canvas")
+    .attr("width", '5000')
+    .attr("height", height)
+    .on("mousemove", function() { sites[0] = d3.mouse(this); redraw(); });
+
+var context = canvas.node().getContext("2d");
+
+redraw();
+
+function redraw() {
+  var cells = voronoi(sites);
+
+  context.clearRect(0, 0, width, height);
+
+  context.fillStyle = "green";
+  draw(cells[0]);
+  context.fill();
+
+  for (var k = 0, l = colors.length; k < l; ++k) {
+    context.fillStyle = colors[k];
+    for (var i = 1, n = cells.length; i < n; ++i) {
+      if (i % l === k && draw(cells[i])) context.fill();
+    }
+  }
+
+  context.strokeStyle = "white";
+  for (var i = 0, n = cells.length; i < n; ++i) {
+    if (draw(cells[i])) context.stroke();
+  }
+
+  context.fillStyle = "black";
+  for (var i = 1, n = sites.length, site; i < n; ++i) {
+    site = sites[i];
+    context.beginPath();
+    context.arc(site[0], site[1], 1.5, 0, 2 * Math.PI, false);
+    context.fill();
+  }
+}
+
+function draw(cell) {
+  if (cell) {
+    context.beginPath();
+    context.moveTo(cell[0][0], cell[0][1]);
+    for (var j = 1, m = cell.length; j < m; ++j) {
+      context.lineTo(cell[j][0], cell[j][1]);
+    }
+    context.closePath();
+    return true;
+  }
+}
+});
+
+</script>
+<div id="thing" style="max-width:100%"></div>
+
+
+<br><br><br><br>

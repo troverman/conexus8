@@ -74,16 +74,18 @@
     img.opacity-img{opacity:0.8;}
     img.opacity-img:hover{opacity:1;}
     #angle-down-icon{color:rgb(211,221,241);margin-left:5px;}
-    #angle-down-icon:hover{color:rgb(255,255,255);}
-    #academies-icon{color:rgb(111,141,141);}
-    #academies-icon:hover{color:rgb(255,255,255);}
-    #courses-icon{color:rgb(111,121,141);}
-    #courses-icon:hover{color:rgb(255,255,255);}
-    #discover-icon{color:rgb(140,121,141);}
-    #discover-icon:hover{color:rgb(255,255,255);}
+    #angle-down-icon:hover{color:rgb(180,180,180);}
+    #projects-icon{color:rgb(88, 101, 6);}
+    #projects-icon:hover{color:rgb(180,180,180);}
+    #stream-icon{color:rgb(40, 40, 40);}
+    #stream-icon:hover{color:rgb(180,180,180);}
+    #event-icon{color:rgb(113, 75, 8);}
+    #event-icon:hover{color:rgb(180,180,180);}
+    #discover-icon{color:rgb(113, 34, 8);}
+    #discover-icon:hover{color:rgb(180,180,180);}
     #facebook-login:hover{opacity:.9;}
-    #feed-icon{color:rgb(140,140,141);}
-    #feed-icon:hover{color:rgb(255,255,255);}
+    #feed-icon{color:rgb(46, 99, 58);}
+    #feed-icon:hover{color:rgb(180,180,180);}
     #footer-links{font-family:ubuntu;color:rgb(201,211,231);margin-top:-15px;}
     #google-login:hover{opacity:.9;}
     #inbox-icon{color:rgb(211,221,241);}
@@ -171,7 +173,8 @@
   <!-- containter ================================================== -->
   <div class="container">
     <!-- navbar ================================================== -->
-    <div class="navbar navbar-inverse navbar-fixed-top" style="position:relative;min-width:980px;">
+    <div class="navbar navbar-inverse navbar-static-top" style="min-width:1056px;">
+    <!--<div class="navbar navbar-inverse navbar-fixed-top" style="position:relative;min-width:980px;">-->
       <div class="flash">{{=response.flash or ''}}</div>
       <div class="navbar-inner" id="site-header-container">
         <div class="" id="site-header">
@@ -180,20 +183,14 @@
               <img id="logo-conexus" src="/conexus/static/images/conexus.png" />
             </a>
           </div>
-          <div id="header-icons" style="margin-top:30px;margin-left:3px;float:left;">
-            <a href="/discover/"><i id="discover-icon" class="fa fa-random" style="margin-left:15px;"> discover</i></a>
-            <a href="/events/"><i id="discover-icon" class="fa fa-calendar-o" style="margin-left:15px;"> events</i></a>
-            <a href="/projects/"><i id="academies-icon" class="fa fa-wrench" style="margin-left:15px;"> projects</i></a>
-            <a href="/feed/"><i id="feed-icon" class="fa fa-align-justify" style="margin-left:15px;"> feed</i></a>
+          <div id="header-icons" style="margin-top:26px;margin-left:3px;float:left;">
+            <a href="/discover/"><i id="discover-icon" class="fa fa-random" style="margin-left:15px;"><p style="font-family:ubuntu;display:inline;"> discover</p></i></a>
+            <a href="/events/"><i id="event-icon" class="fa fa-calendar-o" style="margin-left:15px;"><p style="font-family:ubuntu;display:inline;"> events</p></i></a>
+            <a href="/feed/"><i id="feed-icon" class="fa fa-align-justify" style="margin-left:15px;"><p style="font-family:ubuntu;display:inline;"> feed</p></i></a>
+            <a href="/projects/"><i id="projects-icon" class="fa fa-wrench" style="margin-left:15px;"><p style="font-family:ubuntu;display:inline;"> projects</p></i></a>
+            <a href="/streams/"><i id="stream-icon" class="fa fa-video-camera" style="margin-left:15px;"><p style="font-family:ubuntu;display:inline;"> streams</p></i></a>
           </div>
-          <div id="header-search" style="float:left;margin-left:20px;margin-top:23px;">
-            <div class="input-append">
-              <input type="text">
-              <div class="btn-group" style="margin-top:0px;">
-                <a href="/search/"><button class="btn" tabindex="-1"><i class="icon-search"></i></button></a>          
-              </div>
-            </div>
-          </div>
+          
           {{if auth.is_logged_in():}}
             <ul id="member-name-area" class="nav pull-right nav_bar">
               <a data-toggle="dropdown" class="dropdown-toggle" href="#">
@@ -237,13 +234,19 @@
               <a data-toggle="modal" href="#login-or-signup" id="login-area">login or signup</a>
             </ul>
           {{pass}}
+          <div id="search-bar" style="float:right;margin-right:30px;margin-top:19px;">
+            <div class="input-prepend">
+              <span class="add-on"><i class="icon-search"></i></span>
+              <input class="span2" id="prependedInput" type="text" placeholder="search">
+            </div>    
+          </div>
         </div>
       </div>
     </div>
     <!--/navbar -->
 
     <!-- main-content ================================================== -->
-    <div id="main-content" style="min-width:980px;">
+    <div id="main-content" style="min-width:1056px;">
       {{block center}}
       {{include}}
       {{end}}
@@ -326,8 +329,8 @@
       }
     }); 
 
-    {{if request.function=='academies':}}
-      $("#academies-icon").css('color','rgb(255,255,255)');
+    {{if request.function=='projects':}}
+      $("#projects-icon").css('color','rgb(255,255,255)');
     {{pass}}
     {{if request.function=='courses':}}
       $("#courses-icon").css('color','rgb(255,255,255)');
