@@ -10,6 +10,42 @@
     margin-left:5%;
     margin-right:5%;
 }
+#left {
+    width: 175px; 
+    float: left;
+    border-right:1px solid rgb(238,238,238);  
+    padding-left:15px;    
+}
+#collapsed-left {
+        float: left;
+        border-bottom:1px solid rgb(238,238,238);
+        border-right:1px solid rgb(238,238,238);
+        padding-left:7px;
+        padding-right:7px;
+}
+#collapsed-left:hover {
+        float: left;
+        padding-left:7px;
+        padding-right:7px;
+        background-color:rgb(245,245,248);
+        border-right:1px solid rgb(235,235,238);
+        border-bottom:1px solid rgb(235,235,238)
+}
+#collapse-left {
+        padding-left:5px;
+        padding-right:5px;
+        float:right;
+        border-left:1px solid rgb(238,238,238);
+        border-bottom:1px solid rgb(238,238,238);
+}
+#collapse-left:hover {
+        padding-left:5px;
+        padding-right:5px;
+        float:right;
+        background-color:rgb(245,245,248);
+        border-left:1px solid rgb(235,235,238);
+        border-bottom:1px solid rgb(235,235,238) 
+}
 </style>
 <div id="index-header">
     <div id="index-header-container">
@@ -17,6 +53,17 @@
     </div>
 </div>
 <div class="centered-width">
+
+    <div id="left">
+       <p class="lead">location filter</p>
+       <p class="lead">following</p>
+       <p class="lead">tags</p>
+       {{for x in range(10):}}
+            <p class="lead">{{=x}}</p>
+       {{pass}}
+
+       <div style="clear:both"></div>
+    </div>
 	{{for x in range(20):}}
 		<p class="lead">feed item {{=x}}</p>
 	{{pass}}

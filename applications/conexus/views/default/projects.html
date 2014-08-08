@@ -53,9 +53,13 @@
     <div id="item-list-container" style="">
         <br>
         <hr>
-        {{for project in project_list:}}
-            <img style="height:64px;float:left;" class="img-polaroid" src="/conexus/static/images/noimage-icon.png" >
-            <h3 style="float:left;margin-left:15px;"><a href="/project/{{=project['url_title']}}/">{{=project['title']}}</a></h3>
+        {{for project in project_list_array:}}
+            {{try:}}
+            {{picture = project[1][0]['picture']}}
+                <a href="/project/{{=project[0]['url_title']}}/"><img style="height:64px;float:left;" class="img-polaroid" src="{{=URL('download',args=project[1][0]['picture'])}}"/></a>
+            {{except IndexError:}}
+            {{pass}}
+            <h3 style="float:left;margin-left:15px;"><a href="/project/{{=project[0]['url_title']}}/">{{=project[0]['title']}}</a></h3>
             <h3 style="float:right;margin-right:15px;" class="btn">follow</h3>
             <h3 style="float:right;margin-right:15px;"><a href="">x followers</a></h3>
             <div style="clear:both;"></div>
@@ -63,11 +67,16 @@
         {{pass}}
     </div>
     <div id="item-block-list-container" style="display:none;">
-        {{for project in project_list:}}
+        {{for project in project_list_array:}}
             <div id="item-block-list-item">
-                <h4><a href="/project/{{=project['title']}}">{{=project['title']}}</a></h4>
-                <a href="/project/{{=project['title']}}"><img class="img-polaroid" src="/conexus/static/images/noimage-icon.png"/></a>
-                <h4><a href="/project/{{=project['title']}}">x followers</a></h4>
+                {{try:}}
+                {{picture = project[1][0]['picture']}}
+                    <a href="/project/{{=project[0]['url_title']}}/"><img style="width:256px;" class="img-polaroid" src="{{=URL('download',args=project[1][0]['picture'])}}"/></a>
+                {{except IndexError:}}
+                    <a href="/project/{{=project[0]['url_title']}}/"><img style="width:256px;" class="img-polaroid" src="/conexus/static/images/noimage-icon.png"/></a>
+                {{pass}}
+                <h4><a href="/project/{{=project[0]['title']}}">{{=project[0]['title']}}</a></h4>
+                <h4><a href="/project/{{=project[0]['title']}}">x followers</a></h4>
             </div>
         {{pass}}
     </div>

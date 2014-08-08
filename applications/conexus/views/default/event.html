@@ -228,10 +228,10 @@ $(function() {
 		<h5><a href="/project/{{=event_from_url['url_title']}}/voetr/"><i style="margin-right:15px;" class="fa fa-check-square"></i> voetr</a></h5>
 
 
-	    <div style="padding:5px; border:1px solid rgb(100,100,100)">
+	    <div class="well" style="padding:5px; border:1px solid rgb(100,100,100)">
 	    	similar events
-	    	{{for x in range(5):}}
-	    		<div>event{{=x}}</div>
+	    	{{for event in similar_event_list:}}
+	    		<div><a href="/event/{{=event['url_title']}}/">{{=event['title']}}</a></div>
 	    	{{pass}}
 	    </div>
 

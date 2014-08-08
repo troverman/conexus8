@@ -159,7 +159,7 @@ db.define_table('project_page',
 ####project_picture#############
 ################################
 db.define_table('project_picture',
-    Field('project_id', 'string'),
+    Field('project_id', 'string', readable=False, writable=False),
     Field('picture', 'upload', uploadfield='picture_file'),
     Field('picture_file', 'blob')
 )
@@ -180,6 +180,9 @@ db.define_table('project_membergroup',
 db.define_table('event',
     Field('url_title','string'),
     Field('title','string'),
+    Field('description','string'),
+    Field('website','string'),
+    Field('location','string'),
     Field('description','string'),
     Field('start_time','datetime'),
     Field('end_time','datetime'),
@@ -235,6 +238,15 @@ db.define_table('event_page',
     Field('page_content','text'),
     Field('date_submitted','datetime', default=request.now),
 
+)
+
+################################
+####feed_item###################
+################################
+db.define_table('feed_item',
+    Field('member_id','string'),
+    Field('feed_type','string', readable=False, writable=False),
+    Field('date_submitted','datetime', default=request.now),
 )
 
 ################################

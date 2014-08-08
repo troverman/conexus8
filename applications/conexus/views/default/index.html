@@ -20,7 +20,7 @@
 #share-footer-container{margin-left:5%;margin-right:5%;}
 #project-list-container{text-align:left;width:100%;}
 #project-list-item{border:2px solid rgb(180,180,180);display:inline-block;padding:10px;margin:7px;border-radius:5px;}
-#project-list-item:hover{border:2px solid rgb(110,110,110);display:inline-block;padding:11px;margin:7px;background-color:rgb(255,255,255);border-radius:5px;}
+#project-list-item:hover{border:2px solid rgb(110,110,110);display:inline-block;padding:10px;margin:7px;background-color:rgb(255,255,255);border-radius:5px;}
 #scroller{
     background-color:rgb(247,247,247);
     border-bottom:1px solid rgb(225, 225, 225);
@@ -33,13 +33,14 @@
     max-width: none;
 }
 </style>
+
 <script language="javascript" type="text/javascript" src="{{=URL(request.application,'static','js/jquery.flot.js')}}"></script>
 <script language="javascript" type="text/javascript" src="{{=URL(request.application,'static','js/jquery.flot.selection.js')}}"></script>
 <script language="javascript" type="text/javascript" src="{{=URL(request.application,'static','js/jquery.flot.time.js')}}"></script>
 <script language="javascript" type="text/javascript" src="{{=URL(request.application,'static','js/jquery.thumbnailScroller.js')}}"></script>
 <script>
 $(function() {
-    $('a').click(function(){
+    $('.scroller').click(function(){
         $('html, body').animate({
             scrollTop: $( $.attr(this, 'href') ).offset().top
         }, 500);
@@ -62,25 +63,25 @@ $(function() {
     <p style="font-size:30px;color:rgb(230,230,230);text-align:center">a transparent + opensource network</p>
     <br><br>
 <div id="header-icons">
-    <a href="#events" style="margin-left:8%;">
+    <a href="#events" class="scroller" style="margin-left:8%;">
         <span class="fa-stack fa-lg">
           <i style="font-size:128px;border:1px solid rgb(100,100,100)" class="fa fa-circle fa-stack-2x fa-inverse"></i>
           <i style="font-size:64px;margin-top:43px;margin-left:25px;" class="fa fa-calendar-o fa-stack-1x"></i>
         </span>
     </a>
-    <a href="#discover" style="margin-left:8%;">
+    <a href="#discover" class="scroller" style="margin-left:8%;">
         <span class="fa-stack fa-lg">
           <i style="font-size:128px;" class="fa fa-circle fa-stack-2x fa-inverse"></i>
           <i style="font-size:64px;margin-top:43px;margin-left:25px;" class="fa fa-random fa-stack-1x"></i>
         </span>
     </a>
-    <a href="#projects" style="margin-left:8%;">
+    <a href="#projects" class="scroller" style="margin-left:8%;">
         <span class="fa-stack fa-lg">
           <i style="font-size:128px;" class="fa fa-circle fa-stack-2x fa-inverse"></i>
           <i style="font-size:64px;margin-top:43px;margin-left:25px;" class="fa fa-wrench fa-stack-1x"></i>
         </span>
     </a>
-    <a href="#projects" style="margin-left:8%;">
+    <a href="#projects" class="scroller" style="margin-left:8%;">
         <span class="fa-stack fa-lg">
           <i style="font-size:128px;" class="fa fa-circle fa-stack-2x fa-inverse"></i>
           <i style="font-size:64px;margin-top:43px;margin-left:25px;" class="fa fa-video-camera fa-stack-1x"></i>
@@ -103,25 +104,25 @@ $(function() {
         </div>
     </div>
     </div>
-    <a href="#projects" style="margin-left:8%;">
+    <a href="#projects" class="scroller" style="margin-left:8%;">
         <span class="fa-stack fa-lg">
           <i style="font-size:128px;" class="fa fa-circle fa-stack-2x fa-inverse"></i>
           <i style="font-size:64px;margin-top:43px;margin-left:25px;" class="fa fa-eye fa-stack-1x"></i>
         </span>
     </a>
-    <a href="#projects" style="margin-left:8%;">
+    <a href="#projects" class="scroller" style="margin-left:8%;">
         <span class="fa-stack fa-lg">
           <i style="font-size:128px;" class="fa fa-circle fa-stack-2x fa-inverse"></i>
           <i style="font-size:64px;margin-top:43px;margin-left:25px;" class="fa fa-money fa-stack-1x"></i>
         </span>
     </a>
-    <a href="#projects" style="margin-left:8%;">
+    <a href="#projects" class="scroller" style="margin-left:8%;">
         <span class="fa-stack fa-lg">
           <i style="font-size:128px;" class="fa fa-circle fa-stack-2x fa-inverse"></i>
           <i style="font-size:64px;margin-top:43px;margin-left:25px;" class="fa fa-tasks fa-stack-1x"></i>
         </span>
     </a>
-    <a href="#projects" style="margin-left:8%;">
+    <a href="#projects" class="scroller" style="margin-left:8%;">
         <span class="fa-stack fa-lg">
           <i style="font-size:128px;" class="fa fa-circle fa-stack-2x fa-inverse"></i>
           <i style="font-size:64px;margin-top:43px;margin-left:25px;" class="fa fa-users fa-stack-1x"></i>
@@ -179,46 +180,13 @@ $(function() {
 <hr>
 </div>
 
-
-
-    <!--conex.us is a platform for creating crowd-founded, open source startups built and owned by their makers. Talented minds everywhere are invited to help, and success is shared equitably.-->
-
-       <!-- <div class="row" style="margin-bottom: 24px;">
-          <div class="col-xs-4 text-right text-muted" style="margin-top: 20px;">
-            <h6>Traditional companies</h6>
-            <ul class="list-unstyled list-ruled text-sans">
-              <li>Investors and founders have ownership</li>
-              <li style="line-height: 50px;">Complex organizational structure</li>
-              <li>Most work happens in the office,<br>during the day</li>
-              <li>Employment contracts</li>
-            </ul>
-          </div>
-
-          <div class="col-xs-4">
-            <div class="card card-lg text-center" style="box-shadow: inset 0 0 0 2px rgba(123, 171, 94, 0.48), 0 1px 0 0 rgba(0, 0, 0, 0.04);">
-              <div class="card-body">
-                <h6 class="text-serif">Open Source Startups</h6>
-                <ul class="list-unstyled list-ruled omega text-success">
-                  <li>Everyone has ownership</li>
-                  <li>Everyone contributes where they are most effective</li>
-                  <li>Collaboration can happen around-the-clock by people everywhere</li>
-                  <li>Revenue is split equitably between contributors, monthly</li>
-                </ul>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-xs-4 text-muted" style="margin-top: 20px;">
-            <h6>Side projects</h6>
-            <ul class="list-unstyled list-ruled text-sans">
-              <li>Creator has ownership</li>
-              <li style="line-height: 50px;">Working alone</li>
-              <li>Work happens at home, on nights<br>and weekends</li>
-              <li>Revenue is rare</li>
-            </ul>
-          </div>
-        </div>-->
-      
+    state problem --> state solution --> state who the solution benifits<br>
+    conex.us is a platform for creating crowd-founded, open source projects built and owned by their makers. Talented minds everywhere are invited to help, and success is shared equitably.<br>
+    anyone can jump in and help out a startup on conex.us. The entire process is a collaborative effort including its vision, development, design, and marketing.<br>
+    traditional comanpy vs. open source vs. side project.<br>
+    transparent world<br>
+    live streaming life<br>
+    groups<br>
 
 
 <div style="background-image: url(../conexus/static/images/global_map.svg); height: 300px; background-repeat:no-repeat;background-color:rgb(247,247,247);background-position:center;opacity:.2">
@@ -226,13 +194,49 @@ $(function() {
 </div>
 <br><br><br>
 
+
+<style>
+.image-hover {
+    position:relative;
+}
+.image-hover:after, .image-hover:before {
+    position:absolute;
+    opacity:0;
+    transition: all 0.5s;
+    -webkit-transition: all 0.5s;
+}
+.image-hover:after {
+    //content:'\A';
+    width:100%; height:100%;
+    top:0; left:0;
+    background:rgba(0,0,0,0.6);
+}
+.image-hover:before {
+    content: attr(data-content);
+    color:#fff;
+    padding:4px 10px;
+    z-index:1;
+    text-align:center;
+    bottom:50%;
+    font-size:20px;
+    box-sizing:border-box;
+    background:rgb(200,200,200);
+
+}
+.image-hover:hover:after, .image-hover:hover:before {
+    opacity:1;
+}
+
+
+</style>
+
 <div class="centered-width">
 
     <p class="lead" style="text-align:left;text-align:center"><a href="/streams/"><i style="font-size:64px;margin-right:15px;" class="fa fa-video-camera"></i></a></p><hr>
     {{for x in range(5):}}
-        <div id="project-list-item">
+        <div id="project-list-item" data-content="Text added on hover" class="image-hover">
             <p>streaming name</p>
-            <a href="/stream/{{=x}}/"><img style="width:256px;" class="img-polaroid" src="/conexus/static/images/noimage-icon.png"/></a>
+            <a href="/stream/{{=x}}/"><img style="width:256px;" class="img-polaroid" src="/conexus/static/images/play.jpg"/></a>
         </div>
     {{pass}}
     <hr><br><br>
@@ -396,7 +400,7 @@ $(document).ready(function(){
 
     <div id="project-list-container">
         {{for project in project_list_array[:5]:}}
-        <div id="project-list-item">
+        <div id="project-list-item" data-content="{{=project[0]['title']}}" class="image-hover">
             <a href="/project/{{=project[0]['url_title']}}/"><p style="text-align:left;">{{=project[0]['title']}}</p></a>
             {{try:}}
             {{picture = project[1][0]['picture']}}
@@ -438,7 +442,7 @@ $(document).ready(function(){
     <br><hr><br>
     <div id="project-list-container">
         {{for event in event_list[:5]:}}
-        <div id="project-list-item">
+        <div id="project-list-item" data-content="{{=event['title']}}" class="image-hover">
             <a href="/event/{{=event['url_title']}}/"><p style="text-align:left;">{{=event['title']}}</p></a>
             <a href="/event/{{=event['url_title']}}/"><img style="width:256px;" class="img-polaroid" src="/conexus/static/images/noimage-icon.png"/></a>
         </div>
@@ -469,21 +473,29 @@ $(document).ready(function(){
         <div style="clear:both;"></div>
 
     </div>
-    <p class="lead" style="text-align:left">PICTURE</p>
     <img style="width:256px;" class="img-polaroid" src="/conexus/static/images/noimage-icon.png"/>
 
 
 </div>
-
-
 <br>
 <br>
+<div id="share-footer" style="text-align:center;">
+    <div id="share-footer-container">
+        <br><br><br>
+        <p class="lead">what are you waiting for?</p>
+        <a href="#login-or-signup" class="btn" style="font-size: 24px;padding:15px;">signup</a>
+        <br><br><br>
+    </div>
+</div>
+
 <div id="share-footer">
     <div id="share-footer-container">
     	<div style="float:left;">
     		<h1>share</h1>
     		<p>facebook, twitter, google+, reddit, lealr</p>
+            <div class="fb-like" data-href="https://developers.facebook.com/docs/plugins/" data-layout="standard" data-action="like" data-show-faces="true" data-share="true"></div>
     	</div>
+
 		<div style="float:right;">
 		    <h1>get the app</h1>
 		    <a href=""><img class="opacity-img" style="height:48px;" src="/conexus/static/images/app_store_icon.png" /></a>

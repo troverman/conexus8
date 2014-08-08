@@ -68,6 +68,7 @@ def event():
         for member in event_member_list:
             the_event_member_list.append(db(db.auth_user.id == member['member_id']).select()[0])
 
+        similar_event_list = db(db.event).select()[:5]
 
     except IndexError:
         redirect(URL('events'))
@@ -81,6 +82,7 @@ def event():
         form_create_page=form_create_page,
         event_member_list=event_member_list,
         the_event_member_list=the_event_member_list,
+        similar_event_list=similar_event_list,
 
     )
 
@@ -88,7 +90,8 @@ def event():
 ####event#######################
 ################################
 def events():
-    event_list = db(db.event).select()
+    event_list =     event_list = db(db.event).select()
+
 
     form_create_event = SQLFORM(db.event)
     if form_create_event.process(formname='form_create_event').accepted:
@@ -195,6 +198,9 @@ def member():
         member_picture = db(db.member_picture.member_id == member_from_url['id']).select()
         member_account = db(db.member_account.member_id == member_from_url['id']).select()
 
+        following_list = db(db.follower.following_id == member_from_url['id']).select()
+        follower_list = db(db.follower.followed_id == member_from_url['id']).select()
+
     except IndexError:
         redirect(URL('index'))
 
@@ -205,6 +211,8 @@ def member():
         message_list=message_list,
         member_picture=member_picture,
         member_account=member_account,
+        following_list=following_list,
+        follower_list=follower_list,
     )
 ################################
 ####mission#####################
@@ -235,6 +243,10 @@ def privacy():
 ################################    
 def projects():
     project_list = db(db.project).select()
+    project_list_array = []
+    for project in project_list:
+        picture = db(db.project_picture.project_id == project['id']).select()
+        project_list_array.append([project, picture])
     create_project = SQLFORM(db.project)
     if create_project.process(formname='create_new_page_form').accepted:           
         db.project_membergroup.insert(project_id=create_project.vars.id, title="admin", description="this is the admin")
@@ -247,7 +259,7 @@ def projects():
         session.flash = 'Error' 
         redirect(URL(''))
     return dict(
-        project_list=project_list,
+        project_list_array=project_list_array,
         create_project=create_project,
     )
 
@@ -320,8 +332,29 @@ def project():
             if request.args(2):
                 page_content = db(db.project_page.id == request.args(2)).select()
 
+        edit_project_picture=''
         if request.args(1) == 'settings':
             membergroup_array = db(db.project_membergroup.project_id == project_from_url['id']).select()
+            try:
+                picture = project_picture[0]['picture']
+                edit_project_picture = SQLFORM(db.project_picture, project_picture[0]['id'], showid = False)
+                if edit_project_picture.process(formname='edit_project_picture_form').accepted:           
+                    session.flash = 'picture edited'
+                    redirect(URL('/project/' + project_from_url['url_title']))
+                elif edit_project_picture.errors:
+                    session.flash = 'Error' 
+                    redirect(URL(''))
+            except IndexError:
+                edit_project_picture = SQLFORM(db.project_picture)
+                if edit_project_picture.process(formname='edit_project_picture_form').accepted: 
+                    db(db.project_picture.id==edit_project_picture.vars.id).update(project_id=project_from_url['id'])
+                    session.flash = 'picture edited'
+                    redirect(URL('/project/' + project_from_url['url_title']))
+                elif edit_project_picture.errors:
+                    session.flash = 'Error' 
+                    redirect(URL(''))
+            
+
 
 
     except IndexError:
@@ -339,6 +372,7 @@ def project():
         feed_array=feed_array,
         project_picture=project_picture,
         page_content=page_content,
+        edit_project_picture=edit_project_picture,
     )
 
 
@@ -535,7 +569,9 @@ def ajax_leave_project():
 def ajax_follow_member():
     member_id = int(request.vars.id)
     #LOGIC
-    #db.follower.insert(user_following_id = auth.user_id, user_followed_id = member_id_trim)
+    #check_follow = db(db.follower.following_id == auth.user_id) & (db.follower.followed_id == member_id)).select()
+    #if check_follow:
+    db.follower.insert(following_id = auth.user_id, followed_id = member_id)
     jquery = "jQuery('.flash').html('following').slideDown().delay(1000).slideUp();"
     return jquery
     

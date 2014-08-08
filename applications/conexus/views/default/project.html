@@ -186,10 +186,14 @@ a{cursor: pointer;}
 	    $("#collapse-left").click(function() {	
 			$("#left").fadeToggle(300);
 			$("#collapsed-left").delay(300).fadeToggle(300);
+			$("#feed-list").css("margin-left","0px");	
+
 		});
 		$("#open-left").click(function() {	
 			$("#collapsed-left").fadeOut(300);	
 			$("#left").delay(300).fadeIn(300);	
+			$("#feed-list").css("margin-left","175px");	
+
 		});
 	    $("#close-ad").click(function() {       
 	        $("#ad_block").fadeToggle();        
@@ -204,7 +208,6 @@ a{cursor: pointer;}
     	{{picture = project_picture[0]['picture']}}
 			<img src="{{=URL('download',args=picture)}}" style="height:64px;float:left;" class="img-polaroid" />
     	{{except IndexError:}}
-    		<img class="img-polaroid" style="height:64px;float:left;" src="/conexus/static/images/noimage-icon.png"/>
     	{{pass}}
     	<h3 style="float:left;margin-left:15px;"><a href="/project/{{=project_from_url['url_title']}}/">{{=project_from_url['title']}}</a></h3>
     	<div style="clear:both;"></div>
@@ -227,12 +230,11 @@ a{cursor: pointer;}
 	<div id="left">
     <a id="collapse-left"> <h5 style="margin:0px;padding:3px;" title="minimize"> << </h5> </a>
     <br>
-		<h5><a href="/project/{{=project_from_url['url_title']}}/announcements/"><i style="margin-right:15px;" class="fa fa-bullhorn"></i> announcements</a></h5>
 		<h5><a href="/project/{{=project_from_url['url_title']}}/calendar/"><i style="margin-right:15px;" class="fa fa-calendar"></i> calendar</a></h5>
 		<h5><a href="/project/{{=project_from_url['url_title']}}/discussion/"><i style="margin-right:15px;" class="fa fa-comments-o"></i> discussion</a></h5>
-		<h5><a href="/project/{{=project_from_url['url_title']}}/documents/"><i style="margin-right:15px;" class="fa fa-file-text-o"></i> documents</a></h5>
+		<h5><a href="/project/{{=project_from_url['url_title']}}/documents/"><i style="margin-right:15px;" class="fa fa-folder-open"></i> documents</a></h5>
+		<h5><a href="/project/{{=project_from_url['url_title']}}/feed/"><i style="margin-right:15px;" class="fa fa-bars"></i> feed</a></h5>
 		<h5><a href="/project/{{=project_from_url['url_title']}}/finance/"><i style="margin-right:15px;" class="fa fa-money"></i> finance</a></h5>
-		<h5><a href="/project/{{=project_from_url['url_title']}}/givingfor/">givingfor</a></h5>
 
 		<h5><a href="/project/{{=project_from_url['url_title']}}/members/"><i style="margin-right:15px;" class="fa fa-users"></i> members</a></h5>
 		<h5><a href="/project/{{=project_from_url['url_title']}}/pages/"><i style="margin-right:15px;" class="fa fa-file-text-o"></i> pages</a></h5>
@@ -309,16 +311,24 @@ a{cursor: pointer;}
 		</div>
 		<a href="/project/{{=project_from_url['url_title']}}/members/">see all</a>
 		<br><br>
-		<p class="lead">to enable donations <a href="/project/{{=project_from_url['url_title']}}/givingfor/">connect</a> to givingfor</p>
-		<p class="lead">to enable collective decision making <a href="/project/{{=project_from_url['url_title']}}/voetr/">connect</a> to voetr</p>
+		
 
+
+		<div class="well">
+			<i style="font-size:64px" class="fa fa-money"></i>
+			<p class="lead">to enable donations <a href="/project/{{=project_from_url['url_title']}}/givingfor/">connect</a> to givingfor</p>
+		</div>
+		<div class="well">
+			<i style="font-size:64px" class="fa fa-check"></i>
+			<p class="lead">to enable collective decision making <a href="/project/{{=project_from_url['url_title']}}/voetr/">connect</a> to voetr</p>
+		</div>
 
 
 
 
 
 	</div>
-<div class="centered-width">
+<div style="padding-left:3%;padding-right:3%;">
 
 	<div id="content" style="">
 
@@ -329,24 +339,31 @@ a{cursor: pointer;}
 			<p style="float:right">filters</p>
 			<hr><br>
 			
-			<div id="feed-list">
+			<div id="feed-list" style="margin-left:175px;margin-right:255px;">
 				<div id="feed-item">
 
 				</div>
 				{{for feed in feed_array:}}
-				<div class="panel panel-default" style="margin:15px;">
-				<div class="panel-body">
-					{{=feed}}
-					<a>comment</a>
-					<br><br>
-				</div>
-				</div>
+					<div class="panel panel-default" style="margin:15px;">
+						<div class="panel-body">
+							{{=feed}}
+							<br><br>
+							<a>comment</a>
+							<br><br>
+						</div>
+					</div>
 				{{pass}}
 			</div>
-			<a class="lead">more</a>
+			<p style="text-align:center" class="lead"><a>more</a></p>
 
 		{{elif request.args(1) == 'settings':}}
 			<h3 style="display:inline-block;margin-left:15px;"><i style="margin-right:15px;" class="fa fa-cog"></i> settings</h3><hr>
+
+			<a>project picture</a>
+			<a>parent projects</a>
+
+			{{=edit_project_picture}}
+
 
 			<a>+ new member group</a>
 			<h1>member group</h1>
@@ -357,6 +374,8 @@ a{cursor: pointer;}
 			<h1>permissions</h1>
 
 			<br><br><br>
+			<h3>connect to givingfor</h3>
+			<h3>connect to voetr</h3>
 
 			<h3>leave project</h3>
 			<br><br>
@@ -365,6 +384,7 @@ a{cursor: pointer;}
 		{{elif request.args(1) == 'members':}}
 			<h3 style="display:inline-block;margin-left:15px;"><i style="margin-right:15px;" class="fa fa-users"></i> members</h3><hr>
 
+			<a>teams</a>
 			{{for member in the_project_member_list:}}
 			    <a style="display:inline-block;margin-left:15px;" href="/member/{{=member['username']}}/"><img src="" style="height:64px;" class="img-polaroid" /></a>
 				<h4 style="display:inline-block;margin-left:15px;"><a href="/member/{{=member['username']}}/">{{=member['username']}}</a></h4>
@@ -439,6 +459,8 @@ a{cursor: pointer;}
 		            <a class="btn" id="view-table"><i class="fa fa-calendar"></i> </a>
 		        </div>
 		    </div>
+
+		   <p>tasks can have the ability to generate value through epoint.me and custom markets! :)</p>
 		    <br><br><br>
 		    show completed
    			{{for task in task_list:}}
@@ -449,6 +471,15 @@ a{cursor: pointer;}
 				<h5>{{=task['task_end_time']}}</h5>
 				<br>
 			{{pass}}
+		{{elif request.args(1) == 'tools':}}
+		<h5>repos</h5>
+		<h5>video editing</h5>
+		<h5>collaborative drawing</h5>
+		<h5>collaborative docs</h5>
+		<h5>streaming</h5>
+
+		<iframe style="width:800px;height:800px" name="Stack" src="https://etherpad.wikimedia.org/p/test" frameborder="0" scrolling="no" id="iframe" onload='javascript:resizeIframe(this);' />
+
 		{{elif request.args(1) == 'calendar':}}
 			<h3 style="display:inline-block;margin-left:15px;"><i style="margin-right:15px;" class="fa fa-calendar"></i> calendar</h3><hr>
 			<link href='/conexus/static/css/fullcalendar.css' rel='stylesheet' />
@@ -511,7 +542,36 @@ a{cursor: pointer;}
 					}
 			</style>
 			<div style="display:inline-block;" id="calendar"></div>
+		{{elif request.args(1) == 'finance':}}
+		<h3>create new givingfor campaign</h3>
+	    <table class="table table-striped" style="width:50%">
+	        <thead>
+	            <tr>
+	            	<th>Month</th>
+	                <th>Total revenue (select single currency, or see value breakdown)</th>
+	                <th>Expenses</th>
+	            </tr>
+	        </thead>
+	        <tbody>
+	            <tr>
+	                <td>January</td>
+	                <td>888,888</td>
+					<td>8</td>
+	            </tr>
+	            <tr>
+	                <td>February</td>
+	                <td>888,888,888</td>
+					<td>88</td>
 
+	            </tr>
+	            <tr>
+	                <td>March</td>
+	                <td>888,888,888,888</td>
+					<td>888</td>
+	            </tr>
+	        </tbody>
+	    </table>
+	    <a>contracts via teams etc</a>
 		{{else:}}
 		{{pass}}
 	</div>

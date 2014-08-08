@@ -41,6 +41,10 @@
     	{{pass}}
 		<h3 style="float:left;margin-left:15px;">{{=member_from_url['username']}}</h3>
 
+		{{check_follow = db((db.follower.following_id == auth.user_id) & (db.follower.followed_id == member_from_url['id'])).select()}}
+		{{=check_follow}}
+
+
 	    <div class="follow-member" id="follow-member-{{=member_from_url['username']}}" style="float:right;margin-right:10px;">
 	        <form style="display:none"><input type="hidden" id="" name="id" value="{{=member_from_url['id']}}" /></form> 
 	        <a onclick="ajax('/ajax_follow_member/', ['id'], ':eval');">
@@ -95,7 +99,13 @@
 	</div>
 	
 	<h5>following</h5><hr>
+	{{for following in following_list:}}
+		{{=following}}
+	{{pass}}
 	<h5>followers</h5><hr>
+	{{for follower in follower_list:}}
+		{{=follower}}
+	{{pass}}
 
 	<h3>projects</h3><hr>
 	{{for projects in the_project_list:}}
